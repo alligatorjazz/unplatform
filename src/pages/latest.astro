@@ -1,0 +1,32 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import dayjs from "dayjs";
+import Main from "../layouts/Main.astro";
+import Prompt from "../components/Prompt.astro";
+
+const issueCollection = await getCollection("issues");
+
+const latestIssue: CollectionEntry<"issues"> = issueCollection.sort(
+	(a: CollectionEntry<"issues">, b: CollectionEntry<"issues">) =>
+		dayjs(b.data.publishDate).diff(a.data.publishDate)
+)[0];
+---
+
+<Main title={latestIssue.data.title} description={latestIssue.data.description}>
+	<div id="latest-post-redirect" data-redirect={latestIssue.slug}>
+		<p class="text-2xl text-center">
+			<Prompt /> Sending you to the latest post...
+		</p>
+	</div>
+</Main>
+
+<script>
+	const redirect = document.getElementById("latest-post-redirect")?.dataset[
+		"redirect"
+	];
+	if (redirect) {
+		window.location.replace("/issues/" + redirect);
+	} else {
+		window.location.replace("");
+	}
+</script>

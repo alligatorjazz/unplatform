@@ -1,0 +1,13 @@
+---
+import { Icon } from "astro-icon/components";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"span"> {
+  prompt?: string;
+}
+const { prompt, class: className } = Astro.props;
+---
+
+<span class={["mr-2 text-inherit", className].join(" ")}
+  >{prompt ?? ">"}{":"}</span
+>

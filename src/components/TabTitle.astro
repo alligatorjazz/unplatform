@@ -1,0 +1,10 @@
+---
+import { companyTitle } from '../config';
+
+interface Props {
+	title: string;
+}
+const { title } = Astro.props;
+---
+
+<title>{title} | {companyTitle}</title>

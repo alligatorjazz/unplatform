@@ -1,0 +1,99 @@
+---
+import dayjs from "dayjs";
+import Donate from "../../components/Donate.astro";
+import Prompt from "../../components/Prompt.astro";
+import Main from "../../layouts/Main.astro";
+import { webring } from "../../webring";
+import WebringWidget from "../../components/WebringWidget.astro";
+---
+
+<Main title="Webring" description="List your site as a superhighway stop.">
+	<div class="flex flex-col items-center mt-8">
+		<div class="max-w-4xl">
+			<h1 class="text-2xl font-bold mb-4">
+				<Prompt />Join the FTS webring!
+			</h1>
+			<p class="mb-4">
+				One of the Patreon bonuses for From The Superhighway is
+				membership within the official webring. I hope to develop it
+				over time into a set of links that can serve as a varied
+				taste-test of various indie web projects.
+			</p>
+			<h2 class="text-xl font-bold mb-4">?: How do I join?</h2>
+			<p class="mb-4">There are just two steps:</p>
+			<ol class="list-decimal ml-8 mb-4">
+				<li>
+					Join the FTS <a
+						href="https://www.patreon.com/FalchionStudios"
+						>Patreon</a
+					>.
+				</li>
+				<li>
+					<a href="mailto:ajazz@fromthesuperhighway.com">Send me</a> a
+					an email (or a Discord message) with the name you signed up to
+					Patreon with, as well as the link to the (rules-complying) website
+					you want to add. Once you do, I'll provide you a little code
+					snippet to place on your site!
+				</li>
+			</ol>
+			<div class="m-4 w-full flex justify-center">
+				<Donate />
+			</div>
+			<h2 class="text-xl font-bold mb-4">?: What are the rules?</h2>
+			<ol class="list-decimal ml-8 mb-4">
+				<li>
+					No bigots, no bigotry, and no sites that link to or endorse
+					them. I reserve the right to eject anti-social freaks from
+					the webring, Patreon, and Discord without warning.
+				</li>
+				<li>
+					It's fine if the site you submit has NSFW content <span
+						class="italic">somewhere</span
+					> on it, but <span class="font-bold"
+						>it <span class="italic">must</span> be preceded by an age
+						rating, disclaimer, or other viewer discretion page.</span
+					>
+				</li>
+				<li>
+					The site you submit cannot be A Platform™️, as defined on
+					the <a href="/">homepage</a>.
+				</li>
+				<li>
+					The site you submit has to actually be <i>yours</i>, or
+					you've got to have written permission from the webmaster to
+					add it to the webring.
+				</li>
+				<li>
+					Of course, you've got to actually have the webring on your
+					site in a place where folks can easily find it (usually the footer works fine.)
+				</li>
+			</ol>
+			<p class="mb-4">
+				I reserve the right to (and will probably need to) amend these
+				rules at a later date, but that's all for now.
+			</p>
+			<h2 class="font-bold text-xl mb-4">
+				<Prompt />Our Members!
+			</h2>
+			<ul class="w-full flex flex-wrap justify-evenly gap-4">
+				{
+					webring.map((member) => (
+						<a
+							href={member.url}
+							class="p-4 bg-bgColor border drop-shadow-colored cursor-pointer hover:drop-shadow-colored hover:brightness-125 flex flex-col items-center"
+						>
+							<h3 class="font-bold flex">
+								<Prompt />
+								{member.title}
+							</h3>
+							<p class="text-center">
+								Joined:{" "}
+								{dayjs(member.timestamp).format("YYYY-MM-DD")}
+							</p>
+						</a>
+					))
+				}
+			</ul>
+		</div>
+	</div>
+</Main>

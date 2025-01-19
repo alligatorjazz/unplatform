@@ -1,0 +1,18 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import Prompt from "./Prompt.astro";
+interface Props extends HTMLAttributes<"button"> {
+  showPrompt?: boolean;
+}
+const { class: className, showPrompt } = Astro.props;
+---
+
+<a
+  href="/archive/1"
+  class={[
+    "bg-fgColor whitespace-nowrap text-textColor uppercase text-center flex justify-center",
+    className,
+  ].join(" ")}
+>
+  {showPrompt ? <Prompt /> : ""}<span>Archive</span>
+</a>

@@ -1,0 +1,29 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import dayjs from 'dayjs';
+import Pub from './Pub.astro';
+import Tags from './Tags.astro';
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<"div"> {
+	issue: CollectionEntry<"issues">
+	hideDescription?: boolean;
+}
+const {issue, hideDescription, class: className, ...divProps} = Astro.props;
+---
+<div class:list={["flex flex-col p-4 border-b flex-1 h-36", className]} {...divProps}>
+	<a href={issue.data.externalLink ?? ("/issues/" + issue.slug)} target={issue.data.externalLink ? "_blank" : "_self"}>
+	<h1 class="text-lg font-bold py-3 font-header inline flex-wrap items-center gap-4">
+		<span class="mr-2">{issue.data.title}</span>
+		{issue.data.externalPub && <Pub pub={issue.data.externalPub}/>}
+	</h1>
+	</a>
+	{!hideDescription && <div class="mb-1">{issue.data.description}</div>}
+	<div class="flex max-w-full overflow-hidden flex-1 items-end">
+		<div class="text-sm italic whitespace-nowrap">{dayjs(issue.data.publishDate).add(1, "day").format("MMM DD YYYY")}</div>
+		{issue.data.tags.length > 0 && 
+			<span class="px-2">|</span>
+			<div class="text-sm italic whitespace-nowrap"><Tags show={2} tags={issue.data.tags} /></div>
+		}
+</div>
+</div>

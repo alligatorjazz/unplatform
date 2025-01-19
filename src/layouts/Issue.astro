@@ -1,0 +1,186 @@
+---
+import type { CollectionEntry } from "astro:content";
+import dayjs from "dayjs";
+import Divider from "../components/Divider.astro";
+import Sidebar from "../components/Sidebar.astro";
+import Tags from "../components/Tags.astro";
+import ArticleImage from "../components/article/ArticleImage.astro";
+import Main from "./Main.astro";
+import Prompt from "../components/Prompt.astro";
+import { Image } from "astro:assets";
+
+interface Props {
+	issue: CollectionEntry<"issues">;
+}
+
+const { issue } = Astro.props;
+
+const { data } = issue as CollectionEntry<"issues">;
+const { Content } = await issue.render();
+---
+
+<Main title={`${data.title}`} description={data.description}>
+	<div class="flex flex-wrap justify-center">
+		<article
+			class="flex flex-col items-center p-4 w-full md:w-2/3 md:p-8 bg-bgColor border drop-shadow-colored max-w-6xl"
+		>
+			<div class="my-4 w-full">
+				<h1 class="text-3xl leading-snug font-bold font-header mb-2">
+					{data.title}
+				</h1>
+				<span class="flex py-2 gap-3 sm:gap-4 italic">
+					<h4>
+						{
+							dayjs(data.publishDate)
+								.add(1, "day")
+								.format("MMM DD YYYY")
+						}
+					</h4>
+					<div class="border-l border-l-textColor"></div>
+					<h4><Tags show={5} tags={data.tags ?? []} /></h4>
+				</span>
+				<h3 class="text-lg mt-2 font-header">{data.description}</h3>
+			</div>
+			<Divider class="w-full mb-4 border-b-2 border-b-textColor" />
+			<div id="issue-body" class="w-full break-words">
+				<Image
+					src={issue.data.poster}
+					alt={issue.data.description}
+					format="webp"
+					width={854}
+					height={480}
+					quality={"medium"}
+					class={"py-4 object-contain"}
+				/>
+				<Content components={{ img: ArticleImage }} />
+			</div>
+			<a class="m-auto" href="/"
+				><button
+					class="text-md font-header py-2 px-4 bg-fgColor hover:brightness-125 cursor-pointer select-none transition-all text-textColor"
+					><Prompt />Back to Home</button
+				></a
+			>
+		</article>
+		<Sidebar class="w-full md:mt-20 max-w-sm md:flex-1" />
+	</div>
+	<!-- <BackToTop /> -->
+</Main>
+
+<style lang="scss" is:global>
+	#issue-body {
+		h1 {
+			font-size: 2rem;
+		}
+		h2 {
+			font-size: 1.5rem;
+		}
+		h3 {
+			font-size: 1.2rem;
+		}
+
+		h6 {
+			font-size: 0.8rem;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			color: var(--header-color);
+			font-weight: bold;
+		}
+
+		h1,
+		h2,
+		h3 {
+			font-family: var(--header-font);
+		}
+
+		h1,
+		h2 {
+			margin-bottom: 1rem;
+		}
+
+		h3,
+		h4,
+		h5,
+		h6 {
+			margin-bottom: 0.5rem;
+		}
+
+		p {
+			margin-bottom: 1.5rem;
+			line-height: 1.6rem;
+		}
+
+		ol,
+		ul {
+			margin-left: 2rem;
+			margin-bottom: 1rem;
+		}
+
+		ol {
+			list-style: decimal;
+		}
+
+		ul {
+			list-style: circle;
+		}
+
+		img {
+			max-height: 600px;
+			width: 100%;
+			object-fit: contain;
+			margin: auto;
+		}
+
+		// image captions
+		img + em {
+			width: 100%;
+			margin-top: 0.5rem;
+			display: block;
+			text-align: center;
+		}
+
+		hr {
+			margin: 2rem 0;
+		}
+
+		blockquote {
+			border-left: 1px solid var(--text-color);
+			background-color: var(--fg-color);
+			padding: 1rem;
+			font-style: italic;
+			margin-left: 2rem;
+			margin-bottom: 2rem;
+			margin-right: 2rem;
+			p {
+				margin-bottom: 0;
+			}
+		}
+
+		a {
+			color: var(--accent-color);
+			text-decoration: underline;
+			&:hover {
+				filter: brightness(120%);
+			}
+
+			&:active {
+				filter: brightness(150%);
+			}
+		}
+
+		// iframe {
+		// 	padding-top: 1rem;
+		// 	padding-bottom: 1rem;
+		// 	width: 100%;
+		// 	margin: auto;
+		// 	@media (min-width: 768px) {
+		// 		min-height: 28rem;
+		// 	}
+		// }
+	}
+</style>

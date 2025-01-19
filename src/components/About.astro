@@ -1,0 +1,197 @@
+---
+import Donate from "./Donate.astro";
+import Prompt from "./Prompt.astro";
+import Paragraph from "./article/Paragraph.astro";
+---
+
+<section
+	id="about"
+	class="w-full flex flex-col items-center p-4 md:p-8 gap-4 bg-bgColor border drop-shadow-colored max-w-6xl"
+>
+	<h1 class="text-2xl">
+		<span class="font-bold uppercase text-accentColor"
+			>From The Superhighway</span
+		> is a monthly newsletter dedicated to bringing you the best kept secrets of the
+		indie web.
+	</h1>
+	<ul class="flex flex-col gap-4 w-full">
+		<li>
+			<h2 class="text-2xl font-bold">
+				<Prompt prompt="?" />{"What's the indie web?"}
+			</h2>
+			<p>
+				<Prompt />The indie web (or alt web, or <a
+					href="https://www.cjthex.com/what-is-to-be-done/"
+					target="_blank">Web 1.5</a
+				>, or whatever you want to call it) is composed of any site on
+				the Internet that isn't governed by The Platforms™.
+			</p>
+		</li>
+		<li>
+			<h2 class="text-2xl font-bold">
+				<Prompt prompt="?" />{"What are The Platforms?™"}
+			</h2>
+			<p>
+				<Prompt />As far as this site is concerned, A Platform™ is any
+				website that hosts user-created content and does at least one of
+				the following things:
+			</p>
+			<ul class="flex flex-col list-disc ml-8 py-4">
+				<li>
+					relies on the sale of ads and / or user data to generate
+					revenue;
+				</li>
+				<li>
+					delivers content to its users exclusively or primarily
+					through algorithmic feeds;
+				</li>
+				<li>
+					cannot sustain itself with its own revenue (and as a result
+					relies on speculative investment to survive);
+				</li>
+			</ul>
+			<p>
+				The criteria above include the vast majority of popular websites
+				on the modern internet. That state of affairs is what this
+				newsletter seeks to change.
+			</p>
+		</li>
+		<li>
+			<h2 class="text-2xl font-bold">
+				<Prompt prompt="?" />{"Why should I care about the indie web?"}
+			</h2>
+			<p>
+				<Prompt />Because there is a desperate need to remind people
+				that the Internet was, once upon a time, a genuinely amazing
+				place. <br /><br />
+				I don't want to romanticize too much - Web 1.0. was not a cultural
+				utopia - but it was a place that was chiefly about people sharing
+				things with each other primarily because they believed there was
+				value in the things they were sharing, and <b>not</b> because they
+				were trying to divine the whims of an algorithmic god for clout.
+				<br /><br />
+				What most people don't know is that on the edges of the modern Internet,
+				that old Web is being reborn. On a daily basis, people are starting
+				to realize what The Platforms™ have taken from us - and they're
+				starting to take it back. This newsletter seeks to show you how they're
+				doing it.
+			</p>
+		</li>
+		<li>
+			<h2 class="text-2xl font-bold">
+				<Prompt prompt="?" />{
+					`What kind of "secrets" are going to be in this newsletter?`
+				}
+			</h2>
+			<p>
+				<Prompt />Websites with cool art. Forums dedicated to niche
+				discussion of horror authors. A site that is designed like a
+				Nintendo DS. Sites that let you use Kidpix in your browser. <br
+				/><br />
+				In other words, anything that's creative, entertaining, or thought-provoking
+				- the sort of stuff that The Platforms™ are increasingly uninterested
+				in cultivating.
+			</p>
+		</li>
+		<li>
+			<h2 class="text-2xl font-bold">
+				<Prompt prompt="?" />{`You have a Patreon. What's that about?`}
+			</h2>
+			<p>
+				<Prompt />To be clear:
+				<b
+					>the newsletter itself is and will always remain free to the
+					public.</b
+				>
+				<br /><br />
+				But the Patreon serves several purposes:
+				<ol class="list-decimal ml-8 py-4">
+					<li>
+						I, (meaning me, <a href="https://ajazz.neocities.org/"
+							>ajazz</a
+						>), put a lot of effort into finding these sites,
+						reaching out to the creators, building the newsletter
+						from scratch, etc. It would be nice to be modestly
+						compensated for some of that labor.
+					</li>
+					<li>
+						Another thing I'd like to do with this newsletter is
+						build a community of people who want to share, discuss,
+						and promote the indie web. <b>
+							The Patreon bonuses you get for subscribing include membership in <a href="/webring">our webring</a>
+							and Discord,
+						</b> and the $3 barrier to entry is extremely helpful for
+						keeping that membership at a managable size for one person
+						to moderate (and for keeping bots, trolls, and posers out).
+					</li>
+					<li>
+						Most importantly: the Patreon is for transparency about
+						how this operation runs. I will never run ads, and I
+						will never sell your data. The closest thing to
+						"sponsorships" that you'll ever see here is the
+						newsletter's official webring <b>
+							(membership in which is included with your Patreon
+							subscription).
+						</b> You will always be able to see exactly how much I make
+						(if anything), and in the event this blows up, the Patreon
+						provides a way to sustainably pay the bills for this thing
+						long-term.
+					</li>
+				</ol>
+			</p>
+		</li>
+		<li>
+			<h2 class="text-2xl font-bold">
+				<Prompt prompt="?" />{
+					`I know of a cool thing on the web! How do I submit?`
+				}
+			</h2>
+			<p>
+				<Prompt />Great to hear! There's just a few guidelines to keep
+				in mind:
+				<ul class="ml-8 py-4 list-disc">
+					<li>
+						Like I said above, the cool thing must not be on A
+						Platform™ - this means no Twitter, no Tumblr, no
+						Instagram - and yes, not even Bluesky.
+					</li>
+					<li>
+						Substack is permitted - <span
+							class="animate-shimmer inline-block">for now.</span
+						>
+						<a
+							target="_blank"
+							href="https://www.theverge.com/2023/3/28/23660473/substack-retail-investors-revenue-profit"
+							>I am suspicious of their long-term resistance to
+							enshittification</a
+						>, but for the moment they remain a mostly-positive
+						force helping to bolster written content on the modern
+						web. (I will definitely show preference to non-Substack
+						blogs, though.)
+					</li>
+					<li>
+						The thing you submit has to be SFW. I may be open to
+						NSFW submissions in the future, but I am uncertain of
+						the legality of dropping hog into people's inboxes, and
+						I would rather not find out the hard way.
+					</li>
+					<li>
+						I will not be able to give a personalized reply to every
+						submission emailed to me.
+					</li>
+					<li>
+						I reserve the right to deny a submission on the grounds
+						that I think it's lame or uninteresting.
+					</li>
+				</ul>
+				<p>
+					If you think your thing fits that criteria, feel free to <a
+						href="mailto:submissions@fromthesuperhighway.com"
+						>send it over to me</a
+					>.
+				</p>
+			</p>
+		</li>
+	</ul>
+	<Donate />
+</section>

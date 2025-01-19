@@ -1,0 +1,26 @@
+---
+import { Image, getImage } from "astro:assets";
+import { type HTMLAttributes } from "astro/types";
+type Props = HTMLAttributes<"img">;
+const { src, alt } = Astro.props;
+if (!src) {
+	throw new Error("ArticleImage needs a source url.");
+}
+
+if (!alt) {
+	throw new Error("ArticleImage needs alt text.");
+}
+const metadata = await getImage({
+	src,
+	format: "webp",
+	inferSize: true,
+});
+// console.log(metadata);
+---
+
+<img
+	src={metadata.src}
+	srcset={metadata.srcSet.attribute}
+	alt={alt}
+	class={"w-full object-contain"}
+/>

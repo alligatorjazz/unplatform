@@ -1,0 +1,27 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import Prompt from "./Prompt.astro";
+import { Icon } from "astro-icon/components";
+import { SubscribeForm } from "./SubscribeForm";
+
+interface Props extends HTMLAttributes<"button"> {
+	showPrompt?: boolean;
+}
+const { class: className, showPrompt } = Astro.props;
+---
+
+<button
+	class={[
+		"px-2 py-1 bg-accentColor text-bgColor uppercase hover:bg-fgColor hover:text-textColor transition-all",
+		className,
+	].join(" ")}
+>
+	{showPrompt ? <Prompt /> : ""}Subscribe
+</button>
+<div
+	id="subscribe-modal"
+	data-active="false"
+	class="fixed top-0 left-0 w-screen h-screen flex justify-center items-center backdrop-brightness-50 backdrop-blur-sm data-[active=false]:hidden"
+>
+	<SubscribeForm client:only="react" />
+</div>

@@ -1,0 +1,14 @@
+---
+type Props = {
+	pub: string;
+};
+
+const { pub } = Astro.props;
+---
+
+<span
+	id="latest-issue-indicator"
+	class="font-thin italic text-accentColor whitespace-nowrap"
+>
+	@ {pub}
+</span>

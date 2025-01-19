@@ -1,0 +1,135 @@
+---
+import { Icon } from "astro-icon/components";
+import Prompt from "../../components/Prompt.astro";
+import "../../layouts/Main.css";
+import { site } from "fts-types";
+---
+
+<!doctype html>
+<html lang="en">
+	<base target="_parent" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<link rel="preconnect" href="https://fonts.googleapis.com/" />
+	<body class="bg-bgColor">
+		<div
+			class="fixed top-0 left-0 bg-grid-shift opacity-5 -z-10 select-none"
+		>
+		</div>
+		<div
+			id="fts-webring"
+			class="w-60 h-20 p-4 border flex flex-col justify-center items-center z-10"
+		>
+			<span class="font-bold text-center text-sm uppercase">
+				<Prompt />Superhighway Exit <span id="fts-exit-number"></span>
+			</span>
+			<div class="flex justify-between items-center w-full text-sm gap-2">
+				<a id="fts-prev" class="flex items-center gap-1">
+					<Icon name={"feather:chevron-left"} />
+					Prev
+				</a>
+				<div class="flex items-center gap-1">
+					<a href={site}
+						><Icon size={16} name={"feather:help-circle"} /></a
+					>
+					<div class="h-6 border-l"></div>
+					<a id="fts-random"
+						><Icon name={"la:dice-five"} size={24} /></a
+					>
+					<div class="h-6 border-l"></div>
+					<a href={site + "/webring"}
+						><Icon size={16} name={"feather:list"} /></a
+					>
+				</div>
+				<a class="flex items-center gap-1" id="fts-next">
+					Next
+					<Icon name={"feather:chevron-right"} />
+				</a>
+			</div>
+		</div>
+	</body>
+</html>
+<script>
+	import { webring } from "../../webring";
+
+	// get webring container
+	const container = document.getElementById("fts-webring");
+	if (!container) {
+		throw new Error("Couldn't load the FTS webring.");
+	}
+
+	// load user selected colors (if present)
+	// TODO: add support for hex colors
+	const rootElement: HTMLElement | null = document.querySelector(":root");
+	if (!rootElement) {
+		throw new Error("Could not retrieve the root element for this page.");
+	}
+
+	const params = new URLSearchParams(window.location.search);
+	const textColor =
+		params.get("text-color") ??
+		rootElement.style.getPropertyValue("--text-color");
+	const bgColor =
+		params.get("bg-color") ??
+		rootElement.style.getPropertyValue("--bg-color");
+
+	rootElement.style.setProperty("--text-color", textColor);
+	rootElement.style.setProperty("--bg-color", bgColor);
+
+	// load webring links
+	const current = new URL(document.referrer).origin;
+
+	const prevAnchor = document.getElementById("fts-prev") as HTMLAnchorElement;
+	const nextAnchor = document.getElementById("fts-next") as HTMLAnchorElement;
+	const randomAnchor = document.getElementById(
+		"fts-random"
+	) as HTMLAnchorElement;
+
+	if (!prevAnchor || !nextAnchor || !randomAnchor) {
+		container.style.display = "none";
+		throw new Error("FTS webring is malformed.");
+	}
+
+	const memberRecord = current.startsWith("http://localhost")
+		? webring[0]
+		: webring.find((member) => new URL(member.url).origin === current);
+
+	// verify that the current url is actuall in the webring
+	if (!memberRecord) {
+		container.style.display = "none";
+		throw new Error(
+			`Current needs to be a valid FTS url. Got ${current} instead.`
+		);
+	}
+
+	// calculate exit number and generate prev / next / random links
+	const memberIndex = webring.indexOf(memberRecord);
+	const exitNumber = document.getElementById("fts-exit-number");
+	if (exitNumber) {
+		exitNumber.innerText = `#${memberIndex + 1}`;
+	}
+
+	const prevIndex = memberIndex === 0 ? webring.length - 1 : memberIndex - 1;
+	const nextIndex = memberIndex === webring.length - 1 ? 0 : memberIndex + 1;
+
+	const prevMember = webring[prevIndex];
+	const nextMember = webring[nextIndex];
+	const exclusiveRandint = (generator: () => number, exclude: number) => {
+		let output = exclude;
+		while (output === exclude) {
+			output = generator();
+		}
+		return output;
+	};
+	const randomMember =
+		webring[
+			exclusiveRandint(
+				() => Math.floor(Math.random() * webring.length),
+				memberIndex
+			)
+		];
+
+	prevAnchor.href = prevMember.url;
+	nextAnchor.href = nextMember.url;
+	randomAnchor.href = randomMember.url;
+</script>

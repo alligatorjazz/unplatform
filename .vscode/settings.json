@@ -1,0 +1,21 @@
+{
+	"[typescript]": {
+		"editor.defaultFormatter": "vscode.typescript-language-features"
+	},
+	"cSpell.words": [
+		"cyberfunk",
+		"hubristically",
+		"Macbook",
+		"recreationally",
+		"triaging",
+		"Žižek"
+	],
+	"deno.enablePaths": [
+		"supabase/functions"
+	],
+	"deno.lint": true,
+	"deno.unstable": true,
+	"cSpell.enabledFileTypes": {
+		"json": false
+	}
+}

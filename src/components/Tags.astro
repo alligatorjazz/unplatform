@@ -1,0 +1,29 @@
+---
+interface Props {
+	tags: string[];
+	show?: number;
+}
+
+const { tags, show } = Astro.props;
+---
+
+{
+	tags.slice(0, show).map((tag, index) => {
+		if (index == (show ?? 2) - 1 || index == tags.length - 1) {
+			return (
+				<a class="text-ellipsis" href={`/${tag}/1`}>
+					{tag}
+				</a>
+			);
+		}
+
+		return (
+			<>
+				<a class="text-ellipsis" href={`/${tag}/1`}>
+					{tag}<Fragment set:html={", "} />
+				</a>
+				
+			</>
+		);
+	})
+}

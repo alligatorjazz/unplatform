@@ -1,0 +1,51 @@
+---
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import dayjs from "dayjs";
+import About from "../components/About.astro";
+import PreviousIssues from "../components/PreviousIssues.astro";
+import { SubscribeForm } from "../components/SubscribeForm";
+import Main from "../layouts/Main.astro";
+import { sixteenNine } from "../utils";
+import { getDateString } from "../utils/dates";
+
+const firstFourIssues = (await getCollection("issues"))
+	.sort((a, b) => dayjs(b.data.publishDate).diff(a.data.publishDate))
+	.slice(0, 4);
+const firstIssue = firstFourIssues[0];
+const previousIssues = firstFourIssues.slice(1);
+---
+
+<Main
+	title="Home"
+	description="Bringing you the best kept secrets of the indie web."
+>
+	<div class="flex flex-wrap gap-4 md:p-4 justify-center items-center">
+		<a href=`/issues/${firstIssue.slug}` class="w-full md:w-7/12">
+			<article class="flex flex-col items-center justify-center gap-6">
+				<Image
+					class={"w-full px-8 md:px-0 md:w-11/12 mr-2 object-contain drop-shadow-colored"}
+					src={firstIssue.data.poster}
+					{...sixteenNine(40)}
+					alt={"The article poster for "}
+					format="webp"
+				/>
+				<div class="flex-1">
+					<div class="text-2xl mb-2">
+						<span class="font-bold block"
+							>{getDateString(firstIssue.data.publishDate)}</span
+						>
+						{firstIssue.data.title}
+					</div>
+					<div>
+						{firstIssue.data.description}
+					</div>
+				</div>
+			</article>
+		</a>
+		<PreviousIssues issues={previousIssues} class={"md:max-w-sm"} />
+		<!-- <ArchiveButton /> -->
+		<SubscribeForm className="max-w-md" client:visible />
+		<About />
+	</div>
+</Main>

@@ -1,0 +1,16 @@
+---
+import { getCollection, getEntryBySlug } from "astro:content";
+import Issue from "../../layouts/Issue.astro";
+
+export const prerender = true
+export async function getStaticPaths() {
+	return (await getCollection("issues")).map((issue) => ({ params: { slug: issue.slug } }));
+}
+
+const { slug } = Astro.params;
+
+const issue = slug ? await getEntryBySlug("issues", slug) : null;
+
+---
+
+{issue && <Issue issue={issue}/>}

@@ -1,0 +1,12 @@
+---
+import { ConfirmModule } from "../components/ConfirmModule";
+import Main from "../layouts/Main.astro";
+
+---
+
+<Main
+	title="Confirm Subscription"
+	description="Confirm your subscription to FTS."
+>
+	<ConfirmModule client:only="react"/>
+</Main>

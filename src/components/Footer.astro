@@ -1,0 +1,25 @@
+---
+import Prompt from "./Prompt.astro";
+import WebringWidget from "./WebringWidget.astro";
+---
+
+<footer class="text-sm flex flex-col w-full items-center p-4 gap-4">
+	<WebringWidget />
+	<p class="text-center">
+		<a href="/" class="font-bold text-accentColor"
+			><Prompt />FROM THE SUPERHIGHWAY</a
+		> is a <a href="https://falchionstudios.com/" class="text-accentColor"
+			>Falchion Studios</a
+		> project.
+	</p>
+	<span class="text-xs"
+		>© Falchion Studios {new Date(Date.now()).getFullYear()}</span
+	>
+	<!-- <Image
+    src={gatorGuy}
+    format={"webp"}
+    quality={"low"}
+    alt={"Clip art of an alligator wearing sunglasses."}
+    class={"h-24 w-32 ml-8 object-right-bottom object-cover transition-all cursor-grab active:-translate-x-64 active:cursor-grabbing"}
+  /> -->
+</footer>
