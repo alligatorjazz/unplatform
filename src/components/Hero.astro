@@ -1,0 +1,26 @@
+---
+import { Icon } from "astro-icon/components";
+import Prompt from "./Prompt.astro";
+---
+
+<div class="flex flex-col w-full h-[calc(100dvh-6rem)] justify-between mb-4">
+	<div class="flex-1 text-center flex flex-col justify-center items-center gap-4">
+		<h1 class="text-4xl font-bold">
+			The definitive guide for escaping social media (and joining the
+			indie web).
+		</h1>
+		<a class="uppercase text-bgColor bg-accentColor p-4 py-2 w-min whitespace-nowrap" href="/guide">
+			<Prompt />Get Started
+		</a>
+	</div>
+	<a
+		href="/#about"
+		class="uppercase font-header flex flex-col gap-2 items-center text-bgColor transition-all hover:drop-shadow-xl group"
+	>
+		<span>Learn More</span>
+		<Icon
+			name={"feather:chevrons-down"}
+			class="animate-bounce group-hover:duration-75"
+		/>
+	</a>
+</div>

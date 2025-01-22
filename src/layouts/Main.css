@@ -33,6 +33,7 @@
 
 		--text-font: "Cousine", sans-serif;
 		--header-font: "Cousine", sans-serif;
+		scroll-behavior: smooth;
 	}
 }
 
