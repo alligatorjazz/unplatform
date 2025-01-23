@@ -6,9 +6,11 @@
 		"cyberfunk",
 		"hubristically",
 		"Macbook",
+		"podcasters",
 		"recreationally",
 		"triaging",
-		"Žižek"
+		"Žižek",
+		"Zuckerberg's"
 	],
 	"deno.enablePaths": [
 		"supabase/functions"

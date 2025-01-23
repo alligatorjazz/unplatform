@@ -1,0 +1,35 @@
+---
+import GuidePrevNext from "../../components/GuidePrevNext.astro";
+import TechLiteracySelector from "../../components/TechLiteracySelector";
+import Guide from "../../layouts/Guide.astro";
+---
+
+<Guide frontmatter={{ title: "Where are you at?" }}>
+	<p>
+		Before we continue, I'm going to need an idea of how familiar you are
+		with digital technology. My recommendations will vary quite wildly
+		depending on your level of tech literacy, and I want to make sure I'm
+		not tossing anything at you that you're not ready for. Select the level
+		of tech literacy that best applies to you:
+	</p>
+	<TechLiteracySelector client:load className="mb-4" />
+	<p>
+		After that, I need to know some specifics about what you use social
+		media for:
+	</p>
+
+	<p>
+		I'll use your answers to this to decide what parts of the guide to show
+		you and what order to show you them in. After you've answered those
+		questions, we can move on to talking about <i>the technology</i>.
+	</p>
+	<p>
+		(P.S. if there's a use case you have for social media that wasn't
+		covered here, *please* let me know about it by shooting an email to <a
+			href="mailto:unplatform@fromthesuperhighway.com"
+		>
+			unplatform@fromthesuperhighway.com.
+		</a>
+	</p>
+	<GuidePrevNext />
+</Guide>

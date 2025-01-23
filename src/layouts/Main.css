@@ -73,6 +73,7 @@ img {
 }
 
 a {
+	cursor: pointer;
 	transition: all 300ms;
 }
 

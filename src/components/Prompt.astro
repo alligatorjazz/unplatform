@@ -3,11 +3,12 @@ import { Icon } from "astro-icon/components";
 import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<"span"> {
-  prompt?: string;
+	prompt?: string;
+	reverse?: boolean;
 }
-const { prompt, class: className } = Astro.props;
+const { prompt, reverse, class: className } = Astro.props;
 ---
 
-<span class={["mr-2 text-inherit", className].join(" ")}
-  >{prompt ?? ">"}{":"}</span
->
+<span class={["text-inherit", reverse ? "ml-2" : "mr-2", className].join(" ")}>
+	{reverse ? `:${prompt ?? "<"} ` : `${prompt ?? ">"}: `}
+</span>

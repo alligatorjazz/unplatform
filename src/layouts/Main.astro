@@ -30,16 +30,16 @@ const { title, description, class: className } = Astro.props;
 			title="From The Superhighway"
 			href={`${Astro.site}rss.xml`}
 		/> -->
-		<ClientRouter />
+		<!-- <ClientRouter /> -->
 	</head>
 	<body class={"bg-bgColor"}>
 		<div
 			class="fixed top-0 left-0 bg-grid-shift opacity-5 -z-10 select-none"
 		>
 		</div>
-		<div class="min-h-screen flex flex-col justify-between" id="content">
-			<Navbar type="fixed" transition:persist />
-			<main class="p-4" transition:animate="initial">
+		<div class="min-h-screen flex flex-col justify-between" id="content" >
+			<Navbar type="fixed"/>
+			<main class="p-4">
 				<slot />
 			</main>
 			<Footer />

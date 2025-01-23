@@ -1,0 +1,46 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import PromptLink from "./PromptLink.astro";
+import Prompt from "./Prompt.astro";
+
+type Props = HTMLAttributes<"div">;
+const { class: className, ...props } = Astro.props;
+---
+
+<div class:list={["w-full flex justify-center gap-4", className]}>
+	<a
+		id="prev"
+		class:list={[
+			"block p-4 py-2 bg-accentColor text-bgColor prompt w-min whitespace-nowrap",
+			className,
+		]}
+		{...props}
+	>
+		{":<"} Prev
+	</a>
+	<a
+		id="next"
+		class:list={[
+			"block p-4 py-2 bg-accentColor text-bgColor prompt w-min whitespace-nowrap",
+			className,
+		]}
+		{...props}
+	>
+		Next {">:"}
+	</a>
+</div>
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+		const currentPage = parseInt(
+			window.location.pathname.split("/").pop() ?? "0"
+		);
+		const prev = document.getElementById("prev");
+		const next = document.getElementById("next");
+
+		if (!prev || !next) {
+			throw new Error("Couldn't load pagination buttons.");
+		}
+		prev.setAttribute("href", Math.max(0, currentPage - 1).toString());
+		next.setAttribute("href", Math.max(0, currentPage + 1).toString());
+	});
+</script>
