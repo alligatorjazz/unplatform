@@ -4,6 +4,7 @@ import Footer from "../components/Footer.astro";
 import "./Main.css";
 import TabTitle from "../components/TabTitle.astro";
 import BackToTop from "../components/BackToTop.astro";
+import ClientRouter from "astro/components/ClientRouter.astro";
 
 export interface Props {
 	title: string;
@@ -16,30 +17,33 @@ const { title, description, class: className } = Astro.props;
 
 <!doctype html>
 <html lang="en">
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width,initial-scale=1" />
-	<meta name="description" content={description ?? title} />
-	<meta name="generator" content={Astro.generator} />
-	<TabTitle title={title} />
-	<link rel="preconnect" href="https://fonts.googleapis.com/" />
-	<link
-		rel="alternate"
-		type="application/rss+xml"
-		title="From The Superhighway"
-		href={`${Astro.site}rss.xml`}
-	/>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<meta name="description" content={description ?? title} />
+		<meta name="generator" content={Astro.generator} />
+		<TabTitle title={title} />
+		<link rel="preconnect" href="https://fonts.googleapis.com/" />
+		<!-- <link
+			rel="alternate"
+			type="application/rss+xml"
+			title="From The Superhighway"
+			href={`${Astro.site}rss.xml`}
+		/> -->
+		<ClientRouter />
+	</head>
 	<body class={"bg-bgColor"}>
 		<div
 			class="fixed top-0 left-0 bg-grid-shift opacity-5 -z-10 select-none"
 		>
 		</div>
 		<div class="min-h-screen flex flex-col justify-between" id="content">
-			<Navbar type="fixed" />
-			<main class="p-4">
+			<Navbar type="fixed" transition:persist />
+			<main class="p-4" transition:animate="initial">
 				<slot />
 			</main>
 			<Footer />
-			<BackToTop />
+			<BackToTop  />
 		</div>
 	</body>
 </html>
