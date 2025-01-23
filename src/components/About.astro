@@ -1,20 +1,51 @@
 ---
+import Buzzword from "./Buzzword.astro";
 import Donate from "./Donate.astro";
 import Prompt from "./Prompt.astro";
-import Paragraph from "./article/Paragraph.astro";
 ---
 
 <section
 	id="about"
-	class="w-full flex flex-col items-center p-4 md:p-8 gap-4 bg-bgColor border drop-shadow-colored max-w-6xl"
+	class="w-full flex flex-col items-center p-4 md:p-8 gap-4 bg-bgColor border drop-shadow-colored max-w-4xl"
 >
 	<h1 class="text-2xl">
-		<span class="font-bold uppercase text-accentColor"
-			>From The Superhighway</span
-		> is a monthly newsletter dedicated to bringing you the best kept secrets of the
-		indie web.
+		<span class="font-bold uppercase text-accentColor">Unplatform</span> is an
+		interactive guidebook, online library, and research journal intended to help
+		you escape social media and join the indie web.
 	</h1>
 	<ul class="flex flex-col gap-4 w-full">
+		<li>
+			<h2 class="text-2xl font-bold">
+				<Prompt prompt="?" />{'What do you mean by "social media?" '}
+			</h2>
+			<p>
+				<Prompt />I mean the ad-supported, data harvesting platforms of
+				<Buzzword>Web 2.0</Buzzword>: sites like Instagram, Facebook,
+				and X, just to name a few. In general, I am trying to help you
+				leave sites that:
+			</p>
+			<ul class="flex flex-col list-disc ml-8 py-4">
+				<li>
+					rely on the sale of ads and / or user data to generate
+					revenue;
+				</li>
+				<li>
+					deliver content to their users exclusively or primarily
+					through algorithmic feeds;
+				</li>
+				<li>
+					cannot sustain themselves with their own revenue (and as a
+					result rely on speculative investment to survive);
+				</li>
+			</ul>
+			<p>
+				Almost all the dysfunction of the modern Internet can be traced
+				back to one of the above dynamics - and it's those dynamics that <span
+					class="uppercase font-bold text-accentColor"
+					>Unplatform</span
+				> seeks to help you escape.
+			</p>
+		</li>
 		<li>
 			<h2 class="text-2xl font-bold">
 				<Prompt prompt="?" />{"What's the indie web?"}
@@ -23,174 +54,197 @@ import Paragraph from "./article/Paragraph.astro";
 				<Prompt />The indie web (or alt web, or <a
 					href="https://www.cjthex.com/what-is-to-be-done/"
 					target="_blank">Web 1.5</a
-				>, or whatever you want to call it) is composed of any site on
-				the Internet that isn't governed by The Platforms™.
+				>, or whatever you want to call it) is composed of the vast
+				network of websites, organizations, and software projects on the
+				Internet run by people outside the orbit of Web 2.0 and Silicon
+				Valley.
 			</p>
 		</li>
 		<li>
 			<h2 class="text-2xl font-bold">
-				<Prompt prompt="?" />{"What are The Platforms?™"}
+				<Prompt prompt="?" />{"Why would I want to join the indie web?"}
 			</h2>
 			<p>
-				<Prompt />As far as this site is concerned, A Platform™ is any
-				website that hosts user-created content and does at least one of
-				the following things:
+				<Prompt />While "log off" and "touch grass" are perfectly
+				acceptable reactions to the current digital landscape, the fact
+				remains that there's presumably some reason you were using
+				social media in the first place. Maybe it was for sharing art,
+				or reading news, or getting notified about events - in any case,
+				if you still want to do those things without engaging with the
+				Web 2.0 hellscape, the indie web is the way to do it.
 			</p>
-			<ul class="flex flex-col list-disc ml-8 py-4">
-				<li>
-					relies on the sale of ads and / or user data to generate
-					revenue;
-				</li>
-				<li>
-					delivers content to its users exclusively or primarily
-					through algorithmic feeds;
-				</li>
-				<li>
-					cannot sustain itself with its own revenue (and as a result
-					relies on speculative investment to survive);
-				</li>
-			</ul>
+			<br />
 			<p>
-				The criteria above include the vast majority of popular websites
-				on the modern internet. That state of affairs is what this
-				newsletter seeks to change.
+				Over the last few years, you've probably heard defeatist truisms
+				thrown around like "there's only five websites now" or "the
+				Internet is dead." I'm here to tell you that those "truisms" are
+				false, and the proof of their falseness lies in the indie web.
+				On my newsletter, <a
+					class="no-underline uppercase text-[#f1b5ea] font-bold"
+					href="https://fromthesuperhighway.com"
+					target="_blank">{">:: From The Superhighway"}</a
+				>, I've been covering a ton of vibrant art projects, online
+				communities, and public utilities outside traditional social
+				media platforms since September 2024 - and there's always far
+				too many exciting things happening at any one time to fit them
+				all in any one issue.
 			</p>
-		</li>
-		<li>
-			<h2 class="text-2xl font-bold">
-				<Prompt prompt="?" />{"Why should I care about the indie web?"}
-			</h2>
+			<br />
 			<p>
-				<Prompt />Because there is a desperate need to remind people
-				that the Internet was, once upon a time, a genuinely amazing
-				place. <br /><br />
-				I don't want to romanticize too much - Web 1.0. was not a cultural
-				utopia - but it was a place that was chiefly about people sharing
-				things with each other primarily because they believed there was
-				value in the things they were sharing, and <b>not</b> because they
-				were trying to divine the whims of an algorithmic god for clout.
-				<br /><br />
-				What most people don't know is that on the edges of the modern Internet,
-				that old Web is being reborn. On a daily basis, people are starting
-				to realize what The Platforms™ have taken from us - and they're
-				starting to take it back. This newsletter seeks to show you how they're
-				doing it.
-			</p>
-		</li>
-		<li>
-			<h2 class="text-2xl font-bold">
-				<Prompt prompt="?" />{
-					`What kind of "secrets" are going to be in this newsletter?`
-				}
-			</h2>
-			<p>
-				<Prompt />Websites with cool art. Forums dedicated to niche
-				discussion of horror authors. A site that is designed like a
-				Nintendo DS. Sites that let you use Kidpix in your browser. <br
-				/><br />
-				In other words, anything that's creative, entertaining, or thought-provoking
-				- the sort of stuff that The Platforms™ are increasingly uninterested
-				in cultivating.
-			</p>
-		</li>
-		<li>
-			<h2 class="text-2xl font-bold">
-				<Prompt prompt="?" />{`You have a Patreon. What's that about?`}
-			</h2>
-			<p>
-				<Prompt />To be clear:
-				<b
-					>the newsletter itself is and will always remain free to the
-					public.</b
+				You probably haven't heard of most of those exciting things, and
+				that's not your fault. Web 2.0 - and the platforms that dominate
+				it - have kept them from you.<a
+					target="_blank"
+					href="https://www.404media.co/meta-is-blocking-links-to-decentralized-instagram-competitor-pixelfed/"
 				>
-				<br /><br />
-				But the Patreon serves several purposes:
-				<ol class="list-decimal ml-8 py-4">
-					<li>
-						I, (meaning me, <a href="https://ajazz.neocities.org/"
-							>ajazz</a
-						>), put a lot of effort into finding these sites,
-						reaching out to the creators, building the newsletter
-						from scratch, etc. It would be nice to be modestly
-						compensated for some of that labor.
-					</li>
-					<li>
-						Another thing I'd like to do with this newsletter is
-						build a community of people who want to share, discuss,
-						and promote the indie web. <b>
-							The Patreon bonuses you get for subscribing include membership in <a href="/webring">our webring</a>
-							and Discord,
-						</b> and the $3 barrier to entry is extremely helpful for
-						keeping that membership at a managable size for one person
-						to moderate (and for keeping bots, trolls, and posers out).
-					</li>
-					<li>
-						Most importantly: the Patreon is for transparency about
-						how this operation runs. I will never run ads, and I
-						will never sell your data. The closest thing to
-						"sponsorships" that you'll ever see here is the
-						newsletter's official webring <b>
-							(membership in which is included with your Patreon
-							subscription).
-						</b> You will always be able to see exactly how much I make
-						(if anything), and in the event this blows up, the Patreon
-						provides a way to sustainably pay the bills for this thing
-						long-term.
-					</li>
-				</ol>
+					Sometimes they do it on purpose</a
+				>, but they <i>always</i> do it by design. <span
+					class="uppercase font-bold text-accentColor"
+					>Unplatform</span
+				> is here to rectify that.
 			</p>
 		</li>
 		<li>
 			<h2 class="text-2xl font-bold">
-				<Prompt prompt="?" />{
-					`I know of a cool thing on the web! How do I submit?`
-				}
+				<Prompt prompt="?" />{`Who are you?`}
 			</h2>
 			<p>
-				<Prompt />Great to hear! There's just a few guidelines to keep
-				in mind:
-				<ul class="ml-8 py-4 list-disc">
+				<Prompt />I'm <a
+					href="https://downtheladder.net"
+					target="_blank">Damian</a
+				>. I'm a writer and web developer who's been publishing work
+				online since 2017, and I've been involved in the indie web in
+				some capacity since late 2023.
+			</p>
+			<br />
+			<p>
+				My motivation for creating <span
+					class="uppercase font-bold text-accentColor"
+					>Unplatform</span
+				> is simple. Once upon a time, I, too, was a digital defeatist that
+				believed that the Internet was beyond saving, and that Silicon Valley
+				had achieved total control over the digital world. It's been a deeply
+				humbling and extremely inspiring experience to be proven wrong -
+				and not only do I no longer believe that the Internet is a lost cause,
+				I believe there's never been a better time to take it back.
+			</p>
+			<br />
+			<p>
+				But it won't be easy. Silicon Valley is holding our communities,
+				careers, and conciousnesses hostage. They lured us onto their
+				platforms over the course of 20 years with the promise of access
+				and convenience, and now that they've gone completely <a
+					href="https://www.404media.co/decentralized-social-media-is-the-only-alternative-to-the-tech-oligarchy/"
+					>mask off</a
+				>, they're betting on the idea that we've got too much invested
+				in them to walk away. <span
+					class="uppercase font-bold text-accentColor"
+					>Unplatform</span
+				> is here to help you prove them wrong.
+			</p>
+		</li>
+		<li>
+			<h2 class="text-2xl font-bold">
+				<Prompt prompt="?" />{`How do I get started?`}
+			</h2>
+			<p>
+				<Prompt />Click <a href="/guide">here</a> to start the <span
+					class="uppercase font-bold text-accentColor"
+					>Unplatform</span
+				> interactive guide, which will walk you through the whole process.
+			</p>
+		</li>
+		<li>
+			<h2 class="text-2xl font-bold">
+				<Prompt prompt="?" />{`How can I help?`}
+			</h2>
+			<p class="mb-4">
+				I'm glad you asked. There's several things you can do to make an
+				impact:
+			</p>
+			<div class="mb-4">
+				<h3 class="text-lg italic">Recommendations</h3>
+				<p>
+					Our <a href="/database">database</a> is in constant need of recommendations
+					for new software, services, and sites. We're currently looking
+					for recommendations for the following:
+				</p>
+				<br />
+				<ul class="list-disc ml-8">
 					<li>
-						Like I said above, the cool thing must not be on A
-						Platform™ - this means no Twitter, no Tumblr, no
-						Instagram - and yes, not even Bluesky.
+						Event venues, magazines, newspapers, or other websites
+						with <b>active</b> RSS feeds or newsletters;
 					</li>
 					<li>
-						Substack is permitted - <span
-							class="animate-shimmer inline-block">for now.</span
-						>
-						<a
-							target="_blank"
-							href="https://www.theverge.com/2023/3/28/23660473/substack-retail-investors-revenue-profit"
-							>I am suspicious of their long-term resistance to
-							enshittification</a
-						>, but for the moment they remain a mostly-positive
-						force helping to bolster written content on the modern
-						web. (I will definitely show preference to non-Substack
-						blogs, though.)
+						<b>Newbie-friendly</b> website builders and blogging / microblogging
+						platforms to help indie web newcomers get up and running
+						fast;
 					</li>
 					<li>
-						The thing you submit has to be SFW. I may be open to
-						NSFW submissions in the future, but I am uncertain of
-						the legality of dropping hog into people's inboxes, and
-						I would rather not find out the hard way.
+						Alternative social platforms that promote human
+						curation, creation, and connection, <b>without</b> selling
+						user data for profit, forcing the use of algorithmic feeds,
+						or using user content as AI training data.
 					</li>
 					<li>
-						I will not be able to give a personalized reply to every
-						submission emailed to me.
-					</li>
-					<li>
-						I reserve the right to deny a submission on the grounds
-						that I think it's lame or uninteresting.
+						Important or foundational articles about the past and
+						present of social media, the Web, and Internet for the
+						Unplatform <a href="/library">library</a>.
 					</li>
 				</ul>
+				<br />
 				<p>
-					If you think your thing fits that criteria, feel free to <a
-						href="mailto:submissions@fromthesuperhighway.com"
-						>send it over to me</a
+					If you're interested in contributing a recommendation to
+					Unplatform, you can do it through <a
+						href="https://github.com/alligatorjazz/unplatform"
+						>Github</a
+					>, or you can shoot an email to <a
+						href="mailto:unplatform@fromthesuperhighway.com"
+						>unplatform@fromthesuperhighway.com</a
 					>.
 				</p>
-			</p>
+			</div>
+			<div class="mb-4">
+				<h3 class="text-lg italic">Teammates</h3>
+				<p>
+					While Unplatform is currently a one-man show, I don't want
+					it to stay that way forever. My ambition is to have
+					Unplatform be managed by an editorial committee staffed by
+					committed partisans of the indie web. <br />
+				</p>
+				<br />
+				<p>
+					If you are (or know someone) who has a strong interest in
+					the indie web and the work history, projects, or credentials
+					to back it up, <a
+						href="mailto:unplatform@fromthesuperhighway.com"
+					>
+						shoot me an email</a
+					> - I'd like to talk.
+				</p>
+			</div>
+			<div class="mb-4">
+				<h3 class="text-lg italic">Feedback</h3>
+				<p>
+					Unplatform is only worthwhile if people are getting real
+					utility from it. I'm always looking for feedback on every
+					aspect of the project, whether it be related to the
+					interactive guide, our database, our library, or our design.
+					If you have any general feedback about the project, please
+					send it to <a
+						href="mailto:unplatform@fromthesuperhighway.com"
+						>unplatform@fromthesuperhighway.com</a
+					>. I'll try my best to get back to you.
+				</p>
+				<br />
+				<p>
+					For actual bugs or technical issues, please direct them to
+					the <a
+						href="https://github.com/alligatorjazz/unplatform/issues"
+						>issues page on our Github</a
+					>.
+				</p>
+			</div>
 		</li>
 	</ul>
 	<Donate />
