@@ -9,6 +9,7 @@
 	},
 	"dependencies": {
 		"@astrojs/cloudflare": "^12.1.0",
+		"@astrojs/mdx": "^4.0.7",
 		"@astrojs/node": "^9.0.0",
 		"@astrojs/react": "^3.6.3",
 		"@astrojs/rss": "^4.0.11",
