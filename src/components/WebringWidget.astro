@@ -1,9 +1,36 @@
-<iframe id="fts-webring" width="240" height="80"></iframe>
+<div id="webring-container" class="w-60 h-20 bg-accentColor opacity-0">
+	<iframe id="fts-webring" width="240" height="80"></iframe>
+</div>
+
+<style>
+	.fade-in {
+		animation: fade-in 1s ease-in forwards;
+	}
+
+	@keyframes fade-in {
+		0% {
+			opacity: 0;
+		}
+
+		100% {
+			opacity: 1;
+		}
+	}
+</style>
 <script>
+	const container = document.getElementById(
+		"webring-container"
+	) as HTMLIFrameElement;
+	const webring = document.getElementById("fts-webring") as HTMLIFrameElement;
 	document.addEventListener("DOMContentLoaded", () => {
-		const webring = document.getElementById("fts-webring") as HTMLIFrameElement;
-		const bgColor = getComputedStyle(webring).getPropertyValue('--accent-color');
-		const textColor = getComputedStyle(webring).getPropertyValue('--bg-color');
-		webring.src = `https://fromthesuperhighway.com/webring/source?bg-color=${bgColor}&text-color=${textColor}`
-	})
+		const bgColor =
+			getComputedStyle(webring).getPropertyValue("--accent-color");
+		const textColor =
+			getComputedStyle(webring).getPropertyValue("--bg-color");
+		webring.src = `https://fromthesuperhighway.com/webring/source?bg-color=${bgColor}&text-color=${textColor}`;
+	});
+
+	webring.addEventListener("load", () => {
+		container.classList.add("fade-in");
+	});
 </script>
