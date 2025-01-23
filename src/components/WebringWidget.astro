@@ -1,1 +1,9 @@
-<iframe src="/webring/source" width="240" height="80"></iframe>
+<iframe id="fts-webring" width="240" height="80"></iframe>
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+		const webring = document.getElementById("fts-webring") as HTMLIFrameElement;
+		const bgColor = getComputedStyle(webring).getPropertyValue('--accent-color');
+		const textColor = getComputedStyle(webring).getPropertyValue('--bg-color');
+		webring.src = `https://fromthesuperhighway.com/webring/source?bg-color=${bgColor}&text-color=${textColor}`
+	})
+</script>

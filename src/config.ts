@@ -9,7 +9,20 @@ export const siteBreakpoints = {
 export const companyTitle = "From The Superhighway";
 export const globalNavPages = [
 	{
-		route: "/archive/1",
-		displayName: "Archive"
-	}
+		route: "/guide/0",
+		displayName: "Guide"
+	},
+	{
+		route: "/database",
+		displayName: "Database"
+	},
+	{
+		route: "/library",
+		displayName: "Library"
+	},
+	{
+		route: "/mission",
+		displayName: "Mission"
+	},
+
 ];

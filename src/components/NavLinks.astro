@@ -1,0 +1,29 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {
+	routes: { route: string; displayName: string }[];
+}
+
+const { class: className, routes, ...props } = Astro.props;
+---
+
+<div
+	class:list={[
+		"w-full h-full flex flex-col justify-center md:flex-row md:items-center md:justify-evenly select-none",
+		className,
+	]}
+	,
+	{...props}
+>
+	{
+		routes.map((page) => (
+			<a href={page.route} class="hover:font-bold">
+				{page.displayName}
+			</a>
+		))
+	}
+</div>
+<script>
+	// handles creating dropdown
+</script>

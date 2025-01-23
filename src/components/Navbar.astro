@@ -1,75 +1,117 @@
 ---
-import { Image } from "astro:assets";
-import { globalNavPages } from "../config";
-import Prompt from "./Prompt.astro";
-import Subscribe from "./Subscribe.astro";
 import { Icon } from "astro-icon/components";
 import patreon from "../assets/img/patreon.svg?raw";
+import { globalNavPages } from "../config";
 import PatreonIcon from "./Icon.astro";
-// TODO: allow for disabling transparency
-const currentRoute = Astro.url.pathname;
+import NavLinks from "./NavLinks.astro";
+import Prompt from "./Prompt.astro";
 ---
 
 <header
-	class="flex justify-between items-center transition-all h-16 top-0 w-full px-4 md:px-8 border-b-text-color border-b sticky z-20 bg-bgColor data-[prev-scroll=up]:-top-16"
+	class="group flex justify-between items-center transition-all h-16 top-0 w-full px-4 md:px-8 border-b-text-color border-b sticky z-20 bg-bgColor data-[prev-scroll=up]:-top-16"
+	data-drawer="inactive"
 	data-prev-scroll="up"
 >
 	<a
 		href="/"
 		class="text-md md:text-lg hover:text-accentColor font-bold uppercase"
 	>
-		<span class="hidden sm:block"><Prompt />{`Unplatform`}</span>
-		<span class="block sm:hidden"><Prompt />{`FTS`}</span>
+		<Prompt />{`Unplatform`}
 	</a>
 	<nav
-		class="flex flex-1 text-sm gap-2 md:gap-4 justify-end p-4 items-center md:text-lg uppercase font-header"
+		class="hidden md:flex items-center flex-1 uppercase font-header text-primaryColor max-w-sm gap-2 drop-shadow-lg"
 	>
-		<!-- <a href="/archive/1" class="p-1">
-			Issues
-		</a> -->
-		<a href="">Guide</a>
-		<a href="">Database</a>
-		<a href="">Library</a>
-		<a href="">Mission</a>
-		<a href="https://patreon.com/FalchionStudios" class="p-1">
-			<PatreonIcon content={patreon} class={"w-4 text-inherit"} />
-		</a>
-		<a href="/rss.xml" class="p-1">
-			<Icon name={"feather:rss"} class={"text-inherit"} size={24} />
-		</a>
+		<NavLinks routes={globalNavPages} />
+		<div class="flex gap-4 items-center">
+			<a href="https://patreon.com/FalchionStudios">
+				<PatreonIcon content={patreon} class={"w-4 text-inherit"} />
+			</a>
+			<a href="/rss.xml">
+				<Icon name={"feather:rss"} class={"text-inherit"} size={24} />
+			</a>
+		</div>
+	</nav>
+	<button
+		id="trigger"
+		class="transition-transform group-data-[drawer='active']:rotate-90 md:hidden"
+		><Icon class={"text-3xl text-primaryColor"} name={"feather:menu"} />
+	</button>
+	<nav
+		id="mobile-nav"
+		class="flex md:hidden justify-end items-center fixed w-full h-full top-0 right-0 group-data-[drawer='active']:backdrop-blur-lg group-data-[drawer='active']:backdrop-brightness-75 group-data-[drawer='inactive']:pointer-events-none transition-all text-3xl"
+	>
+		<div
+			class="uppercase font-header text-bgColor p-8 max-w-md bg-primaryColor h-full group-data-[drawer='inactive']:translate-x-full transition-all flex flex-col justify-center gap-4 text-right"
+		>
+			<NavLinks routes={globalNavPages} class:list={["gap-4 h-min"]} />
+			<div class="flex gap-4 justify-end items-center">
+				<a href="https://patreon.com/FalchionStudios">
+					<PatreonIcon content={patreon} class={"w-6 text-inherit"} />
+				</a>
+				<a href="/rss.xml">
+					<Icon
+						name={"feather:rss"}
+						class={"text-inherit"}
+						size={32}
+					/>
+				</a>
+			</div>
+		</div>
 	</nav>
 </header>
 
 <script>
+	import { checkBreakpoint } from "../lib/";
+	function updateDrawerState(e?: PointerEvent) {
+		// console.log((e?.target as HTMLElement).tagName);
+		if ((e?.target as HTMLElement).tagName.toLowerCase() === "a") {
+			// prevents drawer retraction before navlink is clicked
+			return;
+		}
+
+		const header = document.querySelector("header");
+		const prevDrawerState = header?.dataset["drawer"];
+
+		if (!header) {
+			throw new Error("Couldn't update nav - header does not exist");
+		}
+
+		// set mobile expanded drawer
+		if (checkBreakpoint("md")) {
+			header.dataset["drawer"] = "inactive";
+		} else {
+			if (prevDrawerState === "inactive") {
+				header.dataset["drawer"] = "active";
+			} else {
+				header.dataset["drawer"] = "inactive";
+			}
+		}
+	}
+
+	const trigger = document.getElementById("trigger");
+	const mobileNav = document.getElementById("mobile-nav");
+	trigger?.addEventListener("pointerdown", updateDrawerState);
+	mobileNav?.addEventListener("pointerdown", updateDrawerState);
+
+	window.addEventListener("resize", (e) => {
+		if (checkBreakpoint("md")) {
+			updateDrawerState();
+		}
+	});
+
 	let lastScrollPosition = window.scrollY;
-	let getViewportHeight = () => window.innerHeight;
-	let locked = false;
-	function updatePrevScroll(override?: "up" | "down") {
+	function updatePrevScroll() {
 		const header = document.querySelector("header");
 		if (!header) {
 			throw new Error("Couldn't find the header element.");
 		}
 		const newScrollPosition = window.scrollY;
-
-		let newData: "up" | "down";
-		if (window.scrollY < 250) {
-			newData = "up";
-		} else if (lastScrollPosition > newScrollPosition) {
-			newData = "down";
-		} else {
-			newData = "up";
-		}
-
+		header.dataset["prevScroll"] =
+			lastScrollPosition > newScrollPosition || window.scrollY < 250
+				? "up"
+				: "down";
 		lastScrollPosition = newScrollPosition;
-		header.dataset["prevScroll"] = newData;
-		// header.style.backgroundColor = `rgba(248, 248, 255, ${lastScrollPosition / getViewportHeight()}`;
 	}
-	//   for (const element of document.getElementsByClassName("nav-link")) {
-	//     element.addEventListener("click", () => updatePrevScroll("down"));
-	//   }
 
-	window.addEventListener("scroll", () => {
-		// console.log("firing event");
-		updatePrevScroll();
-	});
+	window.addEventListener("scroll", updatePrevScroll);
 </script>

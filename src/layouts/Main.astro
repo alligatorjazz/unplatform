@@ -3,19 +3,15 @@ import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import "./Main.css";
 import TabTitle from "../components/TabTitle.astro";
-import LumineText, {
-	type LumineTextProps,
-} from "../components/LumineText.astro";
 import BackToTop from "../components/BackToTop.astro";
 
 export interface Props {
 	title: string;
 	description?: string;
 	class?: string;
-	lumine?: Omit<LumineTextProps, "text">;
 }
 
-const { title, description, class: className, lumine } = Astro.props;
+const { title, description, class: className } = Astro.props;
 ---
 
 <!doctype html>
