@@ -1,4 +1,7 @@
 import { siteBreakpoints } from "../config";
+export type ArrayElement<ArrayType extends readonly unknown[]> =
+	ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
+
 export function multiclass(...args: (string | undefined)[]) {
 	// combines several css module names into single class
 
@@ -123,4 +126,27 @@ export function repeatRandom<T>(
 	}
 
 	return array as T[];
+}
+
+export const useCases = [
+	{ name: "community", labelText: "Socializing and / or community." },
+	{ name: "events", labelText: "Getting informed about local events." },
+	{ name: "expression", labelText: "Expressing myself." },
+	{ name: "news", labelText: "News and politics." }
+] as const;
+
+export type UseCaseValues = Record<((typeof useCases)[number]["name"]), boolean>;
+export function loadUseCases(): UseCaseValues | null {
+	const cachedUseCases = localStorage.getItem("useCases");
+	if (!cachedUseCases) {
+		return null;
+	}
+
+	try {
+		return JSON.parse(cachedUseCases);
+	} catch (err) {
+		console.error("Could not parse cached use cases.");
+		console.error(err);
+		return null;
+	}
 }
