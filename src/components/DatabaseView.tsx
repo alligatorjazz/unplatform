@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 
 export interface DatabaseViewOptions {
 	freeOnly: boolean;
-	category: RecommendationCategory | null;
+	category: RecommendationCategory;
 	maxComplexity: LiteracyLevel
 }
 
@@ -29,9 +29,26 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 		}
 	});
 
+	const filters = watch();
+
 	const filteredEntries = useMemo(() => {
-		return entries;
-	}, []);
+		let result = entries;
+		if (filters.freeOnly) {
+			result = entries.filter(({ data }) => data.pricing.includes("free"))
+		}
+
+		if (filters.category !== "all") {
+			result = entries.filter(({ data }) => data.category.includes(filters.category))
+		}
+
+		if (filters.maxComplexity !== "4") {
+			const maxLevel = parseInt(filters.maxComplexity);
+			result = entries.filter(({ data }) => parseInt(data.literacyLevel) <= maxLevel)
+		}
+
+		result = result.sort((a, b) => a.data.title.localeCompare(b.data.title));
+		return result;
+	}, [filters]);
 
 	return (
 		<section className="w-full rounded-md border border-textColor">
@@ -39,10 +56,10 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 				<h1 className="font-bold text-center">{title}</h1>
 
 			</div>
-			<div className="max-h-96 overflow-y-scroll flex flex-col-reverse md:flex-row">
-				<ul>
-					{entries.map(({ data }) => (
-						<li key={data.url} className="border-r border-textColor">
+			<div className="max-h-96 min-h-96 overflow-y-scroll flex flex-col-reverse md:flex-row">
+				<ul className="border-textColor md:border-r">
+					{filteredEntries.map(({ data }) => (
+						<li key={data.url}>
 							<a target="_blank" className="p-4 block w-full h-full border-b border-textColor no-underline cursor-pointer hover:brightness-150 hover:backdrop-brightness-125 will-change-auto" href={data.url}>
 								<div className="w-full flex justify-between items-center">
 									<h2 className="md:text-lg">{data.title}</h2>
