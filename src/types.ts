@@ -29,7 +29,8 @@ export const Cities = [
 	"Chicago, IL, USA",
 	"Worcester, MA, USA",
 	"Brisbane, QLD, AU",
-	"Denver, CO, USA"
+	"Denver, CO, USA",
+	"Omaha, NE, USA"
 ] as const;
 
 export const CitySchema = z.enum(Cities)
