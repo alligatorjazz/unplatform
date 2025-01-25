@@ -33,6 +33,8 @@ export const Cities = [
 export const CitySchema = z.enum(Cities)
 export type City = z.infer<typeof CitySchema>;
 
+export const SubscriptionFeedSchema = z.enum(["RSS", "Newsletter"])
+
 // 2. Define a `type` and `schema` for each collection
 export const RecommendationSchema = z.object({
 	url: z.string(),
@@ -45,7 +47,8 @@ export const RecommendationSchema = z.object({
 	literacyLevel: LiteracyLevelSchema,
 	dateAdded: z.date(),
 	lastUpdated: z.date().default(new Date()),
-	city: CitySchema.default("Digital First")
+	city: CitySchema.default("Digital First"),
+	feeds: SubscriptionFeedSchema.array().optional()
 });
 
 export type Recommendation = z.infer<typeof RecommendationSchema>;

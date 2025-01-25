@@ -1,9 +1,9 @@
 ---
-url: https://template.org/
-title: State Library of Queensland
+url: https://www.slq.qld.gov.au/
+title: Queensland Art Gallery
 category: ["organization"]
 literacyLevel: "0"
-headline: Queensland's largest public library.
+headline: A gallery hosting contemporary and historical Australian art.
 os: [web]
 pricing: ["free"]
 city: "Brisbane, QLD, AU"

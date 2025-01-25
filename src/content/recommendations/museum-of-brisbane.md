@@ -1,9 +1,9 @@
 ---
-url: https://template.org/
-title: State Library of Queensland
+url: https://www.museumofbrisbane.com.au/
+title: Museum of Brisbane
 category: ["organization"]
 literacyLevel: "0"
-headline: Queensland's largest public library.
+headline: Brisbane's leading history and art museum.
 os: [web]
 pricing: ["free"]
 city: "Brisbane, QLD, AU"

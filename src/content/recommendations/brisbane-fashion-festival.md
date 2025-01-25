@@ -1,9 +1,9 @@
 ---
-url: https://template.org/
-title: State Library of Queensland
+url: https://brisbanefashionfestival.com/subscribe/
+title: Brisbane Fashion Festival
 category: ["organization"]
 literacyLevel: "0"
-headline: Queensland's largest public library.
+headline: An annual fashion show.
 os: [web]
 pricing: ["free"]
 city: "Brisbane, QLD, AU"

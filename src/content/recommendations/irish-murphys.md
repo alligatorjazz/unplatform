@@ -1,9 +1,9 @@
 ---
-url: https://template.org/
-title: State Library of Queensland
+url: https://www.irishmurphys.com.au/brisbane
+title: Irish Murphy's
 category: ["organization"]
 literacyLevel: "0"
-headline: Queensland's largest public library.
+headline: A pub and live music venue in the Brisbane CBD.
 os: [web]
 pricing: ["free"]
 city: "Brisbane, QLD, AU"
