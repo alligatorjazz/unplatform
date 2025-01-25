@@ -1,4 +1,5 @@
 import { siteBreakpoints } from "../config";
+import { LiteracyLevelSchema, type LiteracyLevel } from "../types";
 export type ArrayElement<ArrayType extends readonly unknown[]> =
 	ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
 
@@ -150,3 +151,24 @@ export function repeatRandom<T>(
 // 		return null;
 // 	}
 // }
+
+export function loadLiteracyLevel(): LiteracyLevel | null {
+	const cachedLiteracyLevel = localStorage.getItem("literacyLevel");
+
+	try {
+		return LiteracyLevelSchema.parse(cachedLiteracyLevel);
+	} catch (err) {
+		console.error("Could not load literacy level.");
+		console.error(err);
+		return null;
+	}
+}
+
+export function saveLiteracyLevel(currentLevel: LiteracyLevel) {
+	try {
+		localStorage.setItem("literacyLevel", LiteracyLevelSchema.parse(currentLevel));
+	} catch (err) {
+		console.error(`Could not save literacy level ${currentLevel}.`);
+		throw err;
+	}
+}

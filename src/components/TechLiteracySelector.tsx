@@ -1,10 +1,12 @@
 import { useEffect, useState, type HTMLAttributes, type ReactElement, type ReactNode } from "react";
 import { useForm } from "react-hook-form";
+import type { LiteracyLevel } from "../content/config";
+import { loadLiteracyLevel, saveLiteracyLevel } from "../lib";
 
-export type LiteracyLevel = "0" | "1" | "2" | "3" | "4";
+
 export default function TechLiteracySelector(props: HTMLAttributes<HTMLFormElement>) {
-	const { register, watch } = useForm<{ literacyLevel: string }>({ defaultValues: { 
-		literacyLevel: localStorage.getItem("literacyLevel") ?? "0" 
+	const { register, watch } = useForm<{ literacyLevel: LiteracyLevel }>({ defaultValues: { 
+		literacyLevel: loadLiteracyLevel() ?? "0"
 	} });
 
 	const currentLevel = watch("literacyLevel");
@@ -18,7 +20,7 @@ export default function TechLiteracySelector(props: HTMLAttributes<HTMLFormEleme
 	];
 
 	useEffect(() => {
-		localStorage.setItem("literacyLevel", currentLevel);
+		saveLiteracyLevel(currentLevel);
 	}, [currentLevel]);
 
 	return (

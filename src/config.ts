@@ -6,7 +6,7 @@ export const siteBreakpoints = {
 	xl: 1400
 };
 
-export const companyTitle = "UNPLATFORM";
+export const companyTitle = "Unplatform";
 export const globalNavPages = [
 	{
 		route: "/guide/0",
