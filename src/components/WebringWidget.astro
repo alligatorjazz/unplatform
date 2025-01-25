@@ -28,9 +28,9 @@
 	const webring = document.getElementById("fts-webring") as HTMLIFrameElement;
 	document.addEventListener("DOMContentLoaded", () => {
 		const bgColor =
-			getComputedStyle(webring).getPropertyValue("--accent-color");
-		const textColor =
 			getComputedStyle(webring).getPropertyValue("--bg-color");
+		const textColor =
+			getComputedStyle(webring).getPropertyValue("--accent-color");
 		webring.src = `https://fromthesuperhighway.com/webring/source?bg-color=${bgColor}&text-color=${textColor}`;
 	});
 

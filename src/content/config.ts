@@ -2,14 +2,10 @@
 import { defineCollection, z } from 'astro:content';
 import { LibraryItemSchema, LiteracyLevelSchema, RecommendationSchema } from '../types';
 
-
-
 const recommendationCollection = defineCollection({
 	type: "content", // v2.5.0 and later
 	schema: RecommendationSchema,
 });
-
-
 
 const libraryCollection = defineCollection({
 	type: "content", // v2.5.0 and later

@@ -2,7 +2,7 @@
 url: https://neocities.org/
 title: Neocities
 category: [site builder, social network]
-literacyLevel: "4"
+literacyLevel: "3"
 headline: A web hosting platform styled after the original Geocities.
 os: [web]
 pricing: [free, paid]

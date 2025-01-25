@@ -14,6 +14,7 @@ const allRecommendations = await getCollection("recommendations");
 	<div
 		class="flex flex-col items-center bg-bgColor border border-textColor max-w-4xl mx-auto p-4"
 	>
+		<p class="text-sm text-center mb-4">See our full list of recommendations for websites, social networks, software, and more.</p>
 		<DatabaseView title="Recommendations" entries={allRecommendations} />
 	</div>
 </Main>

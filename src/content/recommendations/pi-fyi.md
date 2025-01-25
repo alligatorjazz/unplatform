@@ -3,8 +3,9 @@ url: https://www.pi.fyi/
 title: pi.fyi
 category: [social network]
 literacyLevel: "0"
-headline: A social discovery platform designed for sharing recommendations with others.
+headline: A social network designed for sharing recommendations with others.
 os: [web]
 pricing: [free, paid]
+city: "New York, NY, USA"
 dateAdded: 2025-01-24
 ---
