@@ -71,12 +71,22 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 			result = result.filter(({ data }) => data.city === filters.city)
 		}
 
+		if (filters.requireNewsletter) {
+			result = result.filter(({ data }) => data.feeds?.includes("Newsletter"))
+		}
+
+		if (filters.requireRSS) {
+			result = result.filter(({ data }) => data.feeds?.includes("RSS"))
+		}
+
+		console.log(result);
+
 		result = result.sort((a, b) => a.data.title.localeCompare(b.data.title));
 		return result;
 	}, [filters]);
 
 	return (
-		<section className="w-full rounded-md border border-textColor">
+		<section className="w-full rounded-md border border-textColor mb-4">
 			<div className="p-4 border-b border-textColor w-full flex items-center gap-4">
 				<h1 className="font-bold">{title}</h1>
 				{filteredEntries.length < entries.length && <p className="italic text-xs">{entries.length - filteredEntries.length} items hidden due to filters.</p>}
@@ -88,24 +98,27 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 							<a target="_blank" className="p-4 block w-full h-full border-b border-textColor no-underline cursor-pointer hover:brightness-150 hover:backdrop-brightness-125 will-change-auto" href={data.url}>
 								<div className="w-full flex justify-between items-center">
 									<h2 className="text-sm mb-1 font-bold">{data.title}</h2>
-									<div title={data.literacyLevel} className="flex items-center justify-end gap-1">
-										{
-											data.feeds
-										}
+									<div title={data.literacyLevel} className="flex flex-1 items-center justify-end gap-2">
+										<div className="flex flex-1 items-center gap-2 mb-1 mx-2">
+											{data.feeds?.includes("Newsletter") && <FiMail size={16} className="stroke-textColor" />}
+											{data.feeds?.includes("RSS") && <FiRss size={16} className="stroke-textColor" />}
+										</div>
 										{data.city != "All" && data.city != "Digital First" &&
 											<h3 className="fill-textColor text-xs flex gap-1 items-center mr-1">
 												<span>{(data.city).split(",")[0]} </span>
 												<PiCityFill className="stroke-accentColor" />
 											</h3>
 										}
-										<h3 className="text-xs hidden md:block">Complexity</h3>
-										{[0, 1, 2, 3, 4].map(iconLevel => {
-											if (iconLevel > parseInt(data.literacyLevel)) {
-												return <FiMonitor key={iconLevel} size={12} className="stroke-textColor opacity-25" />
-											} else {
-												return <FiMonitor key={iconLevel} size={12} className="stroke-textColor" />
-											}
-										})}
+										<div className="flex items-center gap-1">
+											<h3 className="text-xs hidden md:block">Complexity</h3>
+											{[0, 1, 2, 3, 4].map(iconLevel => {
+												if (iconLevel > parseInt(data.literacyLevel)) {
+													return <FiMonitor key={iconLevel} size={12} className="stroke-textColor opacity-25" />
+												} else {
+													return <FiMonitor key={iconLevel} size={12} className="stroke-textColor" />
+												}
+											})}
+										</div>
 									</div>
 								</div>
 								<h3 className="text-xs mb-2">{data.headline}</h3>

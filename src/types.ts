@@ -3,9 +3,10 @@ export const LiteracyLevelSchema = z.enum(["0", "1", "2", "3", "4"]);
 export type LiteracyLevel = z.infer<typeof LiteracyLevelSchema>;
 
 export const RecommendationCategories = [
-	"newspaper",
+	"news",
 	"magazine",
 	"blog",
+	"events",
 	"software",
 	"social network",
 	"site builder",
@@ -26,8 +27,9 @@ export const Cities = [
 	"Digital First",
 	"New York, NY, USA",
 	"Chicago, IL, USA",
-	"Worchester, MA, USA",
-	"Brisbane, QLD, AU"
+	"Worcester, MA, USA",
+	"Brisbane, QLD, AU",
+	"Denver, CO, USA"
 ] as const;
 
 export const CitySchema = z.enum(Cities)
