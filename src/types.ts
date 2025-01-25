@@ -13,6 +13,9 @@ export const RecommendationCategories = [
 	"forum",
 	"organization",
 	"other",
+	// TODO: implement musician and artist
+	// "musician", 
+	// "artist",
 	"all"
 ] as const;
 
@@ -30,7 +33,8 @@ export const Cities = [
 	"Worcester, MA, USA",
 	"Brisbane, QLD, AU",
 	"Denver, CO, USA",
-	"Omaha, NE, USA"
+	"Omaha, NE, USA",
+	"Orlando, FL, USA"
 ] as const;
 
 export const CitySchema = z.enum(Cities)
