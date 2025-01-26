@@ -1,1 +1,52 @@
-<slot/>
+---
+interface Props {
+	definition: string;
+}
+const { definition } = Astro.props;
+// TODO: replace with proper intersectionObserver api - current solution is unstable
+---
+
+<span title={definition} tabindex="0" class="cursor-help relative group drop-shadow-none">
+	<span
+		class="group-hover:hover:brightness-125 text-accentColor underline decoration-dotted drop-shadow-none" 
+	>
+		<slot /><sup class="text-accentColor">?</sup></span
+	><span
+		id="tooltip"
+		class:list={[
+			"text-xs bg-bgColor border border-textColor p-2 absolute bottom-4 w-52 transition-all drop-shadow-none",
+			"opacity-0 pointer-events-none group-focus:opacity-100 group-focus:pointer-events-auto",
+		]}
+	>
+		{definition}
+	</span></span
+>
+<script>
+	const tooltipWidth = "16rem";
+	function keepTooltipInBounds() {
+		const tooltip = document.getElementById("tooltip");
+		if (!tooltip) {
+			console.warn("Could not find tooltip.");
+			return;
+		}
+
+		const bounding = tooltip.getBoundingClientRect();
+		const offset: { left: number; right: number } = { left: 0, right: 0 };
+
+		// offscreen to the left
+		if (bounding.left < 0) {
+			offset.left = Math.abs(bounding.left);
+		}
+
+		// offscreen to the right
+		if (bounding.right > window.innerWidth) {
+			offset.right = Math.abs(window.innerWidth - bounding.right);
+		}
+
+		tooltip.style.right = `${offset.right - offset.left}px`;
+		console.log(bounding, offset);
+	}
+
+	window.addEventListener("DOMContentLoaded", keepTooltipInBounds);
+	window.addEventListener("resize", keepTooltipInBounds);
+</script>
