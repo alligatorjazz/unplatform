@@ -16,7 +16,7 @@ export default function TechLiteracySelector(props: HTMLAttributes<HTMLFormEleme
 		"I know what a .zip file is, and what it's used for.",
 		`I know what happens if I type "%appdata%" into Windows Explorer.`,
 		"I've dabbled with HTML / CSS (or other programming / markup languages).",
-		<a target="_blank" href="https://www.youtube.com/watch?v=fBDifUjNzbQ">"I don't even see the code."</a>
+		<a className="underline" target="_blank" href="https://www.youtube.com/watch?v=fBDifUjNzbQ">"I don't even see the code."</a>
 	];
 
 	useEffect(() => {

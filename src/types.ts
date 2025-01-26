@@ -8,6 +8,7 @@ export const RecommendationCategories = [
 	"blog",
 	"events",
 	"software",
+	"reader",
 	"social network",
 	"site builder",
 	"forum",

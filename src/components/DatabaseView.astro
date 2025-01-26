@@ -1,12 +1,13 @@
 ---
+import { getCollection } from "astro:content";
 import ReactComponent, { type DatabaseViewProps } from "./DatabaseView.tsx";
 import { LoadingIndicator } from "./LoadingIndicator";
-type Props = DatabaseViewProps;
+type Props = Omit<DatabaseViewProps, "entries">;
 const props = Astro.props;
-
+const collectionEntries = await getCollection("recommendations");
 ---
 
-<ReactComponent {...props} client:only>
+<ReactComponent entries={collectionEntries} {...props} client:only>
 	<div slot="fallback" class="flex justify-center items-center h-[26rem]">
 		<LoadingIndicator />
 	</div>

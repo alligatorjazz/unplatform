@@ -1,6 +1,6 @@
 import type { CollectionEntry } from "astro:content";
 import { useCallback, useMemo, useState, type FormEvent } from "react";
-import { FiMonitor } from "react-icons/fi";
+import { FiGlobe, FiMonitor } from "react-icons/fi";
 import { toTitleCase } from "../lib/dom";
 import { Cities, RecommendationCategories, type City, type LiteracyLevel, type RecommendationCategory } from "../types";
 import { loadLiteracyLevel, saveLiteracyLevel } from "../lib";
@@ -9,7 +9,8 @@ import { PiCityFill } from "react-icons/pi";
 import { FiRss } from "react-icons/fi";
 import { FiMail } from "react-icons/fi";
 import { FiList } from "react-icons/fi";
-
+import { ImWindows } from "react-icons/im";
+import { SiAndroid, SiIos, SiLinux, SiMacos } from "react-icons/si";
 export interface DatabaseViewOptions {
 	freeOnly: boolean;
 	category: RecommendationCategory;
@@ -89,7 +90,7 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 		<section className="w-full rounded-md border border-textColor mb-4">
 			<div className="p-4 border-b border-textColor w-full flex items-center gap-4">
 				<h1 className="font-bold">{title}</h1>
-				{filteredEntries.length < entries.length && <p className="italic text-xs">{entries.length - filteredEntries.length} items hidden due to filters.</p>}
+				{filteredEntries.length < entries.length && Object.values(hideOptions ?? {}).find(hidden => !hidden) && <p className="italic text-xs">{entries.length - filteredEntries.length} items hidden due to filters.</p>}
 			</div>
 			<div className="max-h-96 min-h-96 overflow-y-scroll scrollbar-none flex flex-col-reverse md:flex-row">
 				<ul className="border-textColor md:border-r h-full flex-1">
@@ -123,6 +124,15 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 								</div>
 								<h3 className="text-xs mb-2">{data.headline}</h3>
 								<div className="flex gap-2 text-xs items-center">
+									<ul className="flex items-center gap-2">
+										{data.os?.includes("web") && <FiGlobe size={16} className="stroke-textColor" />}
+										{data.os?.includes("windows") && <ImWindows size={16} className="invert" />}
+										{data.os?.includes("mac") && <SiMacos  size={24} className="invert" />}
+										{data.os?.includes("ios") && <SiIos size={16} className="invert" />}
+										{data.os?.includes("linux") && <SiLinux size={16} className="invert" />}
+										{data.os?.includes("android") && <SiAndroid size={16} className="invert" />}
+									</ul>
+									<div className="h-4 border-l border-textColor"></div>
 									<h4 className="italic">{data.category.map(text => toTitleCase(text)).join(", ")}</h4>
 									<div className="h-4 border-l border-textColor"></div>
 									<ul className="flex gap-2">
@@ -141,49 +151,49 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 					))}
 				</ul>
 				<form className="text-xs flex flex-col p-4 justify-center items-center gap-2 border-b w-full md:sticky md:top-0 md:border-b-0 md:max-w-52">
-					<div className="flex items-center gap-1">
+					{!hideOptions?.freeOnly && <div className="flex items-center gap-1">
 						{/* TODO: figure out a way to align these without this ugly pixel-width */}
 						<input className="h-[15.5px]" type="checkbox" {...register("freeOnly")} />
 						<label htmlFor="freeOnly">Free Options Only</label>
-					</div>
-					<div className="flex items-center gap-1">
+					</div>}
+					{!hideOptions?.maxComplexity && <div className="flex items-center gap-1">
 						<select {...register("maxComplexity")} className="text-bgColor">
 							{["0", "1", "2", "3", "4"].map(level => (
 								<option key={level} value={level}>{parseInt(level) + 1}</option>
 							))}
 						</select>
 						<label htmlFor="maxComplexity">Max Complexity</label>
-					</div>
-					<div className="flex items-center gap-1">
+					</div>}
+					{!hideOptions?.category && <div className="flex items-center gap-1">
 						<label htmlFor="category" title="Category"><FiList className="stroke-textColor" /></label>
 						<select {...register("category")} className="text-bgColor">
 							{RecommendationCategories.map(category => (
 								<option key={category} value={category}>{toTitleCase(category)}</option>
 							))}
 						</select>
-					</div>
-					<div className="flex items-center gap-1">
+					</div>}
+					{!hideOptions?.city && <div className="flex items-center gap-1">
 						<label htmlFor="city" title="City"><PiCityFill className="fill-textColor" /></label>
 						<select {...register("city")} className="text-bgColor">
 							{Cities.map(city => (
 								<option key={city} value={city}>{city}</option>
 							))}
 						</select>
-					</div>
-					<div className="flex items-center gap-1">
+					</div>}
+					{!hideOptions?.requireRSS && <div className="flex items-center gap-1">
 						{/* TODO: figure out a way to align these without this ugly pixel-width */}
 						<input className="h-[15.5px]" type="checkbox" {...register("requireRSS")} />
 						<label htmlFor="requireRSS" className="flex items-center gap-1">
 							<FiRss className="stroke-textColor" /><span>Require RSS Feed</span>
 						</label>
-					</div>
-					<div className="flex items-center gap-1">
+					</div>}
+					{!hideOptions?.requireNewsletter && <div className="flex items-center gap-1">
 						{/* TODO: figure out a way to align these without this ugly pixel-width */}
 						<input className="h-[15.5px]" type="checkbox" {...register("requireNewsletter")} />
 						<label htmlFor="requireNewsletter" className="flex items-center gap-1">
 							<FiMail className="stroke-textColor" /><span>Require Newsletter</span>
 						</label>
-					</div>
+					</div>}
 					<button type="button" onPointerDown={resetFilters} className="p-4 py-2 bg-accentColor text-bgColor transition-all hover:brightness-125 h-min w-min whitespace-nowrap">{">: "}Reset Filters</button>
 				</form>
 			</div>

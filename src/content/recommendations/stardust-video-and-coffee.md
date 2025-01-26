@@ -1,5 +1,5 @@
 ---
-url: https://willspub.org/
+url: https://stardustvideoandcoffee.wordpress.com/
 title: Stardust Video and Coffee
 category: ["events"]
 literacyLevel: "0"

@@ -1,9 +1,6 @@
 ---
-import { getCollection } from "astro:content";
 import DatabaseView from "../components/DatabaseView.astro";
 import Main from "../layouts/Main.astro";
-
-const allRecommendations = await getCollection("recommendations");
 ---
 
 <Main
@@ -17,7 +14,7 @@ const allRecommendations = await getCollection("recommendations");
 			See our full list of recommendations for newsletters, social
 			networks, digital tools, and more.
 		</p>
-		<DatabaseView title="Recommendations" entries={allRecommendations} />
+		<DatabaseView title="Recommendations" />
 		<blockquote class="text-center mb-4">
 			Note: "Free" and "Paid" are referring to the cost of the site's
 			content or software - not necessarily things like tickets for IRL
@@ -25,8 +22,8 @@ const allRecommendations = await getCollection("recommendations");
 		</blockquote>
 		<p class="text-sm text-center mb-4">
 			Do you know of a website, application, or organization we should add
-			here, or do you see something here that's inaccurate / out of date? Let me know at <a
-				href="mailto:unplatform@fromthesuperhighway.com"
+			here, or do you see something here that's inaccurate / out of date?
+			Let me know at <a href="mailto:unplatform@fromthesuperhighway.com"
 				>unplatform@fromthesuperhighway.com</a
 			>!
 		</p>
