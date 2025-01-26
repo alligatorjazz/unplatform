@@ -26,9 +26,11 @@ export interface DatabaseViewProps {
 	entries: CollectionEntry<"recommendations">[];
 	defaultOptions?: Partial<DatabaseViewOptions>;
 	hideOptions?: Record<keyof DatabaseViewOptions, boolean>;
+	localOnly?: boolean;
+	categoryConstraints?: RecommendationCategory[]
 }
 
-export default function DatabaseView({ title, entries, defaultOptions, hideOptions }: DatabaseViewProps) {
+export default function DatabaseView({ title, entries, defaultOptions, hideOptions, localOnly, categoryConstraints }: DatabaseViewProps) {
 	const { register, watch, reset } = useForm<DatabaseViewOptions>({
 		defaultValues: {
 			freeOnly: false,
@@ -87,7 +89,13 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 			result = result.filter(({ data }) => data.feeds?.includes("RSS"))
 		}
 
-		console.log(result);
+		if (localOnly) {
+			result = result.filter(({ data }) => data.city !== "Digital First")
+		}
+
+		if (categoryConstraints) {
+			result = result.filter(({ data }) => data.category.find(category => categoryConstraints.includes(category)))
+		}
 
 		result = result.sort((a, b) => a.data.title.localeCompare(b.data.title));
 		return result;
@@ -134,7 +142,7 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 									<ul className="flex items-center gap-2">
 										{data.os?.includes("web") && <FiGlobe size={16} className="stroke-textColor" />}
 										{data.os?.includes("windows") && <ImWindows size={16} className="invert" />}
-										{data.os?.includes("mac") && <SiMacos  size={24} className="invert" />}
+										{data.os?.includes("mac") && <SiMacos size={24} className="invert" />}
 										{data.os?.includes("ios") && <SiIos size={16} className="invert" />}
 										{data.os?.includes("linux") && <SiLinux size={16} className="invert" />}
 										{data.os?.includes("android") && <SiAndroid size={16} className="invert" />}
@@ -174,7 +182,7 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 					{!hideOptions?.category && <div className="flex items-center gap-1">
 						<label htmlFor="category" title="Category"><FiList className="stroke-textColor" /></label>
 						<select {...register("category")} className="text-bgColor">
-							{RecommendationCategories.map(category => (
+							{(categoryConstraints ?? RecommendationCategories).map(category => (
 								<option key={category} value={category}>{toTitleCase(category)}</option>
 							))}
 						</select>

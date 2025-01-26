@@ -11,9 +11,9 @@ This one's a biggie - when doing initial interviews with Web 2.0 users in prepar
 
 It probably goes without saying, but this part of the guide is going to remain a living document. I cannot collect every newsletter and RSS feed from every city on Earth on my own. I've tried my best to sniff out the ones relevant to the largest metropolitan areas in North America (where I live), but it's still going to be pretty incomplete. **If your city isn't listed below, or if you know of a newsletter / RSS feed that I missed, *please* [let me know](mailto:unplatform@fromthesuperhighway.com).**
 
-> <Icon name="feather:alert-circle" class={"inline"} /> This list is grouped by metropolitan area, not by exact city boundaries. If your city doesn't show up here, try searching for the largest city near you.
+> <Icon name="feather:alert-circle" class={"inline"} /> This list is grouped by metropolitan area, not by exact city boundaries. If your city doesn't show up here, try selecting the largest city near you.
 
-<DatabaseView client:load title={"Local Events & Feeds"} className="mb-4" hideOptions={{os: true, maxComplexity: true}} defaultOptions={{category: "events"}}/>
+<DatabaseView client:load title={"Local Events & Feeds"} className="mb-4" hideOptions={{os: true, maxComplexity: true}} categoryConstraints={["all", "events", "magazine", "forum", "blog", "organization", "news"]} localOnly/>
 
 Once you're ready, we can continue.
 
