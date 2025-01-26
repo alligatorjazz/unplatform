@@ -14,16 +14,16 @@ export const RecommendationCategories = [
 	"forum",
 	"organization",
 	"other",
-	// TODO: implement musician and artist
-	// "musician", 
-	// "artist",
 	"all"
 ] as const;
 
 export const RecommendationCategorySchema = z.enum(RecommendationCategories);
 
 export type RecommendationCategory = z.infer<typeof RecommendationCategorySchema>;
-export const OperatingSystemSchema = z.enum(["ios", "android", "windows", "mac", "linux", "web"]);
+export const OperatingSystems = ["ios", "android", "windows", "mac", "linux", "web", "all"] as const;
+export const OperatingSystemSchema = z.enum(OperatingSystems);
+export type OperatingSystem = z.infer<typeof OperatingSystemSchema>;
+
 export const PricingSchema = z.enum(["free", "paid"]);
 export const MembershipSchema = z.enum(["open", "application", "queue"])
 export const Cities = [

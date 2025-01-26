@@ -2,7 +2,7 @@ import type { CollectionEntry } from "astro:content";
 import { useCallback, useMemo, useState, type FormEvent } from "react";
 import { FiGlobe, FiMonitor } from "react-icons/fi";
 import { toTitleCase } from "../lib/dom";
-import { Cities, RecommendationCategories, type City, type LiteracyLevel, type RecommendationCategory } from "../types";
+import { Cities, OperatingSystems, RecommendationCategories, type City, type LiteracyLevel, type OperatingSystem, type RecommendationCategory } from "../types";
 import { loadLiteracyLevel, saveLiteracyLevel } from "../lib";
 import { useForm } from "react-hook-form";
 import { PiCityFill } from "react-icons/pi";
@@ -18,6 +18,7 @@ export interface DatabaseViewOptions {
 	city: City;
 	requireRSS: boolean;
 	requireNewsletter: boolean;
+	os: OperatingSystem;
 }
 
 export interface DatabaseViewProps {
@@ -34,6 +35,7 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 			category: "all",
 			maxComplexity: loadLiteracyLevel() ?? "4",
 			city: "All",
+			os: "all",
 			requireRSS: false,
 			requireNewsletter: false,
 			...defaultOptions
@@ -46,6 +48,7 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 			freeOnly: false,
 			category: "all",
 			maxComplexity: "4",
+			os: "all",
 			city: "All",
 			requireRSS: false,
 			requireNewsletter: false,
@@ -61,6 +64,10 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 
 		if (filters.category !== "all") {
 			result = result.filter(({ data }) => data.category.includes(filters.category))
+		}
+
+		if (filters.os !== "all") {
+			result = result.filter(({ data }) => data.os.includes(filters.os))
 		}
 
 		if (filters.maxComplexity !== "4") {
@@ -169,6 +176,14 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 						<select {...register("category")} className="text-bgColor">
 							{RecommendationCategories.map(category => (
 								<option key={category} value={category}>{toTitleCase(category)}</option>
+							))}
+						</select>
+					</div>}
+					{!hideOptions?.os && <div className="flex items-center gap-1">
+						<label htmlFor="os" title="os">OS</label>
+						<select {...register("os")} className="text-bgColor">
+							{OperatingSystems.map(system => (
+								<option key={system} value={system}>{system === "ios" ? "iOS" : toTitleCase(system)}</option>
 							))}
 						</select>
 					</div>}
