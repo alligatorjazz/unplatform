@@ -3,7 +3,7 @@ url: https://hyliu.me/fluent-reader/
 title: Fluent Reader
 category: [reader]
 literacyLevel: "0"
-headline: "A straightforward open-source RSS reader for Windows and Mac."
+headline: "A straight-forward and open-source RSS reader for Windows and Mac."
 os: [windows, mac]
 pricing: ["free"]
 feeds: ["RSS"]

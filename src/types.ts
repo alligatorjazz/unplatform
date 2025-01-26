@@ -66,6 +66,7 @@ export const LibraryItemSchema = z.object({
 	title: z.string(),
 	author: z.string(),
 	headline: z.string(),
+	datePublished: z.date(),
 	priority: z.number().optional()
 })
 

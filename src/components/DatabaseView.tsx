@@ -54,8 +54,14 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 			city: "All",
 			requireRSS: false,
 			requireNewsletter: false,
+			...(defaultOptions?? {})
 		});
-		saveLiteracyLevel("4");
+
+		// GDPR: prevents saving the literacy level if it hasn't already been set 
+		if (loadLiteracyLevel()) {
+			saveLiteracyLevel("4");
+		}
+
 	}, []);
 
 	const filteredEntries = useMemo(() => {
