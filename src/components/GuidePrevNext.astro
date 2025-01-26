@@ -1,7 +1,5 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import PromptLink from "./PromptLink.astro";
-import Prompt from "./Prompt.astro";
 
 type Props = HTMLAttributes<"div">;
 const { class: className, ...props } = Astro.props;
@@ -40,7 +38,7 @@ const { class: className, ...props } = Astro.props;
 		if (!prev || !next) {
 			throw new Error("Couldn't load pagination buttons.");
 		}
-		prev.setAttribute("href", Math.max(0, currentPage - 1).toString());
-		next.setAttribute("href", Math.max(0, currentPage + 1).toString());
+		prev.setAttribute("href", "/guide/" + Math.max(0, currentPage - 1).toString());
+		next.setAttribute("href", "/guide/" + Math.max(0, currentPage + 1).toString());
 	});
 </script>
