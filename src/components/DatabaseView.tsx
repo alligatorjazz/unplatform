@@ -181,7 +181,7 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 					{!hideOptions?.maxComplexity && <div className="flex items-center gap-1">
 						<select {...register("maxComplexity")} className="text-bgColor">
 							{["0", "1", "2", "3", "4"].map(level => (
-								<option key={level} value={level}>{parseInt(level) + 1}</option>
+								<option className="text-bgColor" key={level} value={level}>{parseInt(level) + 1}</option>
 							))}
 						</select>
 						<label htmlFor="maxComplexity">Max Complexity</label>

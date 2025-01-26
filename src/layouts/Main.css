@@ -122,6 +122,11 @@ nav>a:visited {
 	}
 } */
 
+input, option, select {
+	background-color: var(--text-color);
+	color: var(--text-color)
+}
+
 .bg-grid-shift {
 	height: 100%;
 	width: 100%;
