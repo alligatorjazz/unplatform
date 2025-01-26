@@ -1,13 +1,23 @@
 ---
+import { getCollection } from "astro:content";
+import DatabaseView from "../components/DatabaseView.astro";
 import Main from "../layouts/Main.astro";
+import LibraryView from "../components/LibraryView.astro";
 
+const libraryEntries = await getCollection("library");
 ---
 
 <Main
 	title="Home"
 	description="Bringing you the best kept secrets of the indie web."
 >
-	<div class="flex flex-col items-center">
-		<p>library</p>
+	<div
+		class="flex flex-col items-center bg-bgColor border border-textColor max-w-4xl mx-auto p-4"
+	>
+		<p class="text-sm text-center mb-4">
+			Articles, books, and podcasts that had foundational influences on
+			Unplatform and its philosophy.
+		</p>
+		<LibraryView title="Recommendations" entries={libraryEntries} />
 	</div>
 </Main>

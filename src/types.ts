@@ -64,7 +64,8 @@ export const LibraryItemSchema = z.object({
 	url: z.string(),
 	title: z.string(),
 	author: z.string(),
-	tags: z.string().array()
+	headline: z.string(),
+	priority: z.number().optional()
 })
 
 export type LibraryItem = z.infer<typeof LibraryItemSchema>;

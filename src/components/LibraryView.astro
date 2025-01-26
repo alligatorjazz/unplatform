@@ -1,0 +1,13 @@
+---
+import ReactComponent, { type LibraryViewProps } from "./LibraryView.tsx";
+import { LoadingIndicator } from "./LoadingIndicator";
+type Props = LibraryViewProps;
+const props = Astro.props;
+
+---
+
+<ReactComponent {...props} client:only>
+	<div slot="fallback" class="flex justify-center items-center h-[26rem]">
+		<LoadingIndicator />
+	</div>
+</ReactComponent>
