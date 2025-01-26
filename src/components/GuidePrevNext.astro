@@ -29,16 +29,31 @@ const { class: className, ...props } = Astro.props;
 </div>
 <script>
 	document.addEventListener("DOMContentLoaded", () => {
-		const currentPage = parseInt(
-			window.location.pathname.split("/").pop() ?? "0"
-		);
+		// TODO: change to a more durable method
+		const pathSegment = window.location.pathname.split("/");
+		let lastSegment = pathSegment.pop();
+		
+		if (lastSegment === "") {
+			lastSegment = pathSegment.pop();
+		}
+		console.log(lastSegment);
+		if (!lastSegment) {
+			throw new Error("Could not parse last url segment.")
+		}
+		const currentPage = parseInt(lastSegment);
 		const prev = document.getElementById("prev");
 		const next = document.getElementById("next");
 
 		if (!prev || !next) {
 			throw new Error("Couldn't load pagination buttons.");
 		}
-		prev.setAttribute("href", "/guide/" + Math.max(0, currentPage - 1).toString());
-		next.setAttribute("href", "/guide/" + Math.max(0, currentPage + 1).toString());
+		prev.setAttribute(
+			"href",
+			"/guide/" + Math.max(0, currentPage - 1).toString()
+		);
+		next.setAttribute(
+			"href",
+			"/guide/" + Math.max(0, currentPage + 1).toString()
+		);
 	});
 </script>
