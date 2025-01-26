@@ -19,10 +19,5 @@ export const globalNavPages = [
 	{
 		route: "/library",
 		displayName: "Library"
-	},
-	{
-		route: "/mission",
-		displayName: "Mission"
-	},
-
+	}
 ];
