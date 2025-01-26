@@ -1,0 +1,7 @@
+---
+import { getCollection } from "astro:content";
+
+const amount = (await getCollection("recommendations")).length + (await getCollection("library")).length;
+
+---
+<span>{amount}</span>
