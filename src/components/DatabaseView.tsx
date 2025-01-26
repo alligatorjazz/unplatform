@@ -97,7 +97,8 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 			result = result.filter(({ data }) => data.category.find(category => categoryConstraints.includes(category)))
 		}
 
-		result = result.sort((a, b) => a.data.title.localeCompare(b.data.title));
+		// alphabetical sort without "the"
+		result = result.sort((a, b) => a.data.title.replace("The ", "").localeCompare(b.data.title.replace("The ", "")));
 		return result;
 	}, [filters]);
 

@@ -4,6 +4,7 @@ layout: ../../layouts/Guide.astro
 ---
 import Buzzword from "../../components/Buzzword.astro";
 import GuidePrevNext from "../../components/GuidePrevNext.astro";
+import DatabaseView from "../../components/DatabaseView.astro";
 
 An extremely common use case for social media is keeping up with news and politics. This is bad, because social media is a uniquely horrible place to keep up with news and politics - The signal-to-noise ratio is simply far too lopsided in favor of noise. Be honest with yourself. Are you independently vetting every infographic you're signal boosting? Do you fact-check every community note? Do you fully read every article whose headline you retweet?
 
@@ -11,7 +12,7 @@ Maybe your brain is enormous and you're an infallible arbiter of truth - more po
 
 That isn't to say you start blindly believing the narratives peddled by mainstream media organizations (that is its own can of worms that's outside the scope of this guide), but it *is* to say that the level of effort required to write and publish an actual report or article will, in general, raise the quality and veracity of the information being presented. Additionally, precisely because reports and articles take more effort than infographics and captions, they're much more likely to be presenting information or ideas that are actually worth your time. I've collected a list of online newspapers, magazines, and journals with active newsletters and RSS feeds below: 
 
-[list]
+<DatabaseView client:load title={"News, Politics, and Magazines"} className="mb-4" hideOptions={{category: true, maxComplexity: true, os: true}} categoryConstraints={["all", "news", "magazine"]}/>
 
 Once you've subscribed to the ones you're interested in, we can finally move to the conclusion!
 
