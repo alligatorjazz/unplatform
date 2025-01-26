@@ -100,7 +100,7 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 				{filteredEntries.length < entries.length && Object.values(hideOptions ?? {}).find(hidden => !hidden) && <p className="italic text-xs">{entries.length - filteredEntries.length} items hidden due to filters.</p>}
 			</div>
 			<div className="max-h-96 min-h-96 overflow-y-scroll scrollbar-none flex flex-col-reverse md:flex-row">
-				<ul className="border-textColor md:border-r md:min-h-full flex-1">
+				<ul className="border-textColor flex-1">
 					{filteredEntries.map(({ data }) => (
 						<li key={data.url}>
 							<a target="_blank" className="p-4 block w-full h-full border-b border-textColor no-underline cursor-pointer hover:brightness-150 hover:backdrop-brightness-125 will-change-auto" href={data.url}>
@@ -157,7 +157,7 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 						</li>
 					))}
 				</ul>
-				<form className="text-xs flex flex-col p-4 justify-center items-center gap-2 border-b w-full md:sticky md:top-0 md:border-b-0 md:max-w-52">
+				<form className="text-xs flex flex-col p-4 justify-center items-center gap-2 border-b w-full md:sticky md:top-0 md:border-b-0 md:max-w-52 md:border-l">
 					{!hideOptions?.freeOnly && <div className="flex items-center gap-1">
 						{/* TODO: figure out a way to align these without this ugly pixel-width */}
 						<input className="h-[15.5px]" type="checkbox" {...register("freeOnly")} />

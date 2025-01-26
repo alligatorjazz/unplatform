@@ -4,16 +4,13 @@ layout: ../../layouts/Guide.astro
 ---
 import Buzzword from "../../components/Buzzword.astro";
 import GuidePrevNext from "../../components/GuidePrevNext.astro";
+import DatabaseView from "../../components/DatabaseView.astro"
 
 To start, I want to make clear that you're not going to find any 1:1 equivalent for whatever Web 2.0 platforms you're currently using in this section. “Socializing” on the indie web doesn't really come in a single undifferentiated form. On the indie web, you generally don't “comment” on a somebody's post — you just check out their website and leave a note in their <Buzzword definition="A widget that allows people to leave messages on your website. It's very common on personal websites across the indie web.">guestbook</Buzzword>, if they have one. You don't “follow” people you're interested in — you subscribe to their RSS feed, join their newsletter, or bookmark their website. You don't DM — you just send emails.
 
-With that said, there *are* plenty of alternative social platforms on the indie web that allow for the formation for more centralized communities, and have support for more conventional forms of interaction (following, commenting, DMing, re-sharing, etc.). Some of them are geared toward a specific interest, and some are designed for general audiences. Some come in traditional shapes like forums or chatrooms, and others are pushing wholly new forms of digital social interaction. I've gone through a number of them to see which ones were both cool and active, and the ones I've found are listed below:
+With that said, there *are* plenty of alternative social networks on the indie web that allow for the formation for more centralized communities, and have support for more conventional forms of interaction (following, commenting, DMing, re-sharing, etc.). Some of them are geared toward a specific interest, and some are designed for general audiences. Some come in traditional shapes like forums or chatrooms, and others are pushing wholly new forms of digital social interaction. I've gone through a number of them to see which ones were both cool and active, and the ones I've found are listed below:
 
-<TechLiteracySelector client:only className="mb-4">
-	<div slot="fallback" class="flex justify-center items-center h-48">
-		<LoadingIndicator />
-	</div>
-</TechLiteracySelector>
+<DatabaseView client:load title={"Alternative Social Networks"} className="mb-4" hideOptions={{city: true, category: true}} defaultOptions={{category: "social network"}}/>
 
 It's totally fine if you don't feel like signing up for any of these right now or ever — speaking for myself, most of my “socializing” on the indie web comes from either hanging out in the forums or chatrooms of organizations I'm a part of, or maintaining direct email correspondence with folks whose work I'm interested in. If you're interested in some of these but want to get on with the rest of the guide, that's fine too — just bookmark them and save them until after we're done.
 
