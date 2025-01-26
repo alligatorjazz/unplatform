@@ -100,7 +100,7 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 				{filteredEntries.length < entries.length && Object.values(hideOptions ?? {}).find(hidden => !hidden) && <p className="italic text-xs">{entries.length - filteredEntries.length} items hidden due to filters.</p>}
 			</div>
 			<div className="max-h-96 min-h-96 overflow-y-scroll scrollbar-none flex flex-col-reverse md:flex-row">
-				<ul className="border-textColor md:border-r h-full flex-1">
+				<ul className="border-textColor md:border-r md:min-h-full flex-1">
 					{filteredEntries.map(({ data }) => (
 						<li key={data.url}>
 							<a target="_blank" className="p-4 block w-full h-full border-b border-textColor no-underline cursor-pointer hover:brightness-150 hover:backdrop-brightness-125 will-change-auto" href={data.url}>
