@@ -114,65 +114,8 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 				<h1 className="font-bold">{title}</h1>
 				{filteredEntries.length < entries.length && Object.values(hideOptions ?? {}).find(hidden => !hidden) && <p className="italic text-xs">{entries.length - filteredEntries.length} items hidden due to filters.</p>}
 			</div>
-			<div className="max-h-96 min-h-96 overflow-y-scroll scrollbar-none flex flex-col-reverse md:flex-row">
-				<ul className="border-textColor flex-1">
-					{filteredEntries.map(({ data }) => (
-						<li key={data.url}>
-							<a target="_blank" className="p-4 block w-full h-full border-b border-textColor no-underline cursor-pointer hover:brightness-150 hover:backdrop-brightness-125 will-change-auto" href={data.url}>
-								<div className="w-full flex justify-between items-center">
-									<h2 className="text-sm mb-1 font-bold">{data.title}</h2>
-									<div title={data.literacyLevel} className="flex flex-1 items-center justify-end gap-2">
-										<div className="flex flex-1 items-center gap-2 mb-1 mx-2">
-											{data.feeds?.includes("Newsletter") && <FiMail size={16} className="stroke-textColor" />}
-											{data.feeds?.includes("RSS") && <FiRss size={16} className="stroke-textColor" />}
-										</div>
-										{data.city != "All" && data.city != "Digital First" &&
-											<h3 className="fill-textColor text-xs flex gap-1 items-center mr-1">
-												<span>{(data.city).split(",")[0]} </span>
-												<PiCityFill className="stroke-accentColor" />
-											</h3>
-										}
-										<div className="flex items-center gap-1">
-											<h3 className="text-xs hidden md:block">Complexity</h3>
-											{[0, 1, 2, 3, 4].map(iconLevel => {
-												if (iconLevel > parseInt(data.literacyLevel)) {
-													return <FiMonitor key={iconLevel} size={12} className="stroke-textColor opacity-25" />
-												} else {
-													return <FiMonitor key={iconLevel} size={12} className="stroke-textColor" />
-												}
-											})}
-										</div>
-									</div>
-								</div>
-								<h3 className="text-xs mb-2">{data.headline}</h3>
-								<div className="flex gap-2 text-xs items-center">
-									<ul className="flex items-center gap-2">
-										{data.os?.includes("web") && <FiGlobe size={16} className="stroke-textColor" />}
-										{data.os?.includes("windows") && <ImWindows size={16} className="invert" />}
-										{data.os?.includes("mac") && <SiMacos size={24} className="invert" />}
-										{data.os?.includes("ios") && <SiIos size={16} className="invert" />}
-										{data.os?.includes("linux") && <SiLinux size={16} className="invert" />}
-										{data.os?.includes("android") && <SiAndroid size={16} className="invert" />}
-									</ul>
-									<div className="h-4 border-l border-textColor"></div>
-									<h4 className="italic">{data.category.map(text => toTitleCase(text)).join(", ")}</h4>
-									<div className="h-4 border-l border-textColor"></div>
-									<ul className="flex gap-2">
-										{data.pricing.map(tier => {
-											if (tier === "free") {
-												return <li key={tier} className="bg-yellow-400 text-bgColor px-1 h-min">Free</li>
-											}
-											if (tier === "paid") {
-												return <li key={tier} className="bg-accentColor text-bgColor px-1 h-min">Paid</li>
-											}
-										})}
-									</ul>
-								</div>
-							</a>
-						</li>
-					))}
-				</ul>
-				<form className="text-xs flex flex-col p-4 justify-center items-center gap-2 border-b w-full md:sticky md:top-0 md:border-b-0 md:max-w-52 md:border-l">
+			<div className="max-h-96 min-h-96 overflow-y-scroll scrollbar-none flex flex-col md:flex-row-reverse overflow-hidden">
+			<form className="text-xs flex flex-col p-4 justify-center items-center gap-2 border-b w-full md:sticky md:top-0 md:border-b-0 md:max-w-52 md:border-l">
 					{!hideOptions?.freeOnly && <div className="flex items-center gap-1">
 						{/* TODO: figure out a way to align these without this ugly pixel-width */}
 						<input className="h-[15.5px]" type="checkbox" {...register("freeOnly")} />
@@ -226,6 +169,63 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 					</div>}
 					<button type="button" onPointerDown={resetFilters} className="p-4 py-2 bg-accentColor text-bgColor transition-all hover:brightness-125 h-min w-min whitespace-nowrap">{">: "}Reset Filters</button>
 				</form>
+				<ul className="border-textColor flex-1">
+					{filteredEntries.map(({ data }) => (
+						<li key={data.url}>
+							<a target="_blank" className="p-4 block w-full h-full border-b border-textColor no-underline cursor-pointer md:hover:backdrop-brightness-125" href={data.url}>
+								<div className="w-full flex justify-between items-center">
+									<h2 className="text-sm mb-1 font-bold">{data.title}</h2>
+									<div title={data.literacyLevel} className="flex flex-1 items-center justify-end gap-2">
+										<div className="flex flex-1 items-center gap-2 mb-1 mx-2">
+											{data.feeds?.includes("Newsletter") && <FiMail size={16} className="stroke-textColor" />}
+											{data.feeds?.includes("RSS") && <FiRss size={16} className="stroke-textColor" />}
+										</div>
+										{data.city != "All" && data.city != "Digital First" &&
+											<h3 className="fill-textColor text-xs flex gap-1 items-center mr-1">
+												<span>{(data.city).split(",")[0]} </span>
+												<PiCityFill className="stroke-accentColor" />
+											</h3>
+										}
+										<div className="flex items-center gap-1">
+											<h3 className="text-xs hidden md:block">Complexity</h3>
+											{[0, 1, 2, 3, 4].map(iconLevel => {
+												if (iconLevel > parseInt(data.literacyLevel)) {
+													return <FiMonitor key={iconLevel} size={12} className="stroke-textColor opacity-25" />
+												} else {
+													return <FiMonitor key={iconLevel} size={12} className="stroke-textColor" />
+												}
+											})}
+										</div>
+									</div>
+								</div>
+								<h3 className="text-xs mb-2">{data.headline}</h3>
+								<div className="flex gap-2 text-xs items-center">
+									<ul className="flex items-center gap-2">
+										{data.os?.includes("web") && <FiGlobe size={16} className="stroke-textColor" />}
+										{data.os?.includes("windows") && <ImWindows size={16} className="invert" />}
+										{data.os?.includes("mac") && <SiMacos size={24} className="invert" />}
+										{data.os?.includes("ios") && <SiIos size={16} className="invert" />}
+										{data.os?.includes("linux") && <SiLinux size={16} className="invert" />}
+										{data.os?.includes("android") && <SiAndroid size={16} className="invert" />}
+									</ul>
+									<div className="h-4 border-l border-textColor"></div>
+									<h4 className="italic">{data.category.map(text => toTitleCase(text)).join(", ")}</h4>
+									<div className="h-4 border-l border-textColor"></div>
+									<ul className="flex gap-2">
+										{data.pricing.map(tier => {
+											if (tier === "free") {
+												return <li key={tier} className="bg-yellow-400 text-bgColor px-1 h-min">Free</li>
+											}
+											if (tier === "paid") {
+												return <li key={tier} className="bg-accentColor text-bgColor px-1 h-min">Paid</li>
+											}
+										})}
+									</ul>
+								</div>
+							</a>
+						</li>
+					))}
+				</ul>
 			</div>
 		</section>
 	);
