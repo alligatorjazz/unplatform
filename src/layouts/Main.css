@@ -3,13 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-	.test-3d {
-		background-color: darkblue;
-		transform: rotate3d(2, -1, -1, -0.2turn);
-	}
-}
-
 @layer base {
 	:root {
 		/* CSS HSL */
