@@ -4,7 +4,6 @@ interface Props {
 }
 const { definition } = Astro.props;
 const buzzwordId = crypto.randomUUID();
-const cardId = crypto.randomUUID();
 // TODO: replace with proper intersectionObserver api - current solution is unstable
 ---
 
@@ -16,30 +15,73 @@ const cardId = crypto.randomUUID();
 >
 	<span
 		class="group-hover:hover:brightness-125 text-accentColor underline decoration-dotted drop-shadow-none"
-	>
-		<slot /><sup class="text-accentColor">?</sup></span
+		><slot /><sup class="text-accentColor">?</sup></span
 	>
 </span>
 
-<div
-	id={cardId}
-	class:list={[
-		"p-8 fixed transition-all top-0 right-0 w-full h-full flex justify-center items-center translate-x-full backdrop-blur-0 pointer-events-none z-10",
-		"data-[active]:backdrop-blur-lg data-[active]:translate-x-0 data-[active]:pointer-events-auto"
-	]}
->
-	<p class="p-4 bg-bgColor border border-textColor max-w-lg">{definition}</p>
-</div>
-
-<script define:vars={{buzzwordId, cardId, definition}}>
-	const buzzword = document.getElementById(buzzwordId)
-	const cardContainer = document.getElementById(cardId);
-	const cardText = cardContainer?.querySelector("p");
-
-	if (!buzzword || !cardContainer || !cardText) {
-		throw new Error(`Could not activate definition card for definition ${definition}.\n${{buzzwordId, cardContainer, cardText}}`);
+<style is:global>
+	.buzzword-card {
+		display: flex;
+		position: fixed;
+		top: 0;
+		right: 0;
+		z-index: 10;
+		padding: 2rem;
+		justify-content: center;
+		align-items: center;
+		width: 100dvw;
+		height: 100dvh;
+		transition-property: all;
+		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+		transition-duration: 300ms;
+		transform: translateX(100%);
+		pointer-events: none;
 	}
 
-	buzzword.addEventListener("pointerdown", () => cardContainer.dataset["active"] = "true")
-	cardContainer.addEventListener("pointerdown", () => delete cardContainer.dataset["active"])
+	.buzzword-card[data-active] {
+		transform: translateX(0);
+		pointer-events: auto;
+		backdrop-filter: blur(16px);
+	}
+
+	.buzzword-card p {
+		background-color: var(--bg-color);
+		padding: 1rem;
+		border-width: 1px;
+		max-width: 32rem;
+	}
+</style>
+
+<script is:inline define:vars={{ buzzwordId, definition }}>
+	document.addEventListener("DOMContentLoaded", () => {
+		const buzzword = document.getElementById(buzzwordId);
+		const cardContainer = document.createElement("div");
+		cardContainer.classList.add("buzzword-card");
+		const cardText = document.createElement("p");
+		cardText.innerText = definition;
+		cardContainer.appendChild(cardText);
+		document.body.appendChild(cardContainer);
+
+		
+		if (!buzzword || !cardContainer || !cardText) {
+			throw new Error(
+				`Could not activate definition card for definition ${definition}.\n${{ buzzwordId, cardContainer, cardText }}`
+			);
+		}
+		console.log(buzzword, cardContainer, cardText);
+
+		buzzword.addEventListener(
+			"pointerdown",
+			() => {
+				console.log("activating buzzword")
+				cardContainer.dataset["active"] = "true"
+			}
+		);
+		cardContainer.addEventListener(
+			"pointerdown",
+			() => {
+				delete cardContainer.dataset["active"]
+			}
+		);
+	});
 </script>

@@ -36,7 +36,7 @@ const { class: className, ...props } = Astro.props;
 		if (lastSegment === "") {
 			lastSegment = pathSegment.pop();
 		}
-		console.log(lastSegment);
+
 		if (!lastSegment) {
 			throw new Error("Could not parse last url segment.")
 		}
