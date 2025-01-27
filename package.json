@@ -5,7 +5,8 @@
 	"scripts": {
 		"dev": "astro dev --host",
 		"build": "astro build",
-		"preview": "astro preview"
+		"preview": "astro preview",
+		"add": "esrun scripts/addRec.ts"
 	},
 	"dependencies": {
 		"@astrojs/cloudflare": "^12.1.0",
@@ -29,17 +30,22 @@
 		"falchion-result": "^0.1.1",
 		"front-matter": "^4.0.2",
 		"neocities": "^0.0.3",
+		"node-html-parser": "^7.0.1",
+		"open": "^10.1.0",
+		"open-graph-scraper": "^6.9.0",
+		"prompt-sync": "^4.2.0",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
 		"react-hook-form": "^7.54.2",
 		"react-icons": "^5.4.0",
+		"rss-parser": "^3.13.0",
 		"simple-result": "github:alligatorjazz/simple-result",
 		"slugify": "^1.6.6",
 		"tailwindcss": "^3.3.3"
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.10.0",
-		"@types/node": "^20.17.6",
+		"@types/node": "^20.17.16",
 		"@types/prompt-sync": "^4.2.3",
 		"eslint-plugin-react": "^7.36.1",
 		"eslint-plugin-react-hooks": "^4.6.2",

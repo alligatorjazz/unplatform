@@ -31,6 +31,7 @@ export const Cities = [
 	"Digital First",
 	"New York, NY, USA",
 	"Chicago, IL, USA",
+	"Los Angeles, CA, USA",
 	"Worcester, MA, USA",
 	"Brisbane, QLD, AU",
 	"Denver, CO, USA",
@@ -53,7 +54,7 @@ export const RecommendationSchema = z.object({
 	pricing: PricingSchema.array(),
 	membership: MembershipSchema.optional(),
 	literacyLevel: LiteracyLevelSchema,
-	dateAdded: z.date(),
+	dateAdded: z.union([z.date(), z.coerce.date()]),
 	lastUpdated: z.date().default(new Date()),
 	city: CitySchema.default("Digital First"),
 	feeds: SubscriptionFeedSchema.array().optional()
