@@ -1,8 +1,8 @@
 ---
 url: "https://40westarts.org/"
-title: 40 West Arts District"
+title: 40 West Arts District
 headline: "A nonprofit creative district promoting arts experiences, exhibitions, and events."
-category: ["organization","events"]
+category: ["organization", "events"]
 os: ["web"]
 pricing: ["free"]
 city: "Denver, CO, USA"
