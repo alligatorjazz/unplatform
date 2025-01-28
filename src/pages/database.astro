@@ -1,5 +1,6 @@
 ---
 import DatabaseView from "../components/DatabaseView.astro";
+import TotalEntries from "../components/TotalEntries.astro";
 import Main from "../layouts/Main.astro";
 ---
 
@@ -11,8 +12,8 @@ import Main from "../layouts/Main.astro";
 		class="flex flex-col items-center bg-bgColor border border-textColor max-w-4xl mx-auto p-4"
 	>
 		<p class="text-sm text-center mb-4">
-			See our full list of recommendations for newsletters, social
-			networks, digital tools, and more.
+			See our full list of over <TotalEntries /> recommendations for newsletters,
+			social networks, digital tools, and more.
 		</p>
 		<DatabaseView title="Recommendations" />
 		<blockquote class="text-center mb-4">
