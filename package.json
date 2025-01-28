@@ -39,7 +39,7 @@
 		"node-html-parser": "^7.0.1",
 		"open": "^10.1.0",
 		"open-graph-scraper": "^6.9.0",
-		"pre-commit": "^1.2.2",
+		"pre-commit": "^1.0.10",
 		"prompt-sync": "^4.2.0",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
