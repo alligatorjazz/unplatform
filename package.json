@@ -3,10 +3,11 @@
 	"type": "module",
 	"version": "0.1.0",
 	"scripts": {
-		"dev": "astro dev --host",
-		"build": "astro build",
+		"dev": "esrun scripts/sortCities.ts && astro dev --host",
+		"build": "esrun scripts/sortCities.ts && astro check && astro build",
 		"preview": "astro preview",
-		"add": "esrun scripts/addRec.ts"
+		"add": "esrun scripts/addRec.ts",
+		"sortCities": "esrun scripts/sortCities.ts"
 	},
 	"dependencies": {
 		"@astrojs/cloudflare": "^12.1.0",
