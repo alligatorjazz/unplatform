@@ -65,10 +65,9 @@ const buzzwordId = crypto.randomUUID();
 		
 		if (!buzzword || !cardContainer || !cardText) {
 			throw new Error(
-				`Could not activate definition card for definition ${definition}.\n${{ buzzwordId, cardContainer, cardText }}`
+				`Could not activate definition card for definition ${definition}.\n${{ cardContainer, cardText }}`
 			);
 		}
-		console.log(buzzword, cardContainer, cardText);
 
 		buzzword.addEventListener(
 			"pointerdown",

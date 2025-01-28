@@ -1,18 +1,15 @@
 import type { CollectionEntry } from "astro:content";
-import { useCallback, useMemo, useState, type FormEvent } from "react";
-import { FiGlobe, FiMonitor } from "react-icons/fi";
-import { toTitleCase } from "../lib/dom";
-import { loadLiteracyLevel, saveLiteracyLevel } from "../lib";
+import { useCallback, useMemo } from "react";
 import { useForm } from "react-hook-form";
-import { PiCityFill } from "react-icons/pi";
-import { FiRss } from "react-icons/fi";
-import { FiMail } from "react-icons/fi";
-import { FiList } from "react-icons/fi";
+import { FiGlobe, FiList, FiMail, FiMonitor, FiRss } from "react-icons/fi";
 import { ImWindows } from "react-icons/im";
+import { PiCityFill } from "react-icons/pi";
 import { SiAndroid, SiIos, SiLinux, SiMacos } from "react-icons/si";
-import { CitySwitcher } from "./CitySwitcher";
 import { Cities } from "../cities";
-import { type RecommendationCategory, type LiteracyLevel, type City, type OperatingSystem, RecommendationCategories, OperatingSystems } from "../types";
+import { loadLiteracyLevel, saveLiteracyLevel } from "../lib";
+import { toTitleCase } from "../lib/dom";
+import { OperatingSystems, RecommendationCategories, type City, type LiteracyLevel, type OperatingSystem, type RecommendationCategory } from "../types";
+import { CitySwitcher } from "./CitySwitcher";
 export interface DatabaseViewOptions {
 	freeOnly: boolean;
 	category: RecommendationCategory;

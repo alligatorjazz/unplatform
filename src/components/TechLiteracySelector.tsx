@@ -1,7 +1,7 @@
-import { useEffect, useState, type HTMLAttributes, type ReactElement, type ReactNode } from "react";
+import { useEffect, type HTMLAttributes, type ReactElement } from "react";
 import { useForm } from "react-hook-form";
-import type { LiteracyLevel } from "../content/config";
 import { loadLiteracyLevel, saveLiteracyLevel } from "../lib";
+import type { LiteracyLevel } from "../types";
 
 
 export default function TechLiteracySelector(props: HTMLAttributes<HTMLFormElement>) {

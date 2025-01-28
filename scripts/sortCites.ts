@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from "fs";
+import { writeFileSync } from "fs";
 import { Cities } from "../src/cities";
 console.log("Sorting cities alphabetically...");
 const cityNames = Cities.filter(name => name !== "All" && name !== "Digital First").sort().map(name => `"${name}"`);

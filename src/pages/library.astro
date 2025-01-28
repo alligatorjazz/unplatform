@@ -1,8 +1,7 @@
 ---
 import { getCollection } from "astro:content";
-import DatabaseView from "../components/DatabaseView.astro";
-import Main from "../layouts/Main.astro";
 import LibraryView from "../components/LibraryView.astro";
+import Main from "../layouts/Main.astro";
 
 const libraryEntries = await getCollection("library");
 ---

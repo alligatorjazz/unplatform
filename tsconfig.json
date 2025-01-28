@@ -5,6 +5,8 @@
 		"jsxImportSource": "react",
 	},
 	"exclude": [
-		"server"
+		"server",
+		"dist",
+		".astro"
 	]
 }

@@ -1,6 +1,9 @@
 {
 	"[typescript]": {
-		"editor.defaultFormatter": "vscode.typescript-language-features"
+		"editor.defaultFormatter": "vscode.typescript-language-features",
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": "explicit"
+		}
 	},
 	"cSpell.words": [
 		"cyberfunk",
@@ -12,6 +15,7 @@
 		"Žižek",
 		"Zuckerberg's"
 	],
+	"editor.formatOnSave": true,
 	"deno.enablePaths": [
 		"supabase/functions"
 	],

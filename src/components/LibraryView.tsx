@@ -16,7 +16,7 @@ export default function LibraryView({ title, entries }: LibraryViewProps) {
 				<ul className="border-textColor md:border-r h-full flex-1">
 					{entries.sort((a, b) => (b.data.priority ?? 0) - (a.data.priority ?? 0)).map(({ data }) => (
 						<li key={data.url}>
-							<article className="p-4 block w-full h-full border-b border-textColor hover:brightness-150 hover:backdrop-brightness-125 will-change-auto" href={data.url}>
+							<article className="p-4 block w-full h-full border-b border-textColor hover:brightness-150 hover:backdrop-brightness-125 will-change-auto">
 								<a className="w-full h-full no-underline cursor-pointer" href={data.url} target="_blank">
 									<div className="w-full flex justify-between items-center">
 										<h2 className="text-sm mb-1 font-bold">{data.title}</h2>
