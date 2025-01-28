@@ -1,4 +1,5 @@
 import { z } from "astro/zod";
+import { Cities } from "./cities";
 export const LiteracyLevelSchema = z.enum(["0", "1", "2", "3", "4"]);
 export type LiteracyLevel = z.infer<typeof LiteracyLevelSchema>;
 
@@ -26,18 +27,6 @@ export type OperatingSystem = z.infer<typeof OperatingSystemSchema>;
 
 export const PricingSchema = z.enum(["free", "paid"]);
 export const MembershipSchema = z.enum(["open", "application", "queue"])
-export const Cities = [
-	"All",
-	"Digital First",
-	"New York, NY, USA",
-	"Chicago, IL, USA",
-	"Los Angeles, CA, USA",
-	"Worcester, MA, USA",
-	"Brisbane, QLD, AU",
-	"Denver, CO, USA",
-	"Omaha, NE, USA",
-	"Orlando, FL, USA"
-] as const;
 
 export const CitySchema = z.enum(Cities)
 export type City = z.infer<typeof CitySchema>;

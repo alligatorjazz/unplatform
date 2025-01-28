@@ -2,7 +2,6 @@ import type { CollectionEntry } from "astro:content";
 import { useCallback, useMemo, useState, type FormEvent } from "react";
 import { FiGlobe, FiMonitor } from "react-icons/fi";
 import { toTitleCase } from "../lib/dom";
-import { Cities, OperatingSystems, RecommendationCategories, type City, type LiteracyLevel, type OperatingSystem, type RecommendationCategory } from "../types";
 import { loadLiteracyLevel, saveLiteracyLevel } from "../lib";
 import { useForm } from "react-hook-form";
 import { PiCityFill } from "react-icons/pi";
@@ -12,6 +11,8 @@ import { FiList } from "react-icons/fi";
 import { ImWindows } from "react-icons/im";
 import { SiAndroid, SiIos, SiLinux, SiMacos } from "react-icons/si";
 import { CitySwitcher } from "./CitySwitcher";
+import { Cities } from "../cities";
+import { type RecommendationCategory, type LiteracyLevel, type City, type OperatingSystem, RecommendationCategories, OperatingSystems } from "../types";
 export interface DatabaseViewOptions {
 	freeOnly: boolean;
 	category: RecommendationCategory;
@@ -183,7 +184,7 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 										</div>
 										{data.city != "All" && data.city != "Digital First" &&
 											<h3 className="fill-textColor text-xs flex gap-1 items-center mr-1">
-												<CitySwitcher data={data.city} timeout={1500}/>
+												<CitySwitcher data={data.city} timeout={1500} />
 												<PiCityFill className="stroke-accentColor" />
 											</h3>
 										}
