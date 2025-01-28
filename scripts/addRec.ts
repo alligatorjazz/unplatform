@@ -35,8 +35,10 @@ async function findFeed(url: string) {
 		}
 
 		try {
-			return await parser.parseURL(targetUrl);
+			const feedData = await (await fetch(targetUrl, { headers: { "Content-Type": "application/xml" } })).text();
+			return await parser.parseString(feedData);
 		} catch (err) {
+			console.error(err);
 			console.warn(`Could not find feed at ${targetUrl}, continuing...`);
 		}
 	}
@@ -51,7 +53,7 @@ async function main(url: string) {
 	// parse html
 	const document = parse(await response.text());
 	// check for feed
-	const feed = await findFeed(url);
+	let feed = await findFeed(url);
 	const { result: openGraph } = await ogs({ url });
 	const metaDescription = (document.querySelector(`meta[name="description"]`) as HTMLMetaElement | null)?.content;
 	const feedDescription = feed?.description;
@@ -67,14 +69,17 @@ async function main(url: string) {
 	const feedTitle = feed?.title;
 	const htmlTitle = (document.querySelector("title") as HTMLMetaElement | null)?.textContent
 
-	const title = ogTitle ?? feedTitle ?? htmlTitle;
+	const title = feedTitle ?? ogTitle ?? htmlTitle;
 
 	if (!title) {
 		console.warn(`Title not found for ${url}. (${JSON.stringify({ og: ogTitle, feed: feedTitle, html: htmlTitle }, null, 4)})`);
 	}
 
-	console.log(feed, openGraph.ogDescription);
-	console.log(title ?? ("(no title)"), description ?? "(no description)");
+	console.log(feed);
+	const feedInput = prompt("Feed is printed above. Is it maintained? (y/n)");
+	const feedMaintained = feedInput.toLowerCase() === "y";
+
+	console.log(`Title: ${title ?? "(not found)"}\nDescription:${description ?? "(not found)"}`);
 
 	// manual newsletter check
 	const newsLetterInput = prompt("Opening page in browser. Does it have a newsletter? (y/n) > ")
@@ -82,7 +87,7 @@ async function main(url: string) {
 	console.log(`Proceeding assuming ${title ?? url} has a newsletter.`);
 
 	const feeds: ("RSS" | "Newsletter")[] = [];
-	if (feed) { feeds.push("RSS") }
+	if (feedMaintained) { feeds.push("RSS") }
 	if (hasNewsletter) { feeds.push("Newsletter") }
 
 	const recContent: Partial<Recommendation> = {
