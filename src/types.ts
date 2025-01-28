@@ -56,7 +56,7 @@ export const RecommendationSchema = z.object({
 	literacyLevel: LiteracyLevelSchema,
 	dateAdded: z.union([z.date(), z.coerce.date()]),
 	lastUpdated: z.date().default(new Date()),
-	city: CitySchema.default("Digital First"),
+	city: z.union([CitySchema.default("Digital First"), CitySchema.exclude(["Digital First"]).array()]),
 	feeds: SubscriptionFeedSchema.array().optional()
 });
 

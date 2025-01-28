@@ -6,6 +6,7 @@ import { join } from "path";
 import ogs from 'open-graph-scraper';
 import type { Recommendation } from "../src/types";
 import { writeFileSync } from "fs";
+import slugify from "slugify";
 
 let parser = new Parser<{ "title": string, "description": string, "link": string }, {}>({
 	defaultRSS: 2.0,
@@ -25,15 +26,18 @@ async function findFeed(url: string) {
 	];
 
 	for (const location of feedLocations) {
+		let targetUrl: string;
+		if (location.startsWith("?")) {
+			targetUrl = url + location;
+		}
+		else {
+			targetUrl = join(url, location);
+		}
+
 		try {
-			if (location.startsWith("?")) {
-				return await parser.parseURL(url + location);
-			}
-			else {
-				return await parser.parseURL(join(url, location));
-			}
+			return await parser.parseURL(targetUrl);
 		} catch (err) {
-			console.error(err);
+			console.warn(`Could not find feed at ${targetUrl}, continuing...`);
 		}
 	}
 
@@ -81,11 +85,11 @@ async function main(url: string) {
 	if (feed) { feeds.push("RSS") }
 	if (hasNewsletter) { feeds.push("Newsletter") }
 
-	const recContent: Recommendation = {
+	const recContent: Partial<Recommendation> = {
 		url,
 		title: title ?? "N/A",
 		headline: description ?? "N/A",
-		category: [],
+		category: ["organization", "events"],
 		os: ["web"],
 		pricing: ["free"],
 		literacyLevel: "0",
@@ -93,11 +97,12 @@ async function main(url: string) {
 		feeds
 	}
 
+	const slug = (slugify(title ?? url.replace("/", ".").split(".")[-2]).toLowerCase());
 	writeFileSync(
-		`./src/content/recommendations/${(title ?? url.replace("/", ".").split(".")[-2]).toLowerCase()}.md`, 
+		`./src/content/recommendations/${slug}.md`,
 		`---\n${Object.entries(recContent).map(([key, value]) => `${key}: ${JSON.stringify(value)}`).join("\n")}\n---`
 	);
-
+	console.log(`Wrote ${slug}.md to database successfully.\n\n`);
 	main(prompt("Enter the URL of the site you're trying to add. > "));
 }
 

@@ -11,6 +11,7 @@ import { FiMail } from "react-icons/fi";
 import { FiList } from "react-icons/fi";
 import { ImWindows } from "react-icons/im";
 import { SiAndroid, SiIos, SiLinux, SiMacos } from "react-icons/si";
+import { CitySwitcher } from "./CitySwitcher";
 export interface DatabaseViewOptions {
 	freeOnly: boolean;
 	category: RecommendationCategory;
@@ -54,7 +55,7 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 			city: "All",
 			requireRSS: false,
 			requireNewsletter: false,
-			...(defaultOptions?? {})
+			...(defaultOptions ?? {})
 		});
 
 		// GDPR: prevents saving the literacy level if it hasn't already been set 
@@ -84,7 +85,7 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 		}
 
 		if (filters.city !== "All") {
-			result = result.filter(({ data }) => data.city === filters.city)
+			result = result.filter(({ data }) => data.city === filters.city || data.city.includes(filters.city as Exclude<City, "Digital First">))
 		}
 
 		if (filters.requireNewsletter) {
@@ -115,7 +116,7 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 				{filteredEntries.length < entries.length && Object.values(hideOptions ?? {}).find(hidden => !hidden) && <p className="italic text-xs">{entries.length - filteredEntries.length} items hidden due to filters.</p>}
 			</div>
 			<div className="max-h-96 min-h-96 overflow-y-scroll scrollbar-none flex flex-col md:flex-row-reverse overflow-hidden">
-			<form className="text-xs flex flex-col p-4 justify-center items-center gap-2 border-b w-full md:sticky md:top-0 md:border-b-0 md:max-w-52 md:border-l">
+				<form className="text-xs flex flex-col p-4 justify-center items-center gap-2 border-b w-full md:sticky md:top-0 md:border-b-0 md:max-w-52 md:border-l">
 					{!hideOptions?.freeOnly && <div className="flex items-center gap-1">
 						{/* TODO: figure out a way to align these without this ugly pixel-width */}
 						<input className="h-[15.5px]" type="checkbox" {...register("freeOnly")} />
@@ -182,7 +183,7 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 										</div>
 										{data.city != "All" && data.city != "Digital First" &&
 											<h3 className="fill-textColor text-xs flex gap-1 items-center mr-1">
-												<span>{(data.city).split(",")[0]} </span>
+												<CitySwitcher data={data.city} timeout={1500}/>
 												<PiCityFill className="stroke-accentColor" />
 											</h3>
 										}
