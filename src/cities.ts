@@ -9,5 +9,6 @@ export const Cities = [
 	"Denver, CO, USA",
 	"Omaha, NE, USA",
 	"Orlando, FL, USA",
-	"Savannah, GA, USA"
+	"Savannah, GA, USA",
+	"Madison, WI, USA"
 ] as const;
