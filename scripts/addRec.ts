@@ -1,12 +1,12 @@
 // script for automatically compiling database additions
-import PromptSync from "prompt-sync";
-import { parse } from "node-html-parser";
-import Parser from "rss-parser";
-import { join } from "path";
-import ogs from 'open-graph-scraper';
-import type { Recommendation } from "../src/types";
 import { writeFileSync } from "fs";
+import { parse } from "node-html-parser";
+import ogs from 'open-graph-scraper';
+import { join } from "path";
+import PromptSync from "prompt-sync";
+import Parser from "rss-parser";
 import slugify from "slugify";
+import type { Recommendation } from "../src/types";
 
 let parser = new Parser<{ "title": string, "description": string, "link": string }, {}>({
 	defaultRSS: 2.0,
@@ -90,10 +90,10 @@ async function main(url: string) {
 	if (feedMaintained) { feeds.push("RSS") }
 	if (hasNewsletter) { feeds.push("Newsletter") }
 
+	const recBody = description ?? ""
 	const recContent: Partial<Recommendation> = {
 		url,
 		title: title ?? "N/A",
-		headline: description ?? "N/A",
 		category: ["organization", "events"],
 		os: ["web"],
 		pricing: ["free"],
@@ -105,7 +105,7 @@ async function main(url: string) {
 	const slug = (slugify(title ?? url.replace("/", ".").split(".")[-2]).toLowerCase());
 	writeFileSync(
 		`./src/content/recommendations/${slug}.md`,
-		`---\n${Object.entries(recContent).map(([key, value]) => `${key}: ${JSON.stringify(value)}`).join("\n")}\n---`
+		`---\n${Object.entries(recContent).map(([key, value]) => `${key}: ${JSON.stringify(value)}`).join("\n")}\n---\n\n${recBody}`
 	);
 	console.log(`Wrote ${slug}.md to database successfully.\n\n`);
 	main(prompt("Enter the URL of the site you're trying to add. > "));
