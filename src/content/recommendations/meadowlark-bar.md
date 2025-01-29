@@ -1,12 +1,13 @@
 ---
-url: https://meadowlarkbar.com/
-title: Meadowlark Bar
+url: "https://meadowlarkbar.com/"
+title: "Meadowlark Bar"
 category: ["events"]
 literacyLevel: "0"
-headline: A music and event venue in the Rino Art District.
-os: [web]
+os: ["web"]
 pricing: ["free"]
 city: "Denver, CO, USA"
 feeds: []
-dateAdded: 2025-01-25
+dateAdded: "Fri Jan 24 2025 19:00:00 GMT-0500 (Eastern Standard Time)"
 ---
+
+A music and event venue in the Rino Art District.

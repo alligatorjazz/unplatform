@@ -1,11 +1,12 @@
 ---
-url: https://neocities.org/
-title: Neocities
-category: [site builder, social network]
+url: "https://neocities.org/"
+title: "Neocities"
+category: ["site builder", "social network"]
 literacyLevel: "4"
-headline: A web hosting platform styled after the original Geocities. Optional subscriptions for supporter perks are available, and all sites come with RSS feeds by default.
-os: [web]
-pricing: [free, paid]
+os: ["web"]
+pricing: ["free", "paid"]
 feeds: ["RSS"]
-dateAdded: 2025-01-24
+dateAdded: "Thu Jan 23 2025 19:00:00 GMT-0500 (Eastern Standard Time)"
 ---
+
+A web hosting platform styled after the original Geocities. Optional subscriptions for supporter perks are available, and all sites come with RSS feeds by default.

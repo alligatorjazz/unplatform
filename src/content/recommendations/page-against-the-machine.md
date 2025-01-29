@@ -1,7 +1,6 @@
 ---
 url: "https://www.patmbooks.com/"
 title: "Page Against The Machine"
-headline: A progressive bookstore in Long Beach.
 category: ["organization", "events"]
 os: ["web"]
 pricing: ["free"]
@@ -10,3 +9,5 @@ city: "Los Angeles, CA, USA"
 dateAdded: "2025-01-27T23:19:51.021Z"
 feeds: ["Newsletter"]
 ---
+
+A progressive bookstore in Long Beach.

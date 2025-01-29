@@ -1,12 +1,13 @@
 ---
-url: https://brisbanefashionfestival.com/subscribe/
-title: Brisbane Fashion Festival
+url: "https://brisbanefashionfestival.com/subscribe/"
+title: "Brisbane Fashion Festival"
 category: ["organization"]
 literacyLevel: "0"
-headline: An annual fashion show.
-os: [web]
+os: ["web"]
 pricing: ["free"]
 city: "Brisbane, QLD, AU"
 feeds: ["Newsletter"]
-dateAdded: 2025-01-25
+dateAdded: "Fri Jan 24 2025 19:00:00 GMT-0500 (Eastern Standard Time)"
 ---
+
+An annual fashion show.

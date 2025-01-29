@@ -1,12 +1,13 @@
 ---
-url: https://hqdenver.com
-title: HQ Denver
+url: "https://hqdenver.com"
+title: "HQ Denver"
 category: ["events"]
 literacyLevel: "0"
-headline: A Denver-based music events aggregator.
-os: [web]
+os: ["web"]
 pricing: ["free"]
 city: "Denver, CO, USA"
 feeds: ["Newsletter"]
-dateAdded: 2025-01-25
+dateAdded: "Fri Jan 24 2025 19:00:00 GMT-0500 (Eastern Standard Time)"
 ---
+
+A Denver-based music events aggregator.

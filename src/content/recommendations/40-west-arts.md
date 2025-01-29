@@ -1,7 +1,6 @@
 ---
 url: "https://40westarts.org/"
-title: 40 West Arts District
-headline: "A nonprofit creative district promoting arts experiences, exhibitions, and events."
+title: "40 West Arts District"
 category: ["organization", "events"]
 os: ["web"]
 pricing: ["free"]
@@ -10,3 +9,5 @@ literacyLevel: "0"
 dateAdded: "2025-01-28T01:56:48.347Z"
 feeds: ["Newsletter"]
 ---
+
+A nonprofit creative district promoting arts experiences, exhibitions, and events.

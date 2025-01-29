@@ -1,12 +1,13 @@
 ---
-url: https://www.irishmurphys.com.au/brisbane
-title: Irish Murphy's
+url: "https://www.irishmurphys.com.au/brisbane"
+title: "Irish Murphy's"
 category: ["organization"]
 literacyLevel: "0"
-headline: A pub and live music venue in the Brisbane CBD.
-os: [web]
+os: ["web"]
 pricing: ["free"]
 city: "Brisbane, QLD, AU"
 feeds: ["Newsletter"]
-dateAdded: 2025-01-25
+dateAdded: "Fri Jan 24 2025 19:00:00 GMT-0500 (Eastern Standard Time)"
 ---
+
+A pub and live music venue in the Brisbane CBD.

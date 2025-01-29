@@ -1,12 +1,13 @@
 ---
-url: https://www.slq.qld.gov.au/
-title: Queensland Art Gallery
+url: "https://www.slq.qld.gov.au/"
+title: "Queensland Art Gallery"
 category: ["organization"]
 literacyLevel: "0"
-headline: A gallery hosting contemporary and historical Australian art.
-os: [web]
+os: ["web"]
 pricing: ["free"]
 city: "Brisbane, QLD, AU"
 feeds: ["Newsletter"]
-dateAdded: 2025-01-25
+dateAdded: "Fri Jan 24 2025 19:00:00 GMT-0500 (Eastern Standard Time)"
 ---
+
+A gallery hosting contemporary and historical Australian art.

@@ -169,7 +169,7 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 					<button type="button" onPointerDown={resetFilters} className="p-4 py-2 bg-accentColor text-bgColor transition-all hover:brightness-125 h-min w-min whitespace-nowrap">{">: "}Reset Filters</button>
 				</form>
 				<ul className="border-textColor flex-1">
-					{filteredEntries.map(({ data }) => (
+					{filteredEntries.map(({ data, body }) => (
 						<li key={data.url}>
 							<a target="_blank" className="p-4 block w-full h-full border-b border-textColor no-underline cursor-pointer md:hover:backdrop-brightness-125" href={data.url}>
 								<div className="w-full flex justify-between items-center">
@@ -197,7 +197,7 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 										</div>
 									</div>
 								</div>
-								<h3 className="text-xs mb-2">{data.headline}</h3>
+								<h3 className="text-xs mb-2">{body}</h3>
 								<div className="flex gap-2 text-xs items-center">
 									<ul className="flex items-center gap-2">
 										{data.os?.includes("web") && <FiGlobe size={16} className="stroke-textColor" />}

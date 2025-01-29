@@ -1,12 +1,13 @@
 ---
-url: https://lost-lake.com/
-title: Lost Lake
+url: "https://lost-lake.com/"
+title: "Lost Lake"
 category: ["events"]
 literacyLevel: "0"
-headline: A music event venue in the Bluebird District.
-os: [web]
+os: ["web"]
 pricing: ["free"]
 city: "Denver, CO, USA"
 feeds: ["Newsletter"]
-dateAdded: 2025-01-25
+dateAdded: "Fri Jan 24 2025 19:00:00 GMT-0500 (Eastern Standard Time)"
 ---
+
+A music event venue in the Bluebird District.

@@ -1,12 +1,13 @@
 ---
-url: https://theslowdown.com/
-title: The Slowdown
+url: "https://theslowdown.com/"
+title: "The Slowdown"
 category: ["events"]
 literacyLevel: "0"
-headline: An music venue in Omaha.
-os: [web]
+os: ["web"]
 pricing: ["free"]
 city: "Denver, CO, USA"
 feeds: ["Newsletter"]
-dateAdded: 2025-01-25
+dateAdded: "Fri Jan 24 2025 19:00:00 GMT-0500 (Eastern Standard Time)"
 ---
+
+An music venue in Omaha.

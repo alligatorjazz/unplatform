@@ -1,12 +1,13 @@
 ---
-url: https://watermarkonline.com/
-title: Watermark
+url: "https://watermarkonline.com/"
+title: "Watermark"
 category: ["events", "news", "magazine"]
 literacyLevel: "0"
-headline: A magazine that covers developments relevant to the LGBTQ community in Central Florida
-os: [web]
+os: ["web"]
 pricing: ["free"]
 city: "Orlando, FL, USA"
 feeds: ["Newsletter"]
-dateAdded: 2025-01-25
+dateAdded: "Fri Jan 24 2025 19:00:00 GMT-0500 (Eastern Standard Time)"
 ---
+
+A magazine that covers developments relevant to the LGBTQ community in Central Florida

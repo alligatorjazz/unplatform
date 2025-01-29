@@ -1,6 +1,7 @@
 import { z } from "astro/zod";
 import { Cities } from "./cities";
-export const LiteracyLevelSchema = z.enum(["0", "1", "2", "3", "4"]);
+export const LiteracyLevelSchema = z.preprocess(value => String(value), z.enum(["0", "1", "2", "3", "4"]));
+
 export type LiteracyLevel = z.infer<typeof LiteracyLevelSchema>;
 
 export const RecommendationCategories = [
@@ -37,7 +38,6 @@ export const SubscriptionFeedSchema = z.enum(["RSS", "Newsletter"])
 export const RecommendationSchema = z.object({
 	url: z.string(),
 	title: z.string(),
-	headline: z.string(),
 	category: RecommendationCategorySchema.array(),
 	os: OperatingSystemSchema.array(),
 	pricing: PricingSchema.array(),
