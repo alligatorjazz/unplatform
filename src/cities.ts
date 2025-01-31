@@ -3,6 +3,7 @@ export const Cities = [
 	"Digital First",
 	"Brisbane, QLD, AU",
 	"Chicago, IL, USA",
+	"Coromandel, WKO, NZ",
 	"Denver, CO, USA",
 	"Los Angeles, CA, USA",
 	"Madison, WI, USA",
