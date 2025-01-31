@@ -185,9 +185,9 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 											{data.feeds?.includes("RSS") && <FiRss size={16} className="stroke-textColor" />}
 										</div>
 										{data.city != "All" && data.city != "Digital First" &&
-											<h3 className="fill-textColor text-xs flex gap-1 items-center mr-1">
+											<h3 className="fill-textColor text-xs flex gap-1 items-center mr-1 min-h-10 text-right md:min-h-min">
 												<CitySwitcher data={data.city} timeout={1500} />
-												<PiCityFill className="stroke-accentColor" />
+												<PiCityFill className="stroke-accentColor hidden md:block" />
 											</h3>
 										}
 										<div className="flex items-center gap-1">

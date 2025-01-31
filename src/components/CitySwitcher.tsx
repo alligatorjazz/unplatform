@@ -27,7 +27,7 @@ export function CitySwitcher({ data, timeout }: { data: City[] | City, timeout: 
 
 	return (
 		<span ref={multiRef} className="opacity-0 transition-opacity">
-			{data[activeCity].split(", ")[0]} + {data.length - 1}
+			{data[activeCity].split(", ")[0]} <span className="hidden md:inline">`$ + {data.length - 1}`</span>
 		</span>
 	);
 }
