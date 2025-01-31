@@ -1,7 +1,13 @@
 ---
 import { getCollection } from "astro:content";
+interface Props {
+	round?: boolean;
+}
+const amount =
+	(await getCollection("recommendations")).length +
+	(await getCollection("library")).length;
 
-const amount = (await getCollection("recommendations")).length + (await getCollection("library")).length;
-
+const { round } = Astro.props;
 ---
-<span>{amount}</span>
+
+<span>{round ? amount : Math.floor(amount / 10) * 10}</span>
