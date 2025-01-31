@@ -10,6 +10,9 @@ import { loadLiteracyLevel, saveLiteracyLevel } from "../lib";
 import { toTitleCase } from "../lib/dom";
 import { OperatingSystems, RecommendationCategories, type City, type LiteracyLevel, type OperatingSystem, type RecommendationCategory } from "../types";
 import { CitySwitcher } from "./CitySwitcher";
+import { marked } from "marked";
+import createDOMPurify from "dompurify";
+
 export interface DatabaseViewOptions {
 	freeOnly: boolean;
 	category: RecommendationCategory;
@@ -29,7 +32,9 @@ export interface DatabaseViewProps {
 	categoryConstraints?: RecommendationCategory[]
 }
 
+
 export default function DatabaseView({ title, entries, defaultOptions, hideOptions, localOnly, categoryConstraints }: DatabaseViewProps) {
+	const DOMPurify = createDOMPurify(window);
 	const { register, watch, reset } = useForm<DatabaseViewOptions>({
 		defaultValues: {
 			freeOnly: false,
@@ -197,7 +202,7 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 										</div>
 									</div>
 								</div>
-								<h3 className="text-xs mb-2">{body}</h3>
+								<h3 dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked.parse(body, { async: false })) }} className="text-xs mb-2"></h3>
 								<div className="flex gap-2 text-xs items-center">
 									<ul className="flex items-center gap-2">
 										{data.os?.includes("web") && <FiGlobe size={16} className="stroke-textColor" />}

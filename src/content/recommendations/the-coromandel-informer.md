@@ -1,7 +1,7 @@
 ---
 url: "https://theinformer.co.nz/"
 title: "The Coromandel Informer"
-category: ["organization", "events"]
+category: ["news"]
 city: "Coromandel, WKO, NZ"
 os: ["web"]
 pricing: ["free"]

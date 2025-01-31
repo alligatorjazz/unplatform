@@ -28,6 +28,7 @@
 		"astro-icon": "^1.1.1",
 		"autoprefixer": "^10.4.14",
 		"dayjs": "^1.11.13",
+		"dompurify": "^3.2.4",
 		"dotenv": "^16.4.5",
 		"esrun": "^3.2.26",
 		"falchion-result": "^0.1.1",

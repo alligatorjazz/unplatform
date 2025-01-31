@@ -1,7 +1,7 @@
 ---
 url: "https://www.stuff.co.nz/"
 title: "Stuff"
-category: ["organization", "events"]
+category: ["news"]
 os: ["web"]
 pricing: ["free"]
 literacyLevel: "0"
