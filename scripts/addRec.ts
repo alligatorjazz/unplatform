@@ -84,7 +84,7 @@ async function main(url: string) {
 	// manual newsletter check
 	const newsLetterInput = prompt("Opening page in browser. Does it have a newsletter? (y/n) > ")
 	const hasNewsletter = newsLetterInput.toLowerCase() === "y";
-	console.log(`Proceeding assuming ${title ?? url} has a newsletter.`);
+	console.log(`Proceeding assuming ${title ?? url} ${hasNewsletter ? "has" : "does not have"} a newsletter.`);
 
 	const feeds: ("RSS" | "Newsletter")[] = [];
 	if (feedMaintained) { feeds.push("RSS") }
