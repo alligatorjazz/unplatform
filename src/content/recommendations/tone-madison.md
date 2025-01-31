@@ -1,7 +1,7 @@
 ---
 url: "https://tonemadison.com/"
 title: "Tone Madison"
-category: ["organization", "events"]
+category: ["news", "events"]
 os: ["web"]
 pricing: ["free"]
 city: "Madison, WI, USA"

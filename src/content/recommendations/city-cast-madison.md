@@ -1,7 +1,7 @@
 ---
 url: "https://madison.citycast.fm/"
 title: "City Cast Madison"
-category: ["organization", "events"]
+category: ["news", "events"]
 os: ["web"]
 pricing: ["free"]
 city: "Madison, WI, USA"

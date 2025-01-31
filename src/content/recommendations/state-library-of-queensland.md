@@ -1,7 +1,7 @@
 ---
 url: "https://template.org/"
 title: "State Library of Queensland"
-category: ["organization"]
+category: ["organization", "events"]
 literacyLevel: "0"
 os: ["web"]
 pricing: ["free"]

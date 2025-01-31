@@ -1,7 +1,7 @@
 ---
 url: "https://superordinary.com.au/"
 title: "Superordinary"
-category: ["organization"]
+category: ["organization", "events"]
 literacyLevel: "0"
 os: ["web"]
 pricing: ["free"]

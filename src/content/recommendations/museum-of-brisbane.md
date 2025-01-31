@@ -1,7 +1,7 @@
 ---
 url: "https://www.museumofbrisbane.com.au/"
 title: "Museum of Brisbane"
-category: ["organization"]
+category: ["organization", "events"]
 literacyLevel: "0"
 os: ["web"]
 pricing: ["free"]

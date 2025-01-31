@@ -1,7 +1,7 @@
 ---
 url: "https://www.slq.qld.gov.au/"
 title: "Queensland Art Gallery"
-category: ["organization"]
+category: ["organization", "events"]
 literacyLevel: "0"
 os: ["web"]
 pricing: ["free"]

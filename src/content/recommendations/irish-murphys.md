@@ -1,7 +1,7 @@
 ---
 url: "https://www.irishmurphys.com.au/brisbane"
 title: "Irish Murphy's"
-category: ["organization"]
+category: ["organization", "events"]
 literacyLevel: "0"
 os: ["web"]
 pricing: ["free"]
