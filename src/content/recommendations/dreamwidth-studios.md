@@ -4,7 +4,7 @@ title: "Dreamwidth Studios"
 category: ["site builder", "social network"]
 os: ["web"]
 pricing: ["free"]
-literacyLevel: "0"
+literacyLevel: "1"
 dateAdded: "2025-01-31T21:27:37.614Z"
 feeds: ["RSS"]
 ---
