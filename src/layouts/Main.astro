@@ -1,6 +1,7 @@
 ---
 import BackToTop from "../components/BackToTop.astro";
 import Footer from "../components/Footer.astro";
+import GDPR from "../components/GDPR.astro";
 import Navbar from "../components/Navbar.astro";
 import TabTitle from "../components/TabTitle.astro";
 import "./Main.css";
@@ -36,13 +37,14 @@ const { title, description, class: className } = Astro.props;
 			class="fixed top-0 left-0 bg-grid-shift opacity-5 -z-10 select-none"
 		>
 		</div>
-		<div class="min-h-screen flex flex-col justify-between" id="content" >
-			<Navbar type="fixed"/>
+		<div class="min-h-screen flex flex-col justify-between" id="content">
+			<Navbar type="fixed" />
 			<main class="p-4">
 				<slot />
 			</main>
 			<Footer />
-			<BackToTop  />
+			<BackToTop />
 		</div>
+		<GDPR />
 	</body>
 </html>

@@ -62,7 +62,7 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 		});
 
 		// GDPR: prevents saving the literacy level if it hasn't already been set 
-		if (loadLiteracyLevel()) {
+		if (loadLiteracyLevel() && localStorage.getItem("GDPR-check")) {
 			saveLiteracyLevel("4");
 		}
 
