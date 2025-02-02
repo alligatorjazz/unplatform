@@ -1,7 +1,7 @@
 ---
 url: "https://www.nearlyfreespeech.net/"
 title: "NearlyFreeSpeech"
-category: ["Site Builder"]
+category: ["site builder"]
 os: ["web"]
 pricing: ["free"]
 literacyLevel: "4"
