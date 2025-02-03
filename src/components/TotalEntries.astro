@@ -10,4 +10,4 @@ const amount =
 const { round } = Astro.props;
 ---
 
-<span>{round ? amount : Math.floor(amount / 10) * 10}</span>
+<span>{round ? Math.floor(amount / 10) * 10 : amount}</span>
