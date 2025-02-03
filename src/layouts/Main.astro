@@ -24,12 +24,12 @@ const { title, description, class: className } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<TabTitle title={title} />
 		<link rel="preconnect" href="https://fonts.googleapis.com/" />
-		<!-- <link
+		<link
 			rel="alternate"
 			type="application/rss+xml"
-			title="From The Superhighway"
-			href={`${Astro.site}rss.xml`}
-		/> -->
+			title="Unplatform RSS feed"
+			href={`${Astro.site}/rss.xml`}
+		/>
 		<!-- <ClientRouter /> -->
 	</head>
 	<body class={"bg-bgColor"}>

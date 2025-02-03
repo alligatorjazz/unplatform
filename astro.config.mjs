@@ -5,8 +5,8 @@ import react from "@astrojs/react";
 
 import mdx from "@astrojs/mdx";
 
-export const site = "https://fromthesuperhighway.com";
-export const siteEmail = "newsletter@fromthesuperhighway.com";
+export const site = "https://unplatform.fromthesuperhighway.com";
+export const siteEmail = "unplatform@fromthesuperhighway.com";
 
 // https://astro.build/config
 export default defineConfig({
