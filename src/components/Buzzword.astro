@@ -62,25 +62,18 @@ const buzzwordId = crypto.randomUUID();
 		cardContainer.appendChild(cardText);
 		document.body.appendChild(cardContainer);
 
-		
 		if (!buzzword || !cardContainer || !cardText) {
 			throw new Error(
 				`Could not activate definition card for definition ${definition}.\n${{ cardContainer, cardText }}`
 			);
 		}
 
-		buzzword.addEventListener(
-			"pointerdown",
-			() => {
-				console.log("activating buzzword")
-				cardContainer.dataset["active"] = "true"
-			}
-		);
-		cardContainer.addEventListener(
-			"pointerdown",
-			() => {
-				delete cardContainer.dataset["active"]
-			}
-		);
+		buzzword.addEventListener("pointerdown", () => {
+			// console.log("activating buzzword")
+			cardContainer.dataset["active"] = "true";
+		});
+		cardContainer.addEventListener("pointerdown", () => {
+			delete cardContainer.dataset["active"];
+		});
 	});
 </script>
