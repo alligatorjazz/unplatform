@@ -1,5 +1,7 @@
+import type { CollectionEntry } from "astro:content";
+import type { DatabaseViewOptions, DatabaseViewProps } from "../components/DatabaseView";
 import { siteBreakpoints } from "../config";
-import { LiteracyLevelSchema, type LiteracyLevel } from "../types";
+import { LiteracyLevelSchema, type City, type LiteracyLevel } from "../types";
 export type ArrayElement<ArrayType extends readonly unknown[]> =
 	ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
 
@@ -171,4 +173,51 @@ export function saveLiteracyLevel(currentLevel: LiteracyLevel) {
 		console.error(`Could not save literacy level ${currentLevel}.`);
 		throw err;
 	}
+}
+
+export function filterDatabaseEntries(entries: CollectionEntry<"recommendations">[], filters?: Partial<DatabaseViewOptions>, props?: Pick<DatabaseViewProps, "localOnly" | "categoryConstraints">) {
+	let result = entries;
+	if (filters) {
+		if (filters.freeOnly) {
+			result = result.filter(({ data }) => data.pricing.includes("free"))
+		}
+
+		if (filters.category && filters.category !== "all") {
+			result = result.filter(({ data }) => filters.category && data.category.includes(filters.category))
+		}
+
+
+		if (filters.os && filters.os !== "all") {
+			result = result.filter(({ data }) => filters.os && data.os.includes(filters.os))
+		}
+
+		if (filters.maxComplexity && filters.maxComplexity !== "4") {
+			const maxLevel = parseInt(filters.maxComplexity);
+			result = result.filter(({ data }) => parseInt(data.literacyLevel) <= maxLevel)
+		}
+
+		if (filters.city && filters.city !== "All") {
+			result = result.filter(({ data }) => data.city === filters.city || data.city.includes(filters.city as Exclude<City, "Digital First">))
+		}
+
+		if (filters.requireNewsletter) {
+			result = result.filter(({ data }) => data.feeds?.includes("Newsletter"))
+		}
+
+		if (filters.requireRSS) {
+			result = result.filter(({ data }) => data.feeds?.includes("RSS"))
+		}
+	}
+
+	if (props) {
+		if (props?.localOnly !== undefined) {
+			result = result.filter(({ data }) => data.city !== "Digital First")
+		}
+
+		if (props?.categoryConstraints !== undefined) {
+			result = result.filter(({ data }) => data.category.find(category => props.categoryConstraints?.includes(category)))
+		}
+	}
+	result = result.sort((a, b) => a.data.title.replace("The ", "").localeCompare(b.data.title.replace("The ", "")));
+	return result;
 }

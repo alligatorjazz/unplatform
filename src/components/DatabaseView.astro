@@ -2,12 +2,25 @@
 import { getCollection } from "astro:content";
 import ReactComponent, { type DatabaseViewProps } from "./DatabaseView.tsx";
 import { LoadingIndicator } from "./LoadingIndicator";
+import { filterDatabaseEntries } from "../lib/index.ts";
 type Props = Omit<DatabaseViewProps, "entries">;
 const props = Astro.props;
 const collectionEntries = await getCollection("recommendations");
+const prefilteredEntries = filterDatabaseEntries(
+	collectionEntries,
+	props.defaultOptions,
+	{
+		localOnly: props.localOnly,
+		categoryConstraints: props.categoryConstraints,
+	}
+);
+console.log(
+	"unfiltered / filtered: ",
+	`${collectionEntries.length} / ${prefilteredEntries.length}`
+);
 ---
 
-<ReactComponent entries={collectionEntries} {...props} client:only>
+<ReactComponent entries={prefilteredEntries} {...props} client:only>
 	<div slot="fallback" class="flex justify-center items-center h-[26rem]">
 		<LoadingIndicator />
 	</div>

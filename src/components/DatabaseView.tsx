@@ -1,5 +1,5 @@
 import type { CollectionEntry } from "astro:content";
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FiGlobe, FiList, FiMail, FiMonitor, FiRss } from "react-icons/fi";
 import { ImWindows } from "react-icons/im";
@@ -28,12 +28,13 @@ export interface DatabaseViewProps {
 	entries: CollectionEntry<"recommendations">[];
 	defaultOptions?: Partial<DatabaseViewOptions>;
 	hideOptions?: Record<keyof DatabaseViewOptions, boolean>;
+	hideHidden?: boolean;
 	localOnly?: boolean;
 	categoryConstraints?: RecommendationCategory[]
 }
 
 
-export default function DatabaseView({ title, entries, defaultOptions, hideOptions, localOnly, categoryConstraints }: DatabaseViewProps) {
+export default function DatabaseView({ title, entries, defaultOptions, hideOptions, hideHidden, localOnly, categoryConstraints }: DatabaseViewProps) {
 	const DOMPurify = createDOMPurify(window);
 	const { register, watch, reset } = useForm<DatabaseViewOptions>({
 		defaultValues: {
@@ -116,7 +117,7 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 		<section className="w-full rounded-md border border-textColor mb-4">
 			<div className="p-4 border-b border-textColor w-full flex items-center gap-4">
 				<h1 className="font-bold">{title}</h1>
-				{filteredEntries.length < entries.length && Object.values(hideOptions ?? {}).find(hidden => !hidden) && <p className="italic text-xs">{entries.length - filteredEntries.length} items hidden due to filters.</p>}
+				{filteredEntries.length < entries.length && !hideHidden && <p className="italic text-xs">{entries.length - filteredEntries.length} items hidden due to filters.</p>}
 			</div>
 			<div className="max-h-96 min-h-96 overflow-y-scroll scrollbar-none flex flex-col md:flex-row-reverse overflow-hidden">
 				<form className="text-xs flex flex-col p-4 justify-center items-center gap-2 border-b w-full md:sticky md:top-0 md:border-b-0 md:max-w-52 md:border-l">
