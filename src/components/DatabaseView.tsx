@@ -172,7 +172,7 @@ export default function DatabaseView({ title, entries, defaultOptions, hideOptio
 							<FiMail className="stroke-textColor" /><span>Require Newsletter</span>
 						</label>
 					</div>}
-					<button type="button" onPointerDown={resetFilters} className="p-4 py-2 bg-accentColor text-bgColor transition-all hover:brightness-125 h-min w-min whitespace-nowrap">{">: "}Reset Filters</button>
+					<button type="button" onPointerDown={resetFilters} className="p-4 py-2 bg-accentColor text-bgColor transition-all md:hover:brightness-125 h-min w-min whitespace-nowrap">{">: "}Reset Filters</button>
 				</form>
 				<ul className="border-textColor flex-1">
 					{filteredEntries.map(({ data, body }) => (
