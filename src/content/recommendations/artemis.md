@@ -2,7 +2,7 @@
 url: "https://artemis.jamesg.blog/"
 title: "Artemis"
 category: ["reader"]
-literacyLevel: "1"
+literacyLevel: "0"
 os: ["web"]
 pricing: ["free"]
 feeds: ["RSS"]
