@@ -9,7 +9,7 @@ export const RecommendationCategories = [
 	"magazine",
 	"blog",
 	"events",
-	"software",
+	// "software",
 	"reader",
 	"social network",
 	"site builder",
