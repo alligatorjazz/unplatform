@@ -59,7 +59,7 @@ async function main(url: string) {
 	const feedDescription = feed?.description;
 	const ogDescription = openGraph.ogDescription;
 
-	let description = ogDescription ?? metaDescription ?? feedDescription;
+	let description = ogDescription ?? metaDescription ?? feedDescription ?? prompt("Description not found. Enter manually: ");
 
 	if (!description) {
 		console.warn(`Description not found for ${JSON.stringify({ meta: metaDescription, feed: feedDescription, og: ogDescription }, null, 4)}.`);
@@ -69,11 +69,7 @@ async function main(url: string) {
 	const feedTitle = feed?.title;
 	const htmlTitle = (document.querySelector("title") as HTMLMetaElement | null)?.textContent
 
-	const title = feedTitle ?? ogTitle ?? htmlTitle;
-
-	if (!title) {
-		console.warn(`Title not found for ${url}. (${JSON.stringify({ og: ogTitle, feed: feedTitle, html: htmlTitle }, null, 4)})`);
-	}
+	const title = feedTitle ?? ogTitle ?? htmlTitle ?? prompt("Title not found. Enter manually: ");
 
 	console.log(feed);
 	const feedInput = prompt("Feed is printed above. Is it maintained? (y/n)");
