@@ -1,6 +1,6 @@
 ---
 url: "https://culturalaccesscollaborative.org/"
-title: "Cultural Access Collab"
+title: "Cultural Access Collaborative"
 category: ["organization", "events"]
 os: ["web"]
 pricing: ["free"]
