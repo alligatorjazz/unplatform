@@ -1,7 +1,8 @@
 ---
 url: "https://nonsensenyc.com/cgi-bin/dada/mail.cgi/list/nonsensenyc/"
 title: "nonsense nyc"
-category: ["organization","events"]
+category: ["organization", "events"]
+city: "New York, NY, USA"
 os: ["web"]
 pricing: ["free"]
 literacyLevel: "0"
