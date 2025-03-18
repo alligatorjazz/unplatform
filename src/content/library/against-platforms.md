@@ -1,7 +1,7 @@
 ---
-url: https://joshuacitarella.substack.com/p/against-platforms-w-mike-pepi
-title: "Against Platforms w/ Mike Pepi"
-author: "Joshua Citarella & Mike Pepi"
-headline: A podcast conversation about the ideological origins of Web 2.0 platforms, and the ways that they intersect with the 60's New Left.
-datePublished: 2025-01-15
+url: https://www.penguinrandomhouse.com/books/761644/against-platforms-by-mike-pepi/9781685891374/
+title: "Against Platforms"
+author: "Mike Pepi"
+headline: An analysis and critique of the "techno-optimist" ideology underpinning Web 2.0 platforms and Silicon Valley more broadly. An incredibly important read for anyone looking to understand the history of the internet.
+datePublished: 2025-01-07
 ---
