@@ -5,6 +5,7 @@ export const Cities = [
 	"Brisbane, QLD, AU",
 	"Chattanooga, TN, USA",
 	"Chicago, IL, USA",
+	"Columbus, OH, USA",
 	"Coromandel, WKO, NZ",
 	"Denver, CO, USA",
 	"Kalamazoo, MI, USA",
