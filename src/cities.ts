@@ -15,8 +15,8 @@ export const Cities = [
 	"Omaha, NE, USA",
 	"Orlando, FL, USA",
 	"Oxford, ENG, UK",
+	"Philadelphia, PA, USA",
 	"Savannah, GA, USA",
 	"Washington, DC, USA",
-	"Worcester, MA, USA",
-	"Philadelphia, PA, USA"
+	"Worcester, MA, USA"
 ] as const
