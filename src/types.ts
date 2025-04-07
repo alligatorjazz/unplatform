@@ -51,6 +51,7 @@ export const RecommendationSchema = z.object({
 
 export type Recommendation = z.infer<typeof RecommendationSchema>;
 
+// TODO: transfer library headlines to markdown content
 export const LibraryItemSchema = z.object({
 	url: z.string(),
 	title: z.string(),
