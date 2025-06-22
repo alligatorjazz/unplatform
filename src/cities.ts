@@ -11,6 +11,7 @@ export const Cities = [
 	"Kalamazoo, MI, USA",
 	"Los Angeles, CA, USA",
 	"Madison, WI, USA",
+	"Nashville, TN, USA",
 	"New York, NY, USA",
 	"Omaha, NE, USA",
 	"Orlando, FL, USA",

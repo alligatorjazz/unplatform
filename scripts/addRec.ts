@@ -34,25 +34,31 @@ async function main(url: string) {
 	let feedList = await findFeed(url);
 	if (!feedList) {
 		console.log(`Could not find feed at URL ${url}.`);
-		main(prompt("Enter the URL of the site you're trying to add. > "));
+		// main(prompt("Enter the URL of the site you're trying to add. > "));
 	}
 
-	let feedUrl: string;
-	if (feedList!.length === 1) {
+	let feedUrl: string | null = null;
+	if (feedList?.length === 1) {
 		feedUrl = feedList![0];
-	} else {
+	} else if (feedList && feedList.length > 1) {
 		console.log("Multiple feeds found. Select one from the list:")
-		feedList!.map((url, index) => console.log(`Index ${index} - ${url}`));
+		feedList?.map((url, index) => console.log(`Index ${index} - ${url}`));
 		feedUrl = feedList![parseInt(prompt("Enter index > "))]
 	}
-	const feedData = await (await fetch(feedUrl, { headers: { "Content-Type": "application/xml" } })).text();
-	const feed = await parser.parseString(feedData);
-	console.log(feed)
-	const feedInput = prompt("Feed is printed above. Is it maintained? (y/n)");
-	const feedMaintained = feedInput.toLowerCase() === "y";
 
-	const { title, description } = feed;
-	console.log(`Title: ${title ?? "(not found)"}\nDescription:${description ?? "(not found)"}`);
+	let feedMaintained = false;
+	let title = null;
+	let description = null;
+
+	if (feedList && feedUrl) {
+		const feedData = await (await fetch(feedUrl, { headers: { "Content-Type": "application/xml" } })).text();
+		const feed = await parser.parseString(feedData);
+		console.log(feed)
+		const feedInput = prompt("Feed is printed above. Is it maintained? (y/n)");
+		feedMaintained = feedInput.toLowerCase() === "y";
+		const { title, description } = feed;
+		console.log(`Title: ${title ?? "(not found)"}\nDescription:${description ?? "(not found)"}`);
+	}
 
 	// manual newsletter check
 	const newsLetterInput = prompt("Does the site have a newsletter? (y/n) > ")
@@ -75,7 +81,7 @@ async function main(url: string) {
 		feeds
 	}
 
-	const slug = (slugify(title ?? url.replace("/", ".").split(".")[-2]).toLowerCase());
+	const slug = slugify(title ?? "title here");
 	writeFileSync(
 		`./src/content/recommendations/${slug}.md`,
 		`---\n${Object.entries(recContent).map(([key, value]) => `${key}: ${JSON.stringify(value)}`).join("\n")}\n---\n\n${recBody}`
