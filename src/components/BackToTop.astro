@@ -4,36 +4,36 @@ import arrow from "../assets/img/arrow-right.svg?raw";
 ---
 
 <button
-  aria-label="Scroll back to the top of the page."
-  class="back-to-top drop-shadow-colored fixed bottom-8 right-8 p-2 select-none bg-bgColor border hover:bg-accentColor cursor-pointer z-20 hover:drop-shadow-[8px_8px_0px_var(--text-color)] duration-75"
+	aria-label="Scroll back to the top of the page."
+	class="back-to-top drop-shadow-colored fixed bottom-8 right-8 p-2 select-none bg-bg border hover:bg-accent cursor-pointer z-20 hover:drop-shadow-[8px_8px_0px_var(--text-color)] duration-75"
 >
-  <Icon content={arrow} class={"stroke-textColor fill-none -rotate-90"} />
+	<Icon content={arrow} class={"stroke-text fill-none -rotate-90"} />
 </button>
 
 <script>
-  import { getNode, getScrollAmount } from "../utils/dom";
+	import { getNode, getScrollAmount } from "../utils/dom";
 
-  let button = getNode("back-to-top");
-  let element = document.documentElement;
-  let updateScroll = () =>
-    setTimeout(() => {
-      const amount = getScrollAmount(element);
-    //   console.log(amount, element?.tagName);
-      (button as HTMLElement).style.opacity = `${amount > 0.15 ? 1 : 0}`;
-    }, 100);
-  if (button !== undefined) {
-    button.addEventListener("click", () =>
-      document.documentElement.scrollTo({ top: 0, behavior: "smooth" })
-    );
+	let button = getNode("back-to-top");
+	let element = document.documentElement;
+	let updateScroll = () =>
+		setTimeout(() => {
+			const amount = getScrollAmount(element);
+			//   console.log(amount, element?.tagName);
+			(button as HTMLElement).style.opacity = `${amount > 0.15 ? 1 : 0}`;
+		}, 100);
+	if (button !== undefined) {
+		button.addEventListener("click", () =>
+			document.documentElement.scrollTo({ top: 0, behavior: "smooth" })
+		);
 
-    // TODO: remove explicit cast; find out why if statement is not working to remove error
-    window.addEventListener("scroll", updateScroll);
-  }
-  updateScroll();
+		// TODO: remove explicit cast; find out why if statement is not working to remove error
+		window.addEventListener("scroll", updateScroll);
+	}
+	updateScroll();
 </script>
 
 <style>
-  .back-to-top {
-    transition: all 0.5s;
-  }
+	.back-to-top {
+		transition: all 0.5s;
+	}
 </style>

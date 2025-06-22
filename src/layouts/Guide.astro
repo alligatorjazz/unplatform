@@ -15,7 +15,7 @@ const { frontmatter } = Astro.props;
 >
 	<div class="flex flex-wrap justify-center">
 		<article
-			class="flex flex-col items-center p-4 w-full md:p-8 bg-bgColor border max-w-4xl overflow-hidden"
+			class="flex flex-col items-center p-4 w-full md:p-8 bg-bg border max-w-4xl overflow-hidden"
 		>
 			<div class="my-4 w-full">
 				<h1 class="text-3xl leading-snug font-bold font-header mb-2">
@@ -113,8 +113,8 @@ const { frontmatter } = Astro.props;
 		}
 
 		& > blockquote {
-			border-left: 1px solid var(--text-color);
-			background-color: var(--fg-color);
+			border-left: 1px solid var(--color-text);
+			background-color: var(--color-fg);
 			padding: 1rem;
 			font-style: italic;
 			margin-left: 1rem;
@@ -126,7 +126,7 @@ const { frontmatter } = Astro.props;
 		}
 
 		& > p > a {
-			color: var(--accent-color);
+			color: var(--color-accent);
 			text-decoration: underline;
 			&:hover {
 				filter: brightness(120%);
@@ -138,10 +138,10 @@ const { frontmatter } = Astro.props;
 		}
 
 		a > em {
-			color: var(--accent-color);
+			color: var(--color-accent);
 		}
 		code {
-			background-color: var(--fg-color);
+			background-color: var(--color-fg);
 			padding: 0.25rem;
 			font-size: small;
 		}

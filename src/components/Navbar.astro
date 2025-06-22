@@ -8,13 +8,13 @@ import Prompt from "./Prompt.astro";
 ---
 
 <header
-	class="group flex justify-between items-center transition-all h-16 top-0 w-full px-4 md:px-8 border-b-text-color border-b sticky z-20 bg-bgColor data-[prev-scroll=up]:-top-16"
+	class="group flex justify-between items-center transition-all h-16 top-0 w-full px-4 md:px-8 border-b-text-color border-b sticky z-20 bg-bg data-[prev-scroll=up]:-top-16"
 	data-drawer="inactive"
 	data-prev-scroll="up"
 >
 	<a
 		href="/"
-		class="text-base md:text-lg hover:text-accentColor font-bold uppercase"
+		class="text-base md:text-lg hover:text-accent font-bold uppercase"
 	>
 		<Prompt />{`Unplatform`}
 	</a>
@@ -48,7 +48,7 @@ import Prompt from "./Prompt.astro";
 		class="flex md:hidden justify-end items-center fixed w-full h-full top-0 right-0 group-data-[drawer='active']:backdrop-blur-lg group-data-[drawer='active']:backdrop-brightness-75 group-data-[drawer='inactive']:pointer-events-none transition-all text-3xl"
 	>
 		<div
-			class="uppercase font-header text-bgColor p-8 max-w-md bg-primaryColor h-full group-data-[drawer='inactive']:translate-x-full transition-all flex flex-col justify-center gap-4 text-right"
+			class="uppercase font-header text-bg p-8 max-w-md bg-primaryColor h-full group-data-[drawer='inactive']:translate-x-full transition-all flex flex-col justify-center gap-4 text-right"
 		>
 			<NavLinks routes={globalNavPages} class:list={["gap-4 h-min"]} />
 			<div class="flex gap-4 justify-end items-center">

@@ -1,9 +1,9 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 interface Props extends HTMLAttributes<"div"> {
-	class?: string
+	class?: string;
 }
 const { class: className } = Astro.props;
 ---
 
-<div class={className?? "border-textColor border-2 my-8 w-full" }></div>
+<div class={className ?? "border-text border-2 my-8 w-full"}></div>
