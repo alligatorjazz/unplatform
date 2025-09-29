@@ -5,12 +5,12 @@ import pluginReact from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 
 export default [
-	{
-		files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"]
-	},
-	{ languageOptions: { globals: globals.browser } },
-	pluginJs.configs.recommended,
-	...tseslint.configs.recommended,
-	pluginReact.configs.flat.recommended,
-	...reactHooks.configs.recommended
+  {
+    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
+  },
+  { languageOptions: { globals: globals.browser } },
+  pluginJs.configs.recommended,
+  ...tseslint.configs.recommended,
+  pluginReact.configs.flat.recommended,
+  reactHooks.configs["recommended-latest"],
 ];
