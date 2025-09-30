@@ -1,0 +1,40 @@
+---
+import { type Page } from "astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+import dayjs from "dayjs";
+import PostCard from "./PostCard.astro";
+
+type Props = {
+	direction?: "row" | "column";
+	hideDescriptions?: boolean;
+} & (
+	| { page: Page<CollectionEntry<"posts">>; limit?: undefined }
+	| { page?: undefined; limit: number }
+);
+const { page, limit, direction, hideDescriptions } = Astro.props;
+const postCollection = (await getCollection("posts")).sort((a, b) =>
+	dayjs(b.data.publishDate).diff(a.data.publishDate)
+);
+const filteredCollection = (page?.data ? page.data : postCollection).slice(
+	0,
+	limit
+);
+type PostEntry = CollectionEntry<"posts">;
+---
+
+<section
+	class:list={[
+		"flex items-center justify-center",
+		direction == "row" ? "flex-row" : "flex-col",
+	]}
+>
+	{
+		filteredCollection.map((post: PostEntry) => (
+			<PostCard
+				post={post}
+				hideDescription={hideDescriptions}
+				class={direction == "row" ? "" : "w-full"}
+			/>
+		))
+	}
+</section>

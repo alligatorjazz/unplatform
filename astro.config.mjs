@@ -12,13 +12,12 @@ export const siteEmail = "unplatform@fromthesuperhighway.com";
 export default defineConfig({
   integrations: [icon(), react(), mdx()],
   site,
-  output: "static",
-
   // vite: { ssr: { noExternal: false } },
   // adapter: cloudflare({ imageService: "cloudflare" }),
   redirects: {
-      "/not-found": "/404",
-	},
+    "/not-found": "/404",
+    "/posts": "/posts/1",
+  },
 
   vite: {
     plugins: [tailwindcss()],

@@ -1,0 +1,37 @@
+---
+import type { GetStaticPathsOptions, Page } from "astro";
+import { getCollection } from "astro:content";
+import dayjs from "dayjs";
+import Paginator from "../../components/Paginator.astro";
+import Main from "../../layouts/Main.astro";
+import PostList from "../../components/PostList.astro";
+
+export const prerender = true;
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+	const postCollection = await getCollection("posts");
+
+	const archivePages = postCollection.sort((a, b) =>
+		dayjs(b.data.publishDate).diff(a.data.publishDate)
+	);
+
+	return paginate(archivePages, { pageSize: 6 });
+}
+
+interface Props {
+	page: Page;
+}
+
+// All paginated data is passed on the "page" prop
+const { page } = Astro.props;
+console.log(page.data[0].title);
+---
+
+<Main
+	title={ "Blog | Page " + page.currentPage }
+>
+	<div class="p-4 max-w-4xl m-auto">
+		<PostList page={page} />
+	</div>
+	<Paginator page={page} />
+</Main>
