@@ -6,12 +6,7 @@ import { ImWindows } from "react-icons/im";
 import { PiCityFill } from "react-icons/pi";
 import { SiAndroid, SiIos, SiLinux, SiMacos } from "react-icons/si";
 import { Cities } from "../cities";
-import {
-  convertFiltersToQuery,
-  convertQueryToFilters,
-  loadLiteracyLevel,
-  saveLiteracyLevel,
-} from "../lib";
+import { loadLiteracyLevel, saveLiteracyLevel } from "../lib";
 import { toTitleCase } from "../lib/dom";
 import {
   OperatingSystems,
@@ -24,6 +19,7 @@ import {
 import { CitySwitcher } from "./CitySwitcher";
 import { marked } from "marked";
 import createDOMPurify from "dompurify";
+import { convertQueryToFilters, convertFiltersToQuery } from "../lib/query";
 
 export interface DatabaseViewOptions {
   freeOnly: boolean;
@@ -167,7 +163,18 @@ export default function DatabaseView({
         .localeCompare(b.data.title.replace("The ", "")),
     );
     return result;
-  }, [filters]);
+  }, [
+    categoryConstraints,
+    entries,
+    filters.category,
+    filters.city,
+    filters.freeOnly,
+    filters.maxComplexity,
+    filters.os,
+    filters.requireNewsletter,
+    filters.requireRSS,
+    localOnly,
+  ]);
 
   return (
     <section className="w-full rounded-md border border-text mb-4 database-view">
@@ -293,6 +300,7 @@ export default function DatabaseView({
             <li key={data.url}>
               <a
                 target="_blank"
+                rel="noreferrer"
                 className="p-4 block w-full h-full border-b text-text border-text no-underline cursor-pointer md:hover:backdrop-brightness-125"
                 href={data.url}
               >

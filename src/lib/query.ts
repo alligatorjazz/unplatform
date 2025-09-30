@@ -1,3 +1,6 @@
+import { stringify, parse } from "qs";
+import type { DatabaseViewOptions } from "../components/DatabaseView";
+
 function isObject(val: unknown) {
   return typeof val === "object" && !Array.isArray(val) && val !== null;
 }
@@ -66,4 +69,22 @@ function parseNumber(val: unknown) {
 
 function parseBoolean(val: unknown) {
   return val === "true";
+}
+
+export function convertFiltersToQuery(
+  partialFilters: Partial<DatabaseViewOptions>,
+) {
+  const queryString = stringify(partialFilters);
+  return queryString;
+}
+
+export function convertQueryToFilters(
+  queryString: string,
+): Partial<DatabaseViewOptions> {
+  const queryObject = parse(queryString);
+  const filters: Record<string, unknown> = {};
+  Object.entries(queryObject).map(([key, value]) => {
+    if (value) filters[key] = parseValue(value);
+  });
+  return filters as Partial<DatabaseViewOptions>;
 }

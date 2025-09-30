@@ -5,8 +5,6 @@ import type {
 } from "../components/DatabaseView";
 import { siteBreakpoints } from "../config";
 import { LiteracyLevelSchema, type City, type LiteracyLevel } from "../types";
-import { stringify, parse } from "qs";
-import { parseValue } from "./query";
 
 export type ArrayElement<ArrayType extends readonly unknown[]> =
   ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
@@ -254,24 +252,4 @@ export function filterDatabaseEntries(
       .localeCompare(b.data.title.replace("The ", "")),
   );
   return result;
-}
-
-export function convertFiltersToQuery(
-  partialFilters: Partial<DatabaseViewOptions>,
-) {
-  const queryString = stringify(partialFilters);
-  console.log("initial querystring: ", queryString);
-  return queryString;
-}
-
-export function convertQueryToFilters(
-  queryString: string,
-): Partial<DatabaseViewOptions> {
-  const queryObject = parse(queryString);
-  const filters: Record<string, unknown> = {};
-  Object.entries(queryObject).map(([key, value]) => {
-    if (value) filters[key] = parseValue(value);
-  });
-	console.log(queryString, filters);
-  return filters as Partial<DatabaseViewOptions>;
 }
