@@ -1,12 +1,17 @@
 import type { CollectionEntry } from "astro:content";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { FiGlobe, FiList, FiMail, FiMonitor, FiRss } from "react-icons/fi";
 import { ImWindows } from "react-icons/im";
 import { PiCityFill } from "react-icons/pi";
 import { SiAndroid, SiIos, SiLinux, SiMacos } from "react-icons/si";
 import { Cities } from "../cities";
-import { loadLiteracyLevel, saveLiteracyLevel } from "../lib";
+import {
+  convertFiltersToQuery,
+  convertQueryToFilters,
+  loadLiteracyLevel,
+  saveLiteracyLevel,
+} from "../lib";
 import { toTitleCase } from "../lib/dom";
 import {
   OperatingSystems,
@@ -30,40 +35,62 @@ export interface DatabaseViewOptions {
   os: OperatingSystem;
 }
 
+const defaultOptions: DatabaseViewOptions = {
+  freeOnly: false,
+  category: "all",
+  maxComplexity: loadLiteracyLevel() ?? "4",
+  city: "All",
+  os: "all",
+  requireRSS: false,
+  requireNewsletter: false,
+};
 export interface DatabaseViewProps {
   title: string;
   entries: CollectionEntry<"recommendations">[];
-  defaultOptions?: Partial<DatabaseViewOptions>;
+  initialOptions?: Partial<DatabaseViewOptions>;
   hideOptions?: Record<keyof DatabaseViewOptions, boolean>;
   hideHidden?: boolean;
   localOnly?: boolean;
+  enableQuerySyncing?: boolean;
   categoryConstraints?: RecommendationCategory[];
 }
 
 export default function DatabaseView({
   title,
   entries,
-  defaultOptions,
+  initialOptions,
   hideOptions,
   hideHidden,
+  enableQuerySyncing,
   localOnly,
   categoryConstraints,
 }: DatabaseViewProps) {
   const DOMPurify = createDOMPurify(window);
+
   const { register, watch, reset } = useForm<DatabaseViewOptions>({
     defaultValues: {
-      freeOnly: false,
-      category: "all",
-      maxComplexity: loadLiteracyLevel() ?? "4",
-      city: "All",
-      os: "all",
-      requireRSS: false,
-      requireNewsletter: false,
       ...defaultOptions,
+      ...initialOptions,
+      ...(enableQuerySyncing
+        ? convertQueryToFilters(window.location.search.substring(1))
+        : {}),
     },
   });
 
   const filters = watch();
+
+  // sync url params w/ filters (database -> url)
+  useEffect(() => {
+    if (enableQuerySyncing && document.readyState === "complete") {
+      const url = window.location.origin + window.location.pathname;
+      history.pushState(
+        filters,
+        "",
+        url + "?" + convertFiltersToQuery(filters),
+      );
+    }
+  }, [enableQuerySyncing, filters]);
+
   const resetFilters = useCallback(() => {
     reset({
       freeOnly: false,
@@ -73,14 +100,14 @@ export default function DatabaseView({
       city: "All",
       requireRSS: false,
       requireNewsletter: false,
-      ...(defaultOptions ?? {}),
+      ...(initialOptions ?? {}),
     });
 
     // GDPR: prevents saving the literacy level if it hasn't already been set
     if (loadLiteracyLevel() && localStorage.getItem("GDPR-check")) {
       saveLiteracyLevel("4");
     }
-  }, []);
+  }, [initialOptions, reset]);
 
   const filteredEntries = useMemo(() => {
     let result = entries;

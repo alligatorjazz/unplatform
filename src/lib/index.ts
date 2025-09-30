@@ -1,134 +1,143 @@
 import type { CollectionEntry } from "astro:content";
-import type { DatabaseViewOptions, DatabaseViewProps } from "../components/DatabaseView";
+import type {
+  DatabaseViewOptions,
+  DatabaseViewProps,
+} from "../components/DatabaseView";
 import { siteBreakpoints } from "../config";
 import { LiteracyLevelSchema, type City, type LiteracyLevel } from "../types";
+import { stringify, parse } from "qs";
+import { parseValue } from "./query";
+
 export type ArrayElement<ArrayType extends readonly unknown[]> =
-	ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
+  ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
 
 export function multiclass(...args: (string | undefined)[]) {
-	// combines several css module names into single class
+  // combines several css module names into single class
 
-	// filters out undefined classes
-	const classes = args.filter((arg) => {
-		if (arg) {
-			return arg;
-		}
-	});
-	return classes.join(" ");
+  // filters out undefined classes
+  const classes = args.filter((arg) => {
+    if (arg) {
+      return arg;
+    }
+  });
+  return classes.join(" ");
 }
 
 export type RGBAColor = {
-	r: number;
-	g: number;
-	b: number;
-	a: number;
+  r: number;
+  g: number;
+  b: number;
+  a: number;
 };
 
 // converts an rgba string to RGBAColor
 const rgbaRegex = new RegExp(
-	/rgba\(\s*(-?\d+|-?\d*\.\d+(?=%))(%?)\s*,\s*(-?\d+|-?\d*\.\d+(?=%))(\2)\s*,\s*(-?\d+|-?\d*\.\d+(?=%))(\2)\s*,\s*(-?\d+|-?\d*.\d+)\s*\)/
+  /rgba\(\s*(-?\d+|-?\d*\.\d+(?=%))(%?)\s*,\s*(-?\d+|-?\d*\.\d+(?=%))(\2)\s*,\s*(-?\d+|-?\d*\.\d+(?=%))(\2)\s*,\s*(-?\d+|-?\d*.\d+)\s*\)/,
 );
 export function getRGBA(str: string): RGBAColor | null {
-	const matches = str.match(rgbaRegex);
-	if (!matches) {
-		return null;
-	}
+  const matches = str.match(rgbaRegex);
+  if (!matches) {
+    return null;
+  }
 
-	const values = matches.filter((match) => match != str && match != "");
-	return {
-		r: parseInt(values[0]),
-		g: parseInt(values[1]),
-		b: parseInt(values[2]),
-		a: parseInt(values[3]),
-	};
+  const values = matches.filter((match) => match != str && match != "");
+  return {
+    r: parseInt(values[0]),
+    g: parseInt(values[1]),
+    b: parseInt(values[2]),
+    a: parseInt(values[3]),
+  };
 }
 
 export function toRGBA(color: RGBAColor): string {
-	return `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
+  return `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
 }
 
 export function isAlphaNumeric(str: string) {
-	let code, i, len;
+  let code, i, len;
 
-	for (i = 0, len = str.length; i < len; i++) {
-		code = str.charCodeAt(i);
-		if (
-			!(code > 47 && code < 58) && // numeric (0-9)
-			!(code > 64 && code < 91) && // upper alpha (A-Z)
-			!(code > 96 && code < 123)
-		) {
-			// lower alpha (a-z)
-			return false;
-		}
-	}
+  for (i = 0, len = str.length; i < len; i++) {
+    code = str.charCodeAt(i);
+    if (
+      !(code > 47 && code < 58) && // numeric (0-9)
+      !(code > 64 && code < 91) && // upper alpha (A-Z)
+      !(code > 96 && code < 123)
+    ) {
+      // lower alpha (a-z)
+      return false;
+    }
+  }
 
-	return true;
+  return true;
 }
 
-export function checkBreakpoint(breakpoint: keyof typeof siteBreakpoints): boolean {
-	if (!window) {
-		throw new Error(
-			"Client-only function checkBreakpoint called on the server."
-		);
-	}
+export function checkBreakpoint(
+  breakpoint: keyof typeof siteBreakpoints,
+): boolean {
+  if (!window) {
+    throw new Error(
+      "Client-only function checkBreakpoint called on the server.",
+    );
+  }
 
-	return window.matchMedia(`(min-width: ${siteBreakpoints[breakpoint]})`).matches;
+  return window.matchMedia(`(min-width: ${siteBreakpoints[breakpoint]})`)
+    .matches;
 }
 
 export const clamp = (num: number, min: number, max: number) =>
-	Math.min(Math.max(num, min), max);
+  Math.min(Math.max(num, min), max);
 export function titleCase(str: string) {
-	return str
-		.toLowerCase()
-		.split(" ")
-		.map(function (word) {
-			return word.charAt(0).toUpperCase() + word.slice(1);
-		})
-		.join(" ");
+  return str
+    .toLowerCase()
+    .split(" ")
+    .map(function (word) {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join(" ");
 }
 
 export async function sendJSONPayload(
-	url: string,
-	payload: object
+  url: string,
+  payload: object,
 ): Promise<void> {
-	try {
-		const response = await fetch(url, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(payload),
-		});
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
 
-		if (!response.ok) {
-			throw new Error(
-				`Failed to send JSON payload. Status: ${response.status}`
-			);
-		}
+    if (!response.ok) {
+      throw new Error(
+        `Failed to send JSON payload. Status: ${response.status}`,
+      );
+    }
 
-		console.log("JSON payload sent successfully!");
-	} catch (error) {
-		console.error("Error sending JSON payload:", error);
-	}
+    console.log("JSON payload sent successfully!");
+  } catch (error) {
+    console.error("Error sending JSON payload:", error);
+  }
 }
 
 export function repeatRandom<T>(
-	callback: (_: unknown, i: number, arr: unknown[]) => T,
-	min?: number,
-	max?: number
+  callback: (_: unknown, i: number, arr: unknown[]) => T,
+  min?: number,
+  max?: number,
 ) {
-	const array: T[] = [];
-	const maxBound = max ?? 5;
-	const minBound = min ?? 1;
-	for (
-		let i = 0;
-		i < clamp(Math.floor(Math.random() * maxBound), minBound, maxBound);
-		i++
-	) {
-		array.push(callback(null, i, array));
-	}
+  const array: T[] = [];
+  const maxBound = max ?? 5;
+  const minBound = min ?? 1;
+  for (
+    let i = 0;
+    i < clamp(Math.floor(Math.random() * maxBound), minBound, maxBound);
+    i++
+  ) {
+    array.push(callback(null, i, array));
+  }
 
-	return array as T[];
+  return array as T[];
 }
 
 // export const useCases = [
@@ -155,69 +164,114 @@ export function repeatRandom<T>(
 // }
 
 export function loadLiteracyLevel(): LiteracyLevel | null {
-	const cachedLiteracyLevel = localStorage.getItem("literacyLevel");
+  const cachedLiteracyLevel = localStorage.getItem("literacyLevel");
 
-	try {
-		return LiteracyLevelSchema.parse(cachedLiteracyLevel);
-	} catch (err) {
-		console.error("Could not load literacy level.");
-		console.error(err);
-		return null;
-	}
+  try {
+    return LiteracyLevelSchema.parse(cachedLiteracyLevel);
+  } catch (err) {
+    console.error("Could not load literacy level.");
+    console.error(err);
+    return null;
+  }
 }
 
 export function saveLiteracyLevel(currentLevel: LiteracyLevel) {
-	try {
-		localStorage.setItem("literacyLevel", LiteracyLevelSchema.parse(currentLevel));
-	} catch (err) {
-		console.error(`Could not save literacy level ${currentLevel}.`);
-		throw err;
-	}
+  try {
+    localStorage.setItem(
+      "literacyLevel",
+      LiteracyLevelSchema.parse(currentLevel),
+    );
+  } catch (err) {
+    console.error(`Could not save literacy level ${currentLevel}.`);
+    throw err;
+  }
 }
 
-export function filterDatabaseEntries(entries: CollectionEntry<"recommendations">[], filters?: Partial<DatabaseViewOptions>, props?: Pick<DatabaseViewProps, "localOnly" | "categoryConstraints">) {
-	let result = entries;
-	if (filters) {
-		if (filters.freeOnly) {
-			result = result.filter(({ data }) => data.pricing.includes("free"))
-		}
+export function filterDatabaseEntries(
+  entries: CollectionEntry<"recommendations">[],
+  filters?: Partial<DatabaseViewOptions>,
+  props?: Pick<DatabaseViewProps, "localOnly" | "categoryConstraints">,
+) {
+  let result = entries;
+  if (filters) {
+    if (filters.freeOnly) {
+      result = result.filter(({ data }) => data.pricing.includes("free"));
+    }
 
-		if (filters.category && filters.category !== "all") {
-			result = result.filter(({ data }) => filters.category && data.category.includes(filters.category))
-		}
+    if (filters.category && filters.category !== "all") {
+      result = result.filter(
+        ({ data }) =>
+          filters.category && data.category.includes(filters.category),
+      );
+    }
 
+    if (filters.os && filters.os !== "all") {
+      result = result.filter(
+        ({ data }) => filters.os && data.os.includes(filters.os),
+      );
+    }
 
-		if (filters.os && filters.os !== "all") {
-			result = result.filter(({ data }) => filters.os && data.os.includes(filters.os))
-		}
+    if (filters.maxComplexity && filters.maxComplexity !== "4") {
+      const maxLevel = parseInt(filters.maxComplexity);
+      result = result.filter(
+        ({ data }) => parseInt(data.literacyLevel) <= maxLevel,
+      );
+    }
 
-		if (filters.maxComplexity && filters.maxComplexity !== "4") {
-			const maxLevel = parseInt(filters.maxComplexity);
-			result = result.filter(({ data }) => parseInt(data.literacyLevel) <= maxLevel)
-		}
+    if (filters.city && filters.city !== "All") {
+      result = result.filter(
+        ({ data }) =>
+          data.city === filters.city ||
+          data.city.includes(filters.city as Exclude<City, "Digital First">),
+      );
+    }
 
-		if (filters.city && filters.city !== "All") {
-			result = result.filter(({ data }) => data.city === filters.city || data.city.includes(filters.city as Exclude<City, "Digital First">))
-		}
+    if (filters.requireNewsletter) {
+      result = result.filter(({ data }) => data.feeds?.includes("Newsletter"));
+    }
 
-		if (filters.requireNewsletter) {
-			result = result.filter(({ data }) => data.feeds?.includes("Newsletter"))
-		}
+    if (filters.requireRSS) {
+      result = result.filter(({ data }) => data.feeds?.includes("RSS"));
+    }
+  }
 
-		if (filters.requireRSS) {
-			result = result.filter(({ data }) => data.feeds?.includes("RSS"))
-		}
-	}
+  if (props) {
+    if (props?.localOnly !== undefined) {
+      result = result.filter(({ data }) => data.city !== "Digital First");
+    }
 
-	if (props) {
-		if (props?.localOnly !== undefined) {
-			result = result.filter(({ data }) => data.city !== "Digital First")
-		}
+    if (props?.categoryConstraints !== undefined) {
+      result = result.filter(({ data }) =>
+        data.category.find((category) =>
+          props.categoryConstraints?.includes(category),
+        ),
+      );
+    }
+  }
+  result = result.sort((a, b) =>
+    a.data.title
+      .replace("The ", "")
+      .localeCompare(b.data.title.replace("The ", "")),
+  );
+  return result;
+}
 
-		if (props?.categoryConstraints !== undefined) {
-			result = result.filter(({ data }) => data.category.find(category => props.categoryConstraints?.includes(category)))
-		}
-	}
-	result = result.sort((a, b) => a.data.title.replace("The ", "").localeCompare(b.data.title.replace("The ", "")));
-	return result;
+export function convertFiltersToQuery(
+  partialFilters: Partial<DatabaseViewOptions>,
+) {
+  const queryString = stringify(partialFilters);
+  console.log("initial querystring: ", queryString);
+  return queryString;
+}
+
+export function convertQueryToFilters(
+  queryString: string,
+): Partial<DatabaseViewOptions> {
+  const queryObject = parse(queryString);
+  const filters: Record<string, unknown> = {};
+  Object.entries(queryObject).map(([key, value]) => {
+    if (value) filters[key] = parseValue(value);
+  });
+	console.log(queryString, filters);
+  return filters as Partial<DatabaseViewOptions>;
 }

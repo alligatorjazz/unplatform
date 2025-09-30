@@ -9,7 +9,7 @@ const props = Astro.props;
 const collectionEntries = await getCollection("recommendations");
 const prefilteredEntries = filterDatabaseEntries(
 	collectionEntries,
-	props.defaultOptions,
+	props.initialOptions,
 	{
 		localOnly: props.localOnly,
 		categoryConstraints: props.categoryConstraints,
