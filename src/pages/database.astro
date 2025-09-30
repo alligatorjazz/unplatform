@@ -3,14 +3,36 @@ import DatabaseView from "../components/DatabaseView.astro";
 import TotalEntries from "../components/TotalEntries.astro";
 import Main from "../layouts/Main.astro";
 export const prerender = false;
-if (Astro.request.headers.get("Accept") === "application/json") {
-	console.log("recieved json request");
-	return new Response("Hello World!", {
-		status: 200,
-		headers: {
-			"Content-Type": "application/json",
+import { getCollection } from "astro:content";
+import type { Recommendation } from "../types";
+import { filterDatabaseEntries } from "../lib";
+import { convertQueryToFilters } from "../lib/query";
+
+export async function queryDatabase(
+	querystring: string,
+): Promise<Recommendation[]> {
+	const filters = convertQueryToFilters(querystring.substring(1));
+	console.log("remote filters: ", filters);
+	const entries = filterDatabaseEntries(
+		await getCollection("recommendations"),
+		filters,
+	);
+	return entries.map(({ data }) => data);
+}
+
+if (
+	Astro.request.headers.get("Accept") === "application/json" &&
+	Astro.request.method === "GET"
+) {
+	return new Response(
+		JSON.stringify(await queryDatabase(Astro.url.search), null, 4),
+		{
+			status: 200,
+			headers: {
+				"Content-Type": "application/json",
+			},
 		},
-	});
+	);
 }
 ---
 
