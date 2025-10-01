@@ -1,66 +1,66 @@
 @import url("https://fonts.googleapis.com/css2?family=Cousine:ital,wght@0,400;0,700;1,400;1,700&family=New+Amsterdam&display=swap");
 
-@import "tailwindcss";
-@config "../../tailwind.config.js";
-@plugin 'tailwind-scrollbar';
+/* @import "tailwindcss"; */
+/* @config "../../tailwind.config.js"; */
+/* @plugin 'tailwind-scrollbar'; */
 
 @theme {
-	/* CSS HSL */
-	--platinum: hsla(0, 0%, 91%, 1);
-	--light-green: hsla(143, 72%, 69%, 1);
-	--malachite: hsla(143, 93%, 47%, 1);
-	--dark-spring-green: hsla(143, 81%, 27%, 1);
-	--night: hsla(0, 0%, 6%, 1);
+  /* CSS HSL */
+  --platinum: hsla(0, 0%, 91%, 1);
+  --light-green: hsla(143, 72%, 69%, 1);
+  --malachite: hsla(143, 93%, 47%, 1);
+  --dark-spring-green: hsla(143, 81%, 27%, 1);
+  --night: hsla(0, 0%, 6%, 1);
 
-	--color-text: var(--platinum);
-	--color-header: var(--light-green);
-	--color-bg: var(--night);
-	--color-fg: var(--dark-spring-green);
+  --color-text: var(--platinum);
+  --color-header: var(--light-green);
+  --color-bg: var(--night);
+  --color-fg: var(--dark-spring-green);
 
-	--color-accent: var(--malachite);
+  --color-accent: var(--malachite);
 
-	--font-text: "Cousine", sans-serif;
-	--font-header: "Cousine", sans-serif;
+  --font-text: "Cousine", sans-serif;
+  --font-header: "Cousine", sans-serif;
 }
 
 body {
-	padding: 0;
-	margin: 0;
-	scroll-behavior: smooth;
-	box-sizing: border-box;
-	color: var(--color-text);
-	font-family: var(--font-text);
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+  color: var(--color-text);
+  font-family: var(--font-text);
 }
 
 code {
-	font-family: var(--font-text);
+  font-family: var(--font-text);
 }
 
 img {
-	object-fit: contain;
+  object-fit: contain;
 }
 
 a {
-	cursor: pointer;
-	transition: all 300ms;
+  cursor: pointer;
+  transition: all 300ms;
 }
 
 a:hover {
-	filter: brightness(150%);
+  filter: brightness(150%);
 }
 
 main p a,
 main ul a,
 main ol a {
-	color: var(--color-accent);
-	text-decoration: underline;
+  color: var(--color-accent);
+  text-decoration: underline;
 }
 
 a:active,
 button:active,
 input:active {
-	filter: brightness(150%);
-	transition: all 0.1s;
+  filter: brightness(150%);
+  transition: all 0.1s;
 }
 
 /* a,
@@ -70,12 +70,12 @@ a:visited {
 } */
 
 a svg {
-	transition: all 0.3s;
+  transition: all 0.3s;
 }
 
 svg {
-	stroke: var(--color-text);
-	transition: none;
+  stroke: var(--color-text);
+  transition: none;
 }
 
 /* nav>a,
@@ -92,75 +92,72 @@ nav>a:visited {
 input,
 option,
 select {
-	background-color: var(--color-text);
-	color: var(--color-bg);
+  background-color: var(--color-text);
+  color: var(--color-bg);
 }
 .database-view {
-	a {
-		color: white;
-		text-decoration: none;
-	}
+  a {
+    color: white;
+    text-decoration: none;
+  }
 
-	p a {
-		color: var(--color-accent);
-		text-decoration: underline;
-	}
+  p a {
+    color: var(--color-accent);
+    text-decoration: underline;
+  }
 }
 
 .bg-grid-shift {
-	height: 100%;
-	width: 100%;
-	background-image: linear-gradient(
-			to right,
-			var(--color-text) 1px,
-			transparent 1px
-		),
-		linear-gradient(to bottom, var(--color-text) 1px, transparent 1px);
-	background-size: 24px 24px;
-	animation: grid-shift 5s linear infinite;
+  height: 100%;
+  width: 100%;
+  background-image:
+    linear-gradient(to right, var(--color-text) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-text) 1px, transparent 1px);
+  background-size: 24px 24px;
+  animation: grid-shift 5s linear infinite;
 }
 
 @keyframes grid-shift {
-	from {
-		background-position: 0px 0px;
-	}
+  from {
+    background-position: 0px 0px;
+  }
 
-	to {
-		background-position: 24px 24px;
-	}
+  to {
+    background-position: 24px 24px;
+  }
 }
 
 @keyframes spin {
-	0% {
-		transform: rotate(0);
-	}
+  0% {
+    transform: rotate(0);
+  }
 
-	50% {
-		transform: rotate(180deg);
-	}
+  50% {
+    transform: rotate(180deg);
+  }
 
-	100% {
-		transform: rotate(360deg);
-	}
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes apparate {
-	0% {
-		height: 0;
-		opacity: 0;
-	}
+  0% {
+    height: 0;
+    opacity: 0;
+  }
 
-	95% {
-		height: 0;
-		opacity: 0;
-	}
+  95% {
+    height: 0;
+    opacity: 0;
+  }
 
-	96% {
-		height: 2rem;
-		opacity: 0;
-	}
-	100% {
-		height: 2rem;
-		opacity: 0.8;
-	}
+  96% {
+    height: 2rem;
+    opacity: 0;
+  }
+  100% {
+    height: 2rem;
+    opacity: 0.8;
+  }
 }

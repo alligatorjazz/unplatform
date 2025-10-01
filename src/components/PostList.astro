@@ -13,11 +13,11 @@ type Props = {
 );
 const { page, limit, direction, hideDescriptions } = Astro.props;
 const postCollection = (await getCollection("posts")).sort((a, b) =>
-	dayjs(b.data.publishDate).diff(a.data.publishDate)
+	dayjs(b.data.dateAdded).diff(a.data.dateAdded),
 );
 const filteredCollection = (page?.data ? page.data : postCollection).slice(
 	0,
-	limit
+	limit,
 );
 type PostEntry = CollectionEntry<"posts">;
 ---

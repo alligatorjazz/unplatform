@@ -12,7 +12,6 @@ export const RecommendationCategories = [
   "magazine",
   "blog",
   "events",
-  // "software",
   "reader",
   "social network",
   "site builder",
@@ -84,7 +83,7 @@ export type NavbarType = "relative" | "fixed" | "transparent";
 export const BlogPostSchema = z
   .object({
     title: z.string(),
-    publishDate: z.union([z.string(), z.date()]),
+    dateAdded: z.union([z.string(), z.date()]),
     lede: z.string(),
     tags: z.array(z.string()),
     video: z.string().optional(),
@@ -101,4 +100,3 @@ export const BlogPostSchema = z
   );
 
 export type BlogPost = z.infer<typeof BlogPostSchema>;
-

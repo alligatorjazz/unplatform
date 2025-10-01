@@ -1,31 +1,37 @@
 ---
-import type { CollectionEntry } from 'astro:content'
-import dayjs from 'dayjs';
-import Pub from './Pub.astro';
-import Tags from './Tags.astro';
-import type { HTMLAttributes } from 'astro/types';
+import type { CollectionEntry } from "astro:content";
+import dayjs from "dayjs";
+import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<"div"> {
-	post: CollectionEntry<"posts">
+	post: CollectionEntry<"posts">;
 	hideDescription?: boolean;
 }
-const {post, hideDescription, class: className, ...divProps} = Astro.props;
+const { post, hideDescription, class: className, ...divProps } = Astro.props;
 ---
-<div class:list={["flex flex-col p-4 border-b flex-1 h-36", className]} {...divProps}>
+
+<div
+	class:list={["flex flex-col p-4 border-b flex-1 h-36", className]}
+	{...divProps}
+>
 	<a href={"/post/" + post.slug} class="hover:text-accent">
-	<h1 class="text-lg font-bold py-3 font-header inline flex-wrap items-center gap-4">
-		<span class="mr-2">{post.data.title}</span>
-		<!-- {post.data.externalPub && <Pub pub={post.data.externalPub}/>} -->
-	</h1>
-	{!hideDescription && <div class="mb-1">{post.data.lede}</div>}
-		</a>
+		<h1
+			class="text-lg font-bold py-3 font-header inline flex-wrap items-center gap-4"
+		>
+			<span class="mr-2">{post.data.title}</span>
+			<!-- {post.data.externalPub && <Pub pub={post.data.externalPub}/>} -->
+		</h1>
+		{!hideDescription && <div class="mb-1">{post.data.lede}</div>}
+	</a>
 
 	<div class="flex max-w-full overflow-hidden flex-1 items-end">
-		<div class="text-sm italic whitespace-nowrap">{dayjs(post.data.publishDate).format("MMM DD YYYY")}</div>
+		<div class="text-sm italic whitespace-nowrap">
+			{dayjs(post.data.dateAdded).format("MMM DD YYYY")}
+		</div>
 		<!-- TODO: implement tags -->
 		<!-- {(post.data.tags?? []).length > 0 &&  -->
 		<!-- 	<span class="px-2">|</span> -->
 		<!-- 	<div class="text-sm italic whitespace-nowrap"><Tags show={2} tags={post.data.tags?? []} /></div> -->
 		<!-- } -->
-</div>
+	</div>
 </div>

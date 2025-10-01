@@ -18,6 +18,7 @@ const { post } = Astro.props;
 const { data } = post as CollectionEntry<"posts">;
 const { Content } = await render(post);
 ---
+
 <Main
 	title={post.data.title}
 	description="The definitive guide for escaping social media (and joining the indie web.)"
@@ -33,7 +34,7 @@ const { Content } = await render(post);
 				<span class="flex py-2 gap-3 sm:gap-4 italic">
 					<h4>
 						{
-							dayjs(data.publishDate)
+							dayjs(data.dateAdded)
 								// .add(1, "day")
 								.format("MMM DD YYYY")
 						}
@@ -45,20 +46,21 @@ const { Content } = await render(post);
 			</div>
 			<Divider class="w-full mb-4 border-b-2 border-b-textColor" />
 			<div id="post-body" class="w-full break-words">
-				<Content/>
+				<Content />
 			</div>
 			<a class="m-auto" href="/posts"
 				><button
 					class="text-md font-header py-2 px-4 bg-accent text-bg hover:brightness-110 cursor-pointer select-none transition-all text-textColor"
 					><Prompt />Back to Posts</button
-				></a>
+				></a
+			>
 		</article>
 	</div>
 	<!-- <BackToTop /> -->
 </Main>
 
 <style lang="scss" is:global>
-	#post-body{
+	#post-body {
 		& > h1 {
 			font-size: 2rem;
 		}
@@ -167,11 +169,15 @@ const { Content } = await render(post);
 		a > em {
 			color: var(--color-accent);
 		}
-		code {
-			background-color: var(--color-fg);
-			padding: 0.25rem;
+		pre.astro-code {
+			/* background-color: var(--color-fg); */
+			padding: 1rem;
 			font-size: small;
+			border-left: 5px solid var(--color-accent);
+			margin: 1rem 0rem;
+			white-space: pre-wrap; /* Since CSS 2.1 */
 		}
+
 		// iframe {
 		// 	padding-top: 1rem;
 		// 	padding-bottom: 1rem;
@@ -182,5 +188,4 @@ const { Content } = await render(post);
 		// 	}
 		// }
 	}
-
 </style>
