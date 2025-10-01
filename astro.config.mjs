@@ -21,12 +21,12 @@ export default defineConfig({
     "/posts": "/posts/1",
   },
   vite: {
-    ssr: {
-      external: [...builtinModules],
-    },
-
+    //   ssr: {
+    //     external: [...builtinModules],
+    //   },
+    //
     plugins: [tailwindcss()],
   },
 
-  adapter: cloudflare(),
+  // adapter: cloudflare(),
 });

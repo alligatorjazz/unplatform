@@ -1,10 +1,15 @@
 ---
 import { getEntry } from "astro:content";
 import BlogPost from "../../layouts/BlogPost.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+	const posts = await getCollection("posts");
+	return posts.map((post) => ({ params: { slug: post.slug } }));
+}
 
 const { slug } = Astro.params;
-
-const post = slug ? await getEntry("posts", slug) : null;
+const post = await getEntry("posts", slug);
 ---
 
 {post && <BlogPost post={post} />}
