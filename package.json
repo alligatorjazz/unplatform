@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.2.0",
   "engines": {
-    "node": "20"
+    "node": "24"
   },
   "scripts": {
     "dev": "astro dev --host",
@@ -17,21 +17,17 @@
     "@astrojs/check": "^0.9.4",
     "@astrojs/cloudflare": "^12.6.9",
     "@astrojs/mdx": "^4.3.0",
-    "@astrojs/node": "^9.0.0",
+    "@astrojs/node": "^9.4.4",
     "@astrojs/react": "^4.3.0",
     "@astrojs/rss": "^4.0.12",
-    "@fastify/middie": "^9.0.2",
-    "@fastify/static": "^8.0.2",
     "@iconify-json/feather": "^1.1.9",
     "@iconify-json/la": "^1.2.0",
-    "@tailwindcss/oxide": "^4.1.13",
-    "@tailwindcss/vite": "^4.1.13",
+    "@tailwindcss/vite": "^4.1.14",
     "@types/qs": "^6.14.0",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
-    "astro": "^5.1.4",
+    "astro": "^5.14.1",
     "astro-icon": "^1.1.1",
-    "builtin-modules": "^5.0.0",
     "dayjs": "^1.11.13",
     "dompurify": "^3.2.4",
     "dotenv": "^16.4.5",
@@ -42,8 +38,6 @@
     "marked": "^15.0.6",
     "neocities": "^0.0.3",
     "node-html-parser": "^7.0.1",
-    "open": "^10.1.0",
-    "open-graph-scraper": "^6.9.0",
     "prompt-sync": "^4.2.0",
     "qs": "^6.14.0",
     "react": "^19.1.0",
@@ -56,11 +50,11 @@
     "simple-result": "github:alligatorjazz/simple-result",
     "slugify": "^1.6.6",
     "tailwind-scrollbar": "^4.0.2",
+    "tailwindcss": "^4.1.14",
     "typescript": "^5.7.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.10.0",
-    "@tailwindcss/postcss": "^4.1.13",
     "@types/node": "^20.17.16",
     "@types/prompt-sync": "^4.2.3",
     "autoprefixer": "^10.4.21",
@@ -70,7 +64,6 @@
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.14.1",
-    "tailwindcss": "^4.1.13",
     "typescript-eslint": "^8.6.0"
   }
 }

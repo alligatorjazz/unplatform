@@ -6,8 +6,6 @@ import Paginator from "../../components/Paginator.astro";
 import Main from "../../layouts/Main.astro";
 import PostList from "../../components/PostList.astro";
 
-export const prerender = true;
-
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
 	const postCollection = await getCollection("posts");
 
