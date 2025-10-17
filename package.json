@@ -10,6 +10,7 @@
     "build": "astro build",
     "check": "npm run sortCities && astro check",
     "preview": "astro preview",
+    "start": "node dist/server/entry.mjs",
     "add": "esrun scripts/addRec.ts",
     "sortCities": "esrun scripts/sortCities.ts"
   },
