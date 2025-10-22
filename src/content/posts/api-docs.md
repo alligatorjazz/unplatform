@@ -12,7 +12,7 @@ In the interest of simplicity, the database API endpoint is just `/database` - s
 
 ```bash
 # using httpie in bash - adapt for your http client of choice
-http GET "http://localhost:4321/database" "Accept:application/json"
+http GET "https://unplatform.fromthesuperhighway.com/database" "Accept:application/json"
 ```
 
 This one-liner will get you the full list of all recommendations from the database. Maybe that's what you want - but you're probably looking to filter the recommendations by city, price, or complexity level. We'll get into that next.
@@ -22,7 +22,7 @@ You add filters to the request using query params. For example, if I want to get
 
 ```bash
 # using httpie in bash - adapt for your http client of choice
-http GET "http://localhost:4321/database?freeOnly=true&category=reader&os=ios" "Accept:application/json"
+http GET "http://unplatform.fromthesuperhighway.com/database?freeOnly=true&category=reader&os=ios" "Accept:application/json"
 ```
 
 ```json

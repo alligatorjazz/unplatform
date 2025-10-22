@@ -14,7 +14,6 @@ export default defineConfig({
   integrations: [icon(), react(), mdx()],
   site,
   output: "static",
-
   redirects: {
     "/not-found": "/404",
     "/posts": "/posts/1",
@@ -25,5 +24,8 @@ export default defineConfig({
   adapter: node({
     mode: "standalone",
   }),
+  server: {
+    port: 3000,
+    host: "0.0.0.0",
+  },
 });
-
