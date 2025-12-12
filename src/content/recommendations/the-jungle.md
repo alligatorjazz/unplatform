@@ -5,6 +5,7 @@ category: ["events"]
 literacyLevel: "0"
 os: [web]
 pricing: ["free"]
+feeds: ["RSS"]
 city: "Chicago, IL, USA"
 dateAdded: 2025-01-25
 ---
