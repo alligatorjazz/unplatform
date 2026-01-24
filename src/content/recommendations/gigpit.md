@@ -1,9 +1,9 @@
 ---
-url: https://gigpit.ca
-title: Gigpit 
+url: "https://gigpit.ca"
+title: "Gigpit" 
 category: ["events"]
 literacyLevel: "0"
-os: [web]
+os: ["web"]
 pricing: ["free"]
 feeds: []
 city: ["Vancouver, BC, CA", "Victoria, BC, CA"]
