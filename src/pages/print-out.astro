@@ -1,0 +1,58 @@
+---
+import Main from "../layouts/Main.astro";
+---
+
+<Main title="print-out-page">
+	<div
+		class="w-[8.5in] h-[11in] border-2 border-textColor grayscale grid grid-rows-2 grid-cols-2 m-auto bg-bg"
+	>
+	{new Array(4).fill(null).map(() => (
+	<div class="p-4 card text-xs">
+		<div class="flex flex-row justify-between text-sm mb-2">
+			<h1 class="text-lg font-bold whitespace-nowrap">>: UNPLATFORM</h1>
+			<p class="text-xs italic text-right">Q: How do I find cool stuff outside of social media?</p>
+		</div>
+		<p class="text-xs text-center font-bold mb-2">A: It's easy. Let's walk you through it.</p>
+		<div class="flex flex-col gap-0.5"><div>
+			<h2 class="pb-1 border-b border-text font-bold mb-2">Q: How do I ... <span class="italic">~ find events? ~</span></h2>
+			<ul class="text-xs list-disc ml-4 flex flex-col gap-2">
+				<li><p><b>nonsense</b> (https://nonsensenyc.com/): An mailing list focused on independent art and culture events in NYC.</p></li>
+				<li><p><b>red cal</b> (https://cal.red): Find events with cool music, community engagement, and radical politics.</p></li>
+			</ul>
+		</div>
+		<div>
+			<h2 class="pb-1 border-b border-text font-bold mb-2">Q: How do I ... <span class="italic">~ read the news? ~</span></h2>
+			<ul class="text-xs list-disc ml-4 flex flex-col gap-2">
+				<li><p><b>hell gate</b> (https://hellgatenyc.com): A worker-owned local paper. Covers politics, culture, and entertainment.</p></li>
+				<li><p><b>gothamist</b> (https://gothamist.com/): A non-profit newsroom run by WNYC.</p></li>
+			</ul>
+		</div>
+		<div>
+			<h2 class="pb-1 border-b border-text font-bold mb-2">Q: How do I ... <span class="italic">~ keep up with friends? ~</span></h2>
+			<ul class="text-xs list-disc ml-4 flex flex-col gap-2">
+				<li><p><b>letterloop</b> (https://www.letterloop.co/): Keep up with friends, family, or whoever else on your own private newsletter.</p></li>
+				<li><p><b>calling</b> (your phone number): When's the last time you called a friend?</p></li>
+			</ul>
+		</div></div>
+		<div class="my-1">
+			<h2 class="border-text pb-1 border-b font-bold mb-1">Q: How do I ... <span class="italic">~ learn more? ~</span></h2>
+			<p class="font-bold text-xs text-center">https://unplatform.fromthesuperhighway.com</p>
+		</div>
+	</div>
+	))}
+	</div>
+</Main>
+
+<style>
+	.card:nth-child(1), .card:nth-child(2) {
+		border-bottom: 2px solid white;
+	}
+	.card:nth-child(2),.card:nth-child(4) {
+		border-left: 1px solid white;
+		}
+
+		.card:nth-child(1), .card:nth-child(3) {
+		border-right: 1px solid white;
+		}
+
+</style>
