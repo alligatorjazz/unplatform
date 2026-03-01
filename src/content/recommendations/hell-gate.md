@@ -1,6 +1,6 @@
 ---
 url: "https://hellgatenyc.com/"
-title: "Hellgate"
+title: "Hell Gate"
 category: ["news"]
 literacyLevel: "0"
 os: ["web"]

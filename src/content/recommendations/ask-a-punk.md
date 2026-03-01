@@ -6,7 +6,7 @@ literacyLevel: "0"
 os: [web]
 pricing: ["free"]
 feeds: ["RSS"]
-city: "Philadelphia, PA, US"
+city: "Philadelphia, PA, USA"
 dateAdded: 2025-12-11
 ---
 
