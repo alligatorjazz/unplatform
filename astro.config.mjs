@@ -17,6 +17,7 @@ export default defineConfig({
   redirects: {
     "/not-found": "/404",
     "/posts": "/posts/1",
+    "/workshop": "https://luma.com/j07njt4i",
   },
   vite: {
     plugins: [tailwindcss()],
