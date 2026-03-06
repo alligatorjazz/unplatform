@@ -1,0 +1,11 @@
+---
+import { Cities } from "../cities";
+import Guide from "../layouts/Guide.astro";
+---
+
+<Guide frontmatter={{ title: "City List" }}>
+	<p>Unplatform supports the following cities:</p>
+	<ul>
+		{Cities.filter((city) => city.includes(",")).map((city) => <li>{city}</li>)}
+	</ul>
+</Guide>

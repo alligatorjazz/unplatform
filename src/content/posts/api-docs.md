@@ -80,7 +80,7 @@ All the same filters that are available to you on the database page itself are a
 - `freeOnly`: `"true" | "false"`
 - `category`: `"news" | "magazine" | "blog" | "events" | "reader" | "social network" | "site builder" | "forum" | "organization" | "other" | "all"`
 - `maxComplexity`: `"0" | "1" | "2" | "3" | "4"`
-- `city`: See the [cities list](https://github.com/alligatorjazz/unplatform/blob/main/src/cities.ts).
+- `city`: See the [cities list](/city-list).
 - `requireRSS`: `"true" | "false"`
 - `requireNewsletter`: `"true" | "false"`
 - `os`: `"ios" | "android" | "windows" | "mac" | "linux" | "web"`
