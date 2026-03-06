@@ -92,4 +92,4 @@ P.S. Unplatform has a blog of it's own now! No newsletter for this one - just RS
 
 Good luck out there,
 
-\- ajazz
+\- [Damian](https://damian.falchionstudios.com) 
