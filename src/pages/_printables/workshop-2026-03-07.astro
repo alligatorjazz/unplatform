@@ -1,0 +1,192 @@
+---
+import { Icon } from "astro-icon/components";
+import Main from "../../layouts/Main.astro";
+
+const streamingBarHeight = "16rem";
+const streamingServiceStats: {
+	icon: string;
+	size?: number;
+	centsPerStream: number;
+	invert?: boolean;
+}[] = [
+	{ icon: "logos:youtube-icon", centsPerStream: 0.0027 },
+	{ icon: "logos:spotify-icon", centsPerStream: 0.0029 },
+	{ icon: "logos:apple", centsPerStream: 0.0061, invert: true },
+	{ icon: "arcticons:qobuz", centsPerStream: 0.0136 },
+];
+
+const maxPerStream = Math.max(
+	...streamingServiceStats.map((service) => service.centsPerStream),
+);
+---
+
+<Main title="Workshop #1">
+	<div
+		class="w-[8.5in] h-[11in] bg-bg border-2 border-text m-auto p-8 mb-16 grayscale invert"
+	>
+		<div>
+			<div class="flex justify-between p-2 border-b-text border-b-2 mb-4">
+				<h1 class="uppercase text-3xl font-bold">>: Unplatform</h1>
+				<div class="flex flex-col items-end text-sm">
+					<p>Creatives Workshop #1</p>
+					<p>https://unplatform.fromthesuperhighway.com</p>
+				</div>
+			</div>
+			<div>
+				<h2 class="text-xl text-center">
+					>: Platforms & Creative Life: By The Numbers
+				</h2>
+				<div class="flex w-full gap-4 justify-between">
+					<div class="p-4">
+						<div class="mb-2">
+							<h3 class="font-bold">Music Streaming Revenue By Service</h3>
+							<p class="text-xs text-center">
+								Share of $1 per stream<sup>1</sup>
+							</p>
+						</div>
+						<div class="w-full flex justify-evenly gap-4">
+							{
+								streamingServiceStats.map((stat) => (
+									<div class="flex flex-col items-center gap-2">
+										<div class="flex-1 w-full flex flex-col">
+											<div class="flex-1" />
+											<div
+												class="w-full bg-text"
+												style={{
+													height: `calc(${streamingBarHeight} * (${stat.centsPerStream} / ${maxPerStream})`,
+												}}
+											/>
+										</div>
+										<p class="text-xs">${stat.centsPerStream}</p>
+										<Icon
+											size={stat.size ?? 24}
+											name={stat.icon}
+											class={stat.invert ? "invert-100" : ""}
+										/>
+									</div>
+								))
+							}
+						</div>
+					</div>
+					<div class="flex w-full gap-4 justify-between flex-1">
+						<div class="p-4 flex flex-col">
+							<div class="mb-2">
+								<h3 class="font-bold">Requirements for Monetization</h3>
+								<p class="text-xs">
+									What platforms require from creators before paying them a
+									single dollar
+								</p>
+							</div>
+							<div class="flex flex-col flex-1 justify-around">
+								<div class="flex flex-col justify-between text-sm">
+									<div class="flex flex-col gap-2">
+										<div class="flex items-center pb-2 border-b gap-2">
+											<Icon name="logos:youtube-icon" />
+											<p class="font-bold">
+												YouTube Partner Program<sup>2</sup>
+											</p>
+										</div>
+										<ul class="list-disc ml-4">
+											<li>1000 Subscribers</li><li>4000 watch hours</li>
+										</ul>
+									</div>
+								</div>
+								<div class="flex flex-col justify-between text-sm">
+									<div class="flex flex-col gap-2">
+										<div class="flex items-center pb-2 border-b gap-2">
+											<Icon name="logos:twitch" />
+											<p class="font-bold">Twitch Affiliate Program</p>
+										</div>
+										<ul class="list-disc ml-4">
+											<li>25 Followers</li>
+											<li>4 hours of streaming over at least 4 days</li>
+											<li>Avg. 3 viewers / stream</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="mb-4">
+				<h2 class="text-xl text-center mb-2">
+					>: New Organizations & Alternative Models
+				</h2>
+				<div class="flex flex-col gap-4">
+					<div>
+						<div class="pb-2 border-b mb-2 flex items-center gap-4">
+							<h3>
+								<span class="font-bold">The Dark Forest Collective</span>
+							</h3>
+							<h4 class="text-xs">
+								Writing & Publishing (darkforest.metalabel.com)
+							</h4>
+						</div>
+						<p class="text-xs">
+							A group of writers, researchers, & technologists who write about
+							the future of community on the internet. Their essay collection, <i
+								>The Dark Forest Anthology</i
+							> - composed of works that would have otherwise stayed on each contributor's
+							individual platforms - has generated over $70k for the collective to
+							date, and they use that revenue continue to fund new projects.
+						</p>
+					</div>
+					<div>
+						<div class="pb-2 border-b mb-2 flex items-center gap-4">
+							<h3>
+								<span class="font-bold">Hell Gate</span>
+							</h3>
+							<h4 class="text-xs">News & Events (hellgatenyc.com)</h4>
+						</div>
+						<p class="text-xs">
+							A worker-owned news outlet for NYC that covers local politics,
+							events, and entertainment. A highlight of their coverage includes
+							their $20 dinner map: an interactive tool that - in addition to
+							making it easier to grab food on the cheap - allows local
+							businesses a venue to promote themselves outside the boundaries of
+							social media.
+						</p>
+					</div>
+					<div>
+						<div class="pb-2 border-b mb-2 flex items-center gap-4">
+							<h3>
+								<span class="font-bold">Do Not Research</span>
+							</h3>
+							<h4 class="text-xs">
+								Research & Education (donotresearch.substack.com)
+							</h4>
+						</div>
+						<p class="text-xs">
+							A research collective that studies issues at the intersection of
+							art and technology. In addition to a regularly published blog, DNR
+							also uses funds from their Substack & Patreon subscriptions to
+							fund an educational program that pays educators rates approaching
+							and in some cases exceeding comparable roles at mainstream
+							educational institutions.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="text-[0.5rem] flex flex-col gap-2">
+			<p>
+				1. Sourced from YouTuber Benn Jordan. Importantly, music streaming
+				services generally do not pay "per stream" - instead, they pool together
+				the money they get from ads and subscriptions and distribute it in
+				"shares" to rights holders based on how much they contributed to total
+				streams on the platform. Importantly, this is not the amount distributed
+				to <i>artists</i> - it's the amount distributed to whoever owns the right
+				to their music. What the artist gets paid could be much lower.
+			</p>
+			<p>
+				2. Sourced from Google support. These numbers are for recieiving ad
+				revenue - to be eligible for channel memberships, creators "only" need
+				500 subscribers, 3000 watch hours, and 3 public uploads in the last 90
+				days.
+			</p>
+		</footer>
+	</div>
+</Main>
+
+<style></style>
