@@ -18,6 +18,7 @@ export const RecommendationCategories = [
   "forum",
   "organization",
   "other",
+  "info",
   "all",
 ] as const;
 

@@ -1,0 +1,147 @@
+---
+import Main from "./Main.astro";
+
+interface Props {
+	title: string;
+}
+const { title } = Astro.props;
+---
+
+<Main
+	title={title}
+	description="The definitive guide for escaping social media (and joining the indie web.)"
+>
+	<div id="printable-body" class="w-204 h-264 m-auto bg-bg border-2">
+		<slot />
+	</div>
+</Main>
+
+<style lang="scss" is:global>
+	#printable-body {
+		width: 8.5in;
+		height: 11in;
+		padding: 2rem;
+		& > h1 {
+			font-size: 2rem;
+		}
+		& > h2 {
+			font-size: 1.5rem;
+		}
+		& > h3 {
+			font-size: 1.2rem;
+		}
+
+		& > h6 {
+			font-size: 0.8rem;
+		}
+
+		& > h1,
+		& > h2,
+		& > h3,
+		& > h4,
+		& > h5,
+		& > h6 {
+			color: var(--header-color);
+			font-weight: bold;
+		}
+
+		& > h1,
+		& > h2,
+		& > h3 {
+			font-family: var(--header-font);
+		}
+
+		& > h1,
+		& > h2 {
+			margin-bottom: 1rem;
+		}
+
+		& > h3,
+		& > h4,
+		& > h5,
+		& > h6 {
+			margin-bottom: 0.5rem;
+		}
+
+		& > p {
+			margin-bottom: 1.5rem;
+			line-height: 1.6rem;
+		}
+
+		& > ol,
+		& > ul {
+			margin-left: 2rem;
+			margin-bottom: 1rem;
+		}
+
+		& > ol {
+			list-style: decimal;
+		}
+
+		& > ul {
+			list-style: circle;
+		}
+
+		& > img {
+			max-height: 600px;
+			width: 100%;
+			object-fit: contain;
+			margin: auto;
+		}
+
+		// image captions
+		& > img + em {
+			width: 100%;
+			margin-top: 0.5rem;
+			display: block;
+			text-align: center;
+		}
+
+		& > hr {
+			margin: 2rem 0;
+		}
+
+		& > blockquote {
+			border-left: 1px solid var(--color-text);
+			background-color: var(--color-fg);
+			padding: 1rem;
+			font-style: italic;
+			margin-left: 1rem;
+			margin-bottom: 2rem;
+			margin-right: 1rem;
+			p {
+				margin-bottom: 0;
+			}
+		}
+
+		& > p > a {
+			color: var(--color-accent);
+			text-decoration: underline;
+			&:hover {
+				filter: brightness(120%);
+			}
+
+			&:active {
+				filter: brightness(150%);
+			}
+		}
+
+		a > em {
+			color: var(--color-accent);
+		}
+		code {
+			background-color: var(--color-fg);
+			padding: 0.25rem;
+			font-size: small;
+		}
+		// iframe {
+		// 	padding-top: 1rem;
+		// 	padding-bottom: 1rem;
+		// 	width: 100%;
+		// 	margin: auto;
+		// 	@media (min-width: 768px) {
+		// 		min-height: 28rem;
+		// 	}
+		// }
+	}
+</style>
