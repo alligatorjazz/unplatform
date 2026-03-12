@@ -1,7 +1,7 @@
 ---
 title: "Come to the Unplatform Creatives Workshop in NYC!"
 dateAdded: 2026-03-11
-lede: "Join us at the Bushwick Public Library on March 11th!"
+lede: "Join us at the Bushwick Public Library on March 21st!"
 tags: [updates, events]
 ---
 
@@ -10,7 +10,7 @@ Hello everyone! I know there's been some radio silence across Unplatform and [FT
 
 The project came out of my initial research interviews for the Unplatform project, in which almost everyone I spoke to said that the biggest reason they haven't yet left social media platforms was (usually local) culture: seeing posters for music shows, commissioning cool artists, and keeping up with the local news or politics. In keeping with those findings, the Unplatform database has tried its best to catalog off-platform resources for keeping up with local culture - and while it's done a decent job at that in most of the cities it covers, I eventually realized that merely collecting existing resources is not going to be enough on its own. Creative professionals need to be organized directly - not just because digital platforms cheapen and extract the value of their work, but because their work keeps people on the platforms *precisely because* it has value.
 
-This event series is my attempt at starting that organizing process. I want to build a space where people can both get the information *and* build the confidence they need to start "unplatforming" their entire creative communities. In some cases, that will be as simple as starting a robust events calendar, like the folks at [Orlando Pop](https://orlandopop.com/) and [NYC Noise](https://nyc-noise.com/) have. In others, it will require the reorganization of entire creative scenes and the birthing of new, community-controlled institutions. In either case, I want Unplatform to be a valuable part of that process, and if you happen to be in NYC on March 11th, it'd mean the world if you could come and bet part of that process too. [You can RSVP to the event here](https://unplatform.fromthesuperhighway.com).
+This event series is my attempt at starting that organizing process. I want to build a space where people can both get the information *and* build the confidence they need to start "unplatforming" their entire creative communities. In some cases, that will be as simple as starting a robust events calendar, like the folks at [Orlando Pop](https://orlandopop.com/) and [NYC Noise](https://nyc-noise.com/) have. In others, it will require the reorganization of entire creative scenes and the birthing of new, community-controlled institutions. In either case, I want Unplatform to be a valuable part of that process, and if you happen to be in NYC on March 21st, it'd mean the world if you could come and bet part of that process too. [You can RSVP to the event here](https://unplatform.fromthesuperhighway.com).
 
 ![A green-tinted photo of the Bushwick Public Library. At the bottom, it lists event information: "Unplatform Creatives Workshop - Bushwick Public Library, Spectrum Learning Lab, March 11th from 2pm to 4pm."](/blog/workshop-2-poster.png)
 
