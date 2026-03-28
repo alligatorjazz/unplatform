@@ -3,7 +3,7 @@ url: "https://www.nearlyfreespeech.net/"
 title: "NearlyFreeSpeech"
 category: ["site builder"]
 os: ["web"]
-pricing: ["free"]
+pricing: ["paid"]
 literacyLevel: "4"
 dateAdded: "2025-02-01T23:50:57.412Z"
 feeds: []

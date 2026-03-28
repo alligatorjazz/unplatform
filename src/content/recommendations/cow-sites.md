@@ -1,6 +1,6 @@
 ---
 url: "https://cowsites.net/"
-title: "N/A"
+title: "CowSites"
 category: ["site builder"]
 os: ["web"]
 pricing: ["free", "paid"]
