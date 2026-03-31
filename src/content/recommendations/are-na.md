@@ -9,4 +9,4 @@ feeds: ["RSS"]
 dateAdded: "Thu Jan 23 2025 19:00:00 GMT-0500 (Eastern Standard Time)"
 ---
 
-Probably best described as "hipster Pinterest." Provides 200 "blocks" (pins) on its free tier, and provides unlimited blocks and additional features for $70/yr (or $7/mo). All pages have RSS support.
+An ad-free social network similar to Pinterest. Provides 200 "blocks" (pins) on its free tier, and provides unlimited blocks and additional features for $70/yr (or $7/mo). All pages have RSS support.
