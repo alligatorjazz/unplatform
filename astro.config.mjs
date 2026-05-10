@@ -18,6 +18,7 @@ export default defineConfig({
     "/not-found": "/404",
     "/posts": "/posts/1",
     "/workshop": "https://luma.com/unplatform",
+    "/newsletter": "https://buttondown.com/alligatorjazz",
   },
   vite: {
     plugins: [tailwindcss()],

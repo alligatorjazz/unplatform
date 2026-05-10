@@ -1,0 +1,125 @@
+---
+import Main from "../layouts/Main.astro";
+---
+
+<Main title="print-out-page">
+  <div
+    class="w-[8.5in] h-[11in] border-2 border-textColor grayscale m-auto bg-bg invert"
+  >
+    <div class="p-4 card w-full h-full flex flex-col text-lg">
+      <div class="flex flex-col mb-2 pb-1 border-b mb-8">
+        <h1 class="uppercase text-3xl font-bold">>: Unplatform</h1>
+        <p class="text-center font-bold mb-2 italic">
+          Q: How do I find cool stuff outside of social media?
+        </p>
+        <p class="text-center font-bold mb-2">
+          A: It's easy. Let's walk you through it.
+        </p>
+      </div>
+      <div class="flex flex-col gap-0.5">
+        <div>
+          <h2 class="pb-1 border-b border-text font-bold mb-2">
+            Q: How do I ... <span class="italic">~ find events? ~</span>
+          </h2>
+          <ul class="list-disc ml-4 flex flex-col gap-2">
+            <li>
+              <p>
+                <b>nonsense</b> (https://nonsensenyc.com/): An mailing list focused
+                on independent art and culture events in NYC.
+              </p>
+            </li>
+            <li>
+              <p>
+                <b>red cal</b> (https://cal.red): Find events with cool music, community
+                engagement, and radical politics.
+              </p>
+            </li>
+            <li>
+              <p>
+                <b>NYC Off-Tech</b> (https://buttondown.com/nycofftech/): Find events
+                dedicated to building off-platform and offline community.
+              </p>
+            </li>
+            <li>
+              <p>
+                <b>NYC Noise</b> (https://nyc-noise.com/): A music events calendar
+                with a focus on DIY music & artists. Also includes a massive directory
+                of other similar event calendars from around the world.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <b>the skint</b> (https://www.theskint.com/): An NYC events calendar
+                that focuses on low-cost events.
+              </p>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="pb-1 border-b border-text font-bold mb-2">
+            Q: How do I ... <span class="italic">~ read the news? ~</span>
+          </h2>
+          <ul class="list-disc ml-4 flex flex-col gap-2">
+            <li>
+              <p>
+                <b>hell gate</b> (https://hellgatenyc.com): A worker-owned local paper.
+                Covers politics, culture, and entertainment.
+              </p>
+            </li>
+            <li>
+              <p>
+                <b>gothamist</b> (https://gothamist.com/): A non-profit newsroom run
+                by WNYC.
+              </p>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="pb-1 border-b border-text font-bold mb-2">
+            Q: How do I ... <span class="italic">~ keep up with friends? ~</span
+            >
+          </h2>
+          <ul class="list-disc ml-4 flex flex-col gap-2">
+            <li>
+              <p>
+                <b>letterloop</b> (https://www.letterloop.co/): Keep up with friends,
+                family, or whoever else on your own private newsletter.
+              </p>
+            </li>
+            <li>
+              <p>
+                <b>calling</b> (your phone number): When's the last time you called
+                a friend?
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="my-1">
+        <h2 class="border-text pb-1 border-b font-bold mb-1">
+          Q: How do I ... <span class="italic">~ learn more? ~</span>
+        </h2>
+        <p class="font-bold text-center">
+          https://unplatform.fromthesuperhighway.com
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .card:nth-child(1),
+    .card:nth-child(2) {
+      border-bottom: 2px solid white;
+    }
+    .card:nth-child(2),
+    .card:nth-child(4) {
+      border-left: 1px solid white;
+    }
+
+    .card:nth-child(1),
+    .card:nth-child(3) {
+      border-right: 1px solid white;
+    }
+  </style>
+</Main>

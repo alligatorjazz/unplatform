@@ -25,6 +25,10 @@ export const globalNavPages = [
     displayName: "Blog",
   },
   {
+    route: "/newsletter",
+    displayName: "Newsletter",
+  },
+  {
     route: "/workshop",
     displayName: "Workshop",
   },
