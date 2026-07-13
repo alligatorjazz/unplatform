@@ -8,11 +8,10 @@
   "scripts": {
     "dev": "astro dev --host",
     "build": "astro build",
-    "check": "npm run sortCities && astro check",
+    "check": "astro check",
     "preview": "astro preview",
     "start": "node dist/server/entry.mjs",
-    "add": "esrun scripts/addRec.ts",
-    "sortCities": "esrun scripts/sortCities.ts"
+    "add": "tsx scripts/addRec.ts"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.0",
@@ -20,18 +19,21 @@
     "@astrojs/react": "^4.3.0",
     "@astrojs/rss": "^4.0.12",
     "@iconify-json/feather": "^1.2.1",
+    "@inquirer/prompts": "^8.5.2",
     "@tailwindcss/vite": "^4.1.14",
     "@types/qs": "^6.14.0",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "astro": "^5.14.1",
     "astro-icon": "^1.1.5",
+    "attempt": "git+https://git.commonalitymag.com/ajazz/attempt#1.0.0",
     "dayjs": "^1.11.13",
     "dompurify": "^3.2.4",
     "dotenv": "^16.4.5",
     "eslint": "^9.36.0",
-    "esrun": "^0.0.1",
+    "feedsmith": "^2.9.5",
     "marked": "^15.0.6",
+    "node-html-parser": "^9.0.0",
     "qs": "^6.14.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -42,6 +44,7 @@
     "slugify": "^1.6.6",
     "tailwind-scrollbar": "^4.0.2",
     "tailwindcss": "^4.1.14",
+    "tsx": "^4.23.1",
     "typescript": "^5.7.3"
   },
   "devDependencies": {

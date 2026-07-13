@@ -1,118 +1,206 @@
-// script for automatically compiling database additions
-import { writeFileSync } from "fs";
-import PromptSync from "prompt-sync";
-import Parser from "rss-parser";
-import slugify from "slugify";
-import type { Recommendation } from "../src/types";
+// add-rec: adds a new recommendation to the Unplatform database
+import { checkbox, confirm, input, select } from "@inquirer/prompts";
+import { attempt } from "attempt";
+import { parse } from "node-html-parser";
+import type { Rss, Atom, DeepPartial } from "feedsmith/types";
+import { parseFeed } from "feedsmith";
+import {
+  OperatingSystemSchema,
+  RecommendationCategorySchema,
+  PricingSchema,
+  RecommendationSchema,
+} from "../src/types";
+import { Cities } from "../src/cities";
+import { join } from "node:path";
+import { writeFile } from "node:fs/promises";
 
-let parser = new Parser<
-  { title: string; description: string; link: string },
-  {}
->({
-  defaultRSS: 2.0,
-  customFields: {
-    feed: ["title", "description", "link"],
-  },
-});
-
-const prompt = PromptSync();
-async function findFeed(url: string) {
-  const response = await fetch(
-    `https://feedsearch.dev/api/v1/search?url=${url}`,
-  );
-  if (response.status === 200) {
-    const data = await response.json();
-    if (Array.isArray(data))
-      return (data as { url: string; title: string }[]).map(
-        ({ url, title }) => ({
-          url,
-          title,
-        }),
-      );
-    else {
-      return null;
-    }
-  }
-
-  console.error(response.status, response.statusText);
-  return null;
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/[\s_-]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
 
-async function main(url: string) {
-  // parse html
-  // check for feed`
-  const feedList = await findFeed(url);
-  if (!feedList) {
-    console.log(`Could not find feed at URL ${url}.`);
-    // main(prompt("Enter the URL of the site you're trying to add. > "));
+function stringifyYaml(value: unknown): string {
+  if (value === null || value === undefined) return "";
+  if (Array.isArray(value)) {
+    if (value.length === 0) return "[]";
+    return "\n" + value.map((item) => `  - ${item}`).join("\n");
   }
-  const feed: { title: string; url: string; description: string };
-  if (feedList?.length === 1) {
-    feedUrl = feedList![0].url;
-  } else if (feedList && feedList.length > 1) {
-    console.log("Multiple feeds found. Select one from the list:");
-    feedList?.map((url, index) => console.log(`Index ${index} - ${url}`));
-    feedUrl = feedList![parseInt(prompt("Enter index > "))].url;
+  if (typeof value === "string") return `"${value.replace(/"/g, '\\"')}"`;
+  return String(value);
+}
+async function fetchRec() {
+  // get recommendation siteUrl
+  let siteUrl: string = await input({
+    message: `Enter the URL of the site you'd like to add to the database. (Type "exit" to exit)`,
+    required: true,
+  });
+
+  if (siteUrl === "exit") {
+    console.log("Exiting script...", "\n");
+    process.exit(0);
   }
 
-  let feedMaintained = false;
-  const title = null;
-  const description = null;
+  const { result: response, error } = await attempt(fetch(siteUrl));
 
-  if (feedList && feedUrl) {
-    const feedData = await (
-      await fetch(feedUrl, { headers: { "Content-Type": "application/xml" } })
-    ).text();
-    const feed = await parser.parseString(feedData);
-    console.log(feed);
-    const feedInput = prompt("Feed is printed above. Is it maintained? (y/n)");
-    feedMaintained = feedInput.toLowerCase() === "y";
-    const { title, description } = feed;
-    console.log(
-      `Title: ${title ?? "(not found)"}\nDescription:${description ?? "(not found)"}`,
+  if (error) {
+    console.error(
+      "Error: Could not fetch the recommendation. Check that the URL is valid and that you're connected to the internet.",
+      "\n",
+    );
+    return fetchRec();
+  }
+
+  const contentType = response.headers.get("Content-Type");
+  let feed: DeepPartial<Rss.Feed<string> | Atom.Feed<string>> | null = null;
+
+  if (contentType?.includes("text/html")) {
+    const vdom = parse(await response.text());
+    const feedLocation =
+      (vdom.querySelector(
+        "link[type=application/rss+xml]",
+      ) as unknown as HTMLLinkElement) ??
+      (vdom.querySelector(
+        "link[type=application/atom+xml]",
+      ) as unknown as HTMLLinkElement);
+
+    if (feedLocation) {
+      const feedLink = feedLocation.href;
+      const { result: feedResponse, error } = await attempt(fetch(feedLink));
+      if (
+        feedResponse?.headers.get("Content-Type")?.includes("application/xml")
+      ) {
+        const feedData = parseFeed(await feedResponse.text());
+        if (feedData.format === "rss" || feedData.format === "atom") {
+          console.log(`Found RSS / Atom feed at URL ${feedLink}.`);
+          feed = feedData.feed;
+        }
+      } else {
+        console.warn(
+          `Got a non-XML response when trying to fetch an RSS / Atom feed at URL ${feedLink} -- not using response for processing.`,
+        );
+      }
+    }
+
+    let defaultDescription: string =
+      (
+        vdom.querySelector(
+          "meta[name=description]",
+        ) as unknown as HTMLMetaElement | null
+      )?.content ??
+      (
+        vdom.querySelector(
+          "meta[property=og:description]",
+        ) as unknown as HTMLMetaElement | null
+      )?.content ??
+      "";
+    const recommendation = RecommendationSchema.safeParse({
+      url: siteUrl,
+      title: await input({
+        message: "Enter the site's title: ",
+        required: true,
+      }),
+      category: await checkbox({
+        message: "Select the site's categori(es): ",
+        choices: RecommendationCategorySchema.options.map((option) => ({
+          name: option,
+          value: option,
+        })),
+        required: true,
+      }),
+
+      os: await checkbox({
+        message: "Select the site's compatible OSes: ",
+        choices: OperatingSystemSchema.options.map((option) => ({
+          name: option,
+          value: option,
+        })),
+        required: true,
+      }),
+      pricing: await checkbox({
+        message:
+          "Mark if the site's primary content is free or paywalled (or both): ",
+        choices: PricingSchema.options.map((option) => ({
+          name: option,
+          value: option,
+        })),
+        required: true,
+      }),
+      literacyLevel: await select({
+        message: "Mark the tech literacy level required to use the site: ",
+        choices: [0, 1, 2, 3, 4],
+      }),
+      dateAdded: new Date(),
+      lastUpdated: new Date(),
+      city: await select({
+        message:
+          "Mark if this site is specific to one city, and if so, which one: ",
+        choices: Cities,
+      }),
+      feeds: [
+        ...(feed ? ["RSS"] : []),
+        ...((await confirm({ message: "Does this site have a newsletter? " }))
+          ? ["Newsletter"]
+          : []),
+      ],
+    });
+
+    // convert recommendation data to a markdown file with frontmatter, write to ./src/content/recommendations
+    if (!recommendation.success) {
+      console.error(
+        "Validation failed:",
+        recommendation.error.flatten().fieldErrors,
+      );
+      return fetchRec();
+    }
+
+    const data = recommendation.data;
+    const filename = `${slugify(data.title)}.md`;
+    const filepath = join(
+      process.cwd(),
+      "src",
+      "content",
+      "recommendations",
+      filename,
+    );
+
+    const frontmatter = [
+      "---",
+      `url: ${stringifyYaml(data.url)}`,
+      `title: ${stringifyYaml(data.title)}`,
+      `category:${stringifyYaml(data.category)}`,
+      `os:${stringifyYaml(data.os)}`,
+      `pricing:${stringifyYaml(data.pricing)}`,
+      `literacyLevel: ${stringifyYaml(data.literacyLevel)}`,
+      ...(data.city ? [`city: ${stringifyYaml(data.city)}`] : []),
+      ...((data.feeds?.length ?? 0 > 0)
+        ? [`feeds:${stringifyYaml(data.feeds)}`]
+        : []),
+      "---",
+    ].join("\n");
+    const description = await input({
+      message: "Enter the site's description: ",
+      default: defaultDescription,
+      required: true,
+    });
+
+    const markdown = `${frontmatter}\n\n${description}\n`;
+
+    await writeFile(filepath, markdown, "utf-8");
+    console.log(`Added recommendation to ${filepath}`);
+  } else {
+    console.error(
+      "URL did not return an HTML response. If you're trying to add a site with an RSS feed, add the homepage itself -- *not* the link to the feed.\nIt could also be possible that the site does not properly link to its RSS feed with a <link> tag. Contact the webmaster to fix this if this is the case.",
     );
   }
-
-  // manual newsletter check
-  const newsLetterInput = prompt("Does the site have a newsletter? (y/n) > ");
-  const hasNewsletter = newsLetterInput.toLowerCase() === "y";
-  console.log(
-    `Proceeding assuming ${title ?? url} ${hasNewsletter ? "has" : "does not have"} a newsletter.`,
-  );
-
-  const feeds: ("RSS" | "Newsletter")[] = [];
-  if (feedMaintained) {
-    feeds.push("RSS");
-  }
-  if (hasNewsletter) {
-    feeds.push("Newsletter");
-  }
-
-  const recBody = description ?? "";
-  const recContent: Partial<Recommendation> = {
-    url,
-    title: title ?? "N/A",
-    category: ["organization", "events"],
-    os: ["web"],
-    pricing: ["free"],
-    literacyLevel: "0",
-    dateAdded: new Date(),
-    feeds,
-  };
-
-  const slug = slugify(title ?? "title here");
-  writeFileSync(
-    `./src/content/recommendations/${slug}.md`,
-    `---\n${Object.entries(recContent)
-      .map(([key, value]) => `${key}: ${JSON.stringify(value)}`)
-      .join("\n")}\n---\n\n${recBody}`,
-  );
-  console.log(`Wrote ${slug}.md to database successfully.\n\n`);
-  return main(prompt("Enter the URL of the site you're trying to add. > "));
 }
 
-const url = prompt("Enter the URL of the site you're trying to add. > ");
-main(url)
-  .then(() => console.log("finished"))
-  .catch((err) => console.error(err));
+const { error } = await attempt(fetchRec());
 
+// handles SIGINT gracefully
+if (error && error.name !== "ExitPromptError") {
+  throw error;
+}
