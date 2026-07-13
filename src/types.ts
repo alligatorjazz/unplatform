@@ -40,7 +40,6 @@ export const OperatingSystemSchema = z.enum(OperatingSystems);
 export type OperatingSystem = z.infer<typeof OperatingSystemSchema>;
 
 export const PricingSchema = z.enum(["free", "paid"]);
-export const MembershipSchema = z.enum(["open", "application", "queue"]);
 
 export const CitySchema = z.enum(Cities);
 export type City = z.infer<typeof CitySchema>;
@@ -54,7 +53,6 @@ export const RecommendationSchema = z.object({
   category: RecommendationCategorySchema.array(),
   os: OperatingSystemSchema.array(),
   pricing: PricingSchema.array(),
-  membership: MembershipSchema.optional(),
   literacyLevel: LiteracyLevelSchema,
   dateAdded: z.union([z.date(), z.coerce.date()]),
   lastUpdated: z.date().default(new Date()),
