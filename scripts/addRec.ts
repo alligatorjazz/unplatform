@@ -78,6 +78,9 @@ async function fetchRec() {
           console.log(`Found RSS / Atom feed at URL ${feedLink}.`);
           feed = feedData.feed;
         }
+      } else if (feedResponse === undefined) {
+        // TODO: implement static url checks (/feed, /rss, /rss.xml, /atom, /atom.xml), then use feedfiner checks
+        console.warn("RSS feed not found in page header.");
       } else {
         console.warn(
           `Got a non-XML response when trying to fetch an RSS / Atom feed at URL ${feedLink} -- not using response for processing.`,
