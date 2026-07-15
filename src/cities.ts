@@ -17,6 +17,7 @@ export const Cities = [
   "Orlando, FL, USA",
   "Oxford, ENG, UK",
   "Philadelphia, PA, USA",
+  "San Francisco, CA, USA",
   "Savannah, GA, USA",
   "Washington, DC, USA",
   "Vancouver, BC, CA",
